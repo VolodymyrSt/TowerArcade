@@ -9,7 +9,7 @@ namespace Game
 
         public EventBus() => _signals = new Dictionary<Type, List<object>>();
 
-        public void RegisterEvent<T>(Action<T> callback)
+        public void SubscribeEvent<T>(Action<T> callback)
         {
             var key = typeof(T);
 
@@ -17,11 +17,13 @@ namespace Game
             {
                 _signals[key].Add(callback);
             }
-
-            _signals.Add(key, new List<object>() { callback });
+            else 
+            { 
+                _signals.Add(key, new List<object>() { callback });
+            }
         }
 
-        public void UnRegisterEvent<T>(Action<T> callback)
+        public void UnSubscribeEvent<T>(Action<T> callback)
         {
             var key = typeof(T);
 

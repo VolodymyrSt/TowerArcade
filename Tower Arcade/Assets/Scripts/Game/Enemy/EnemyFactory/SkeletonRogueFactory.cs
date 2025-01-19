@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Game
 {
-    public class SkeletonRogueFactory : Factory
+    public class SkeletonRogueFactory : EnemyFactory
     {
-        public override Enemy Create()
+        public override IEnemy Create()
         {
             var enemyPrefab = Resources.Load<SkeletonRogueController>("Enemy/SkeletonRogue");
-            Enemy skeletonRogue = Object.Instantiate(enemyPrefab);
+            IEnemy skeletonRogue = Object.Instantiate(enemyPrefab);
             return skeletonRogue;
         }
     }

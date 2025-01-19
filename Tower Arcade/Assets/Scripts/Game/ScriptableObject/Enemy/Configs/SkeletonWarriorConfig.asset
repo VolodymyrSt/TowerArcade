@@ -16,5 +16,6 @@ MonoBehaviour:
   MoveSpeed: 0.5
   SoulCost: 15
   EnemyName: Warrior
-  EnemyDescription: 
+  EnemyDescription: Dengarous because of his high health
   EnemyType: 1
+  EnemyRank: 1

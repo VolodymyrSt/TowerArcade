@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace Game
 {
-    public class SkeletonMinionFactory : Factory
+    public class SkeletonMinionFactory : EnemyFactory
     {
-        public override Enemy Create()
+        public override IEnemy Create()
         {
             var skeletonPrefab = Resources.Load<SkeletonMinionController>("Enemy/SkeletonMinion");
-            Enemy skeleton = Object.Instantiate(skeletonPrefab);
+            IEnemy skeleton = Object.Instantiate(skeletonPrefab);
             return skeleton;
         }
     }

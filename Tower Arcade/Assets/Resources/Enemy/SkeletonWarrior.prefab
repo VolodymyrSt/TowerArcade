@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4027015343141529372}
   - component: {fileID: 1747542532292734244}
   - component: {fileID: 9071062382333725283}
+  - component: {fileID: -2033187732783260846}
   m_Layer: 0
   m_Name: SkeletonWarrior
   m_TagString: Untagged
@@ -68,7 +69,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460acb686f379e946871ebf550c2b8a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 22f912d20cd141a439267ed183f120fb, type: 2}
+  EnemyConfig: {fileID: 11400000, guid: 22f912d20cd141a439267ed183f120fb, type: 2}
+--- !u!136 &-2033187732783260846
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4924283323548701751}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.33
+  m_Height: 1.1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &5317896036959935857
 PrefabInstance:
   m_ObjectHideFlags: 0

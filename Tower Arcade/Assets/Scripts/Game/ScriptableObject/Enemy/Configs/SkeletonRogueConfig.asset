@@ -16,5 +16,6 @@ MonoBehaviour:
   MoveSpeed: 3
   SoulCost: 10
   EnemyName: Rogue
-  EnemyDescription: 
+  EnemyDescription: The same as Minion but has more speed
   EnemyType: 2
+  EnemyRank: 0

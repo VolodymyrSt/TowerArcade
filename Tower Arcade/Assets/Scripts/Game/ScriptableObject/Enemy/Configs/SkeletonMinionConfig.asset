@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 25
   MoveSpeed: 0.5
-  SoulCost: 1
+  SoulCost: 5
   EnemyName: Minion
-  EnemyDescription: 
+  EnemyDescription: The simplest enemy ever existed
   EnemyType: 0
+  EnemyRank: 0

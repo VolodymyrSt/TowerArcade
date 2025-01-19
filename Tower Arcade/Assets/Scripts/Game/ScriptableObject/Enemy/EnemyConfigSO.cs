@@ -14,6 +14,7 @@ namespace Game
         public string EnemyName;
         public string EnemyDescription;
         public EnemyType EnemyType;
+        public EnemyRank EnemyRank;
 
         private void OnValidate()
         {
@@ -38,5 +39,10 @@ namespace Game
         SlowBoss,
         HiddenBoss,
         SpeedyBoss,
+    }
+
+    public enum EnemyRank
+    {
+        E, D, C, B, A, S, SS, SSS
     }
 }
