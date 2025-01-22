@@ -26,6 +26,9 @@ namespace Game
         [SerializeField] private TowerPlacementBlocksHolder _towerPlacementBlocksHolder;
         [SerializeField] private GameInventoryHandler _gameInventoryHandler;
 
+        [Header("TowerInitialization")]
+        [SerializeField] private List<TowerSO> towerSOs = new List<TowerSO>();
+
         private List<IUpdatable> _updatable = new List<IUpdatable>();
         private CoroutineUsager _coroutineUsage;
 
@@ -41,7 +44,7 @@ namespace Game
             _waveInfoHandlerUI.Initialize(_container.Resolve<LevelSystemSO>(), _container.Resolve<EventBus>());
             _waveAnnouncementHandlerUI.Initialize(_container.Resolve<LevelSystemSO>(), _container.Resolve<EventBus>());
 
-            _gameInventoryHandler.Initialize(_container.Resolve<TowerPlacementBlocksHolder>());
+            _gameInventoryHandler.Initialize(_container, towerSOs);
 
             InitializeUtilScripts();
         }

@@ -8,8 +8,6 @@ namespace Game
         [SerializeField] private List<TowerPlacementBlock> _towerPlacementBlocks = new();
 
         public List<TowerPlacementBlock> GetAllTowerPlacement() => _towerPlacementBlocks;
-        public void AddTowerPlacement(TowerPlacementBlock towerPlacementBlock) => _towerPlacementBlocks.Add(towerPlacementBlock);
-        public void RemoveTowerPlacement(TowerPlacementBlock towerPlacementBlock) => _towerPlacementBlocks.Remove(towerPlacementBlock);
 
         public void TuggleHighlight()
         {

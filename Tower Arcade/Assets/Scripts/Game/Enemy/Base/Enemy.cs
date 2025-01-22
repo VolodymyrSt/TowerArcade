@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour, IEnemy, IEnemyDescription
     {
         CurrentHealth -= damage;
 
-        if(CurrentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Destroy(gameObject);
             //analitic.soul += SoulCost;

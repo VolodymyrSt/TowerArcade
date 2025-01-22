@@ -5,17 +5,17 @@ namespace Game
 {
     public class EnemyFactoryHandler
     {
-        public EnemyFactory GetFactoryByType(DIContainer container, FactoryType type)
+        public EnemyFactory GetEnemyFactoryByType(DIContainer container, EnemyFactoryType type)
         {
             switch (type)
             {
-                case FactoryType.SkeletonMinion:
+                case EnemyFactoryType.SkeletonMinion:
                     return container.Resolve<SkeletonMinionFactory>();
 
-                case FactoryType.SkeletonRogue:
+                case EnemyFactoryType.SkeletonRogue:
                     return container.Resolve<SkeletonRogueFactory>();
 
-                case FactoryType.SkeletonWarrior:
+                case EnemyFactoryType.SkeletonWarrior:
                     return container.Resolve<SkeletonWarriorFactory>();
 
                 default:
@@ -24,7 +24,7 @@ namespace Game
         }
     }
 
-    public enum FactoryType
+    public enum EnemyFactoryType
     {
         SkeletonMinion,
         SkeletonRogue,

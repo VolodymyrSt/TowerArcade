@@ -1,16 +1,18 @@
+using DI;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
     public class GameInventoryHandler : MonoBehaviour
     {
-        public void Initialize(TowerPlacementBlocksHolder  towerPlacementBlocksHolder)
+        public void Initialize(DIContainer container, List<TowerSO> towers)
         {
-            foreach(Transform slot in transform)
+            for (int i = 0; i < transform.childCount; i++)
             {
-                if (slot.TryGetComponent(out GameInventorySlotUI gameInventorySlotUI))
+                if(transform.GetChild(i).TryGetComponent(out GameInventorySlotUI gameInventorySlotUI))
                 {
-                    gameInventorySlotUI.Initialize(towerPlacementBlocksHolder);
+                    gameInventorySlotUI.Initialize(container, towers[i]);
                 }
             }
         }

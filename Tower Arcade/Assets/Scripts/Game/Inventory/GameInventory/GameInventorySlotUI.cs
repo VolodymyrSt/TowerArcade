@@ -1,22 +1,40 @@
+using DI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Game
 {
     public class GameInventorySlotUI : MonoBehaviour, IPointerClickHandler
     {
+        [Header("UI")]
+        [SerializeField] private TextMeshProUGUI _towerName;
+        [SerializeField] private Image _towerImage;
+        [SerializeField] private TextMeshProUGUI _towerSoulCost;
+
+        [Header("Dependencies")]
+        private DIContainer _container;
         private TowerPlacementBlocksHolder _towerPlacementBlocksHolder;
-
-        [SerializeField] private TowerSO _tower;
-
-        private bool _isClickedOnSlot = false;
+        private TowerFactoryHandler _towerFactoryHandler;
         private Camera _camera;
 
-        public void Initialize(TowerPlacementBlocksHolder blocksHolder)
+        private TowerSO _tower;
+        private bool _isClickedOnSlot = false;
+
+        public void Initialize(DIContainer container, TowerSO tower)
         {
             _camera = Camera.main;
-            _towerPlacementBlocksHolder = blocksHolder;
+            _container = container;
+            _towerFactoryHandler = container.Resolve<TowerFactoryHandler>();
+            _towerPlacementBlocksHolder = container.Resolve<TowerPlacementBlocksHolder>();
+
+            _tower = tower;
+
+            _towerName.text = _tower.TowerName;
+            _towerImage.sprite = _tower.TowerSprite;
+            _towerSoulCost.text = _tower.SoulCost.ToString();
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -36,11 +54,13 @@ namespace Game
                 {
                     if (hitInfo.transform.TryGetComponent(out TowerPlacementBlock towerPlacementBlock))
                     {
-                        var tower = Instantiate(_tower.TowerPrefab);
-                        tower.transform.SetParent(towerPlacementBlock.GetPlacePivot(), false);
-
                         _towerPlacementBlocksHolder.UnTuggleHighlight();
-                        _towerPlacementBlocksHolder.RemoveTowerPlacement(towerPlacementBlock);
+
+                        _towerFactoryHandler.GetTowerFactoryByType(_container, _tower.TowerType).
+                            SpawnTower(towerPlacementBlock.GetPlacePivot());
+
+                        towerPlacementBlock.SetOccupied(true);
+
                         _isClickedOnSlot = false;
                     }
                     else
@@ -51,7 +71,5 @@ namespace Game
                 }
             }
         }
-
-        public void SetTowerToSlot(TowerSO tower) => _tower = tower;
     }
 }

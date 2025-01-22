@@ -6,6 +6,8 @@ namespace Game
     public class TowerSO : ScriptableObject
     {
         public string TowerName;
-        public GameObject TowerPrefab;
+        public Sprite TowerSprite;
+        public TowerFactoryType TowerType;
+        public float SoulCost;
     }
 }

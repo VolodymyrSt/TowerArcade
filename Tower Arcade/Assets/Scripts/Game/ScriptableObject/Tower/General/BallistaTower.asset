@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8051e6072063124cadf5f961436cbb9, type: 3}
+  m_Name: BallistaTower
+  m_EditorClassIdentifier: 
+  TowerName: Ballista
+  TowerSprite: {fileID: -403076053, guid: b250d48d68b5a844ebd00dddb0b5ed9d, type: 3}
+  TowerType: 0
+  SoulCost: 50

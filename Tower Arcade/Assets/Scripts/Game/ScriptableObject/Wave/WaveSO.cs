@@ -25,7 +25,7 @@ namespace Game
                 for(int j = 0; j < EnemyConfiguration[i].NumberOfEnemies; j++)
                 {
                     EnemyFactoryHandler factoryHandler = container.Resolve<EnemyFactoryHandler>();
-                    factoryHandler.GetFactoryByType(container, EnemyConfiguration[i].FactoryType).SpawnEnemy(startPosition, destination);
+                    factoryHandler.GetEnemyFactoryByType(container, EnemyConfiguration[i].FactoryType).SpawnEnemy(startPosition, destination);
                     yield return new WaitForSecondsRealtime(TimeBetweenEnemySpawn);
                 }
             }
@@ -38,7 +38,7 @@ namespace Game
     [Serializable]
     public struct EnemyData { 
         public int NumberOfEnemies;
-        public FactoryType FactoryType;
+        public EnemyFactoryType FactoryType;
     }
 
 }
