@@ -17,6 +17,9 @@ namespace Game
         [Header("LevelSystem")]
         [SerializeField] private LevelSystemSO _levelSystemConfig;
 
+        [Header("LevelDescription")]
+        [SerializeField] private LevelDescriptionSO _levelDescription;
+
         [Header("UI")]
         [SerializeField] private LevelSystemActivatorUI _levelSystemActivatorUI;
         [SerializeField] private WaveInfoHandlerUI _waveInfoHandlerUI;
@@ -40,7 +43,7 @@ namespace Game
             _container.RegisterInstance<EnemyDescriptionCardUI>(_enemyCardHandlerUI);
             _container.RegisterInstance<TowerPlacementBlocksHolder>(_towerPlacementBlocksHolder);
 
-            _levelSystemActivatorUI.Initialize(_container.Resolve<LevelSystemSO>(), _container.Resolve<EventBus>());
+            _levelSystemActivatorUI.Initialize(_container.Resolve<LevelSystemSO>(), _container.Resolve<EventBus>(), _levelDescription);
             _waveInfoHandlerUI.Initialize(_container.Resolve<LevelSystemSO>(), _container.Resolve<EventBus>());
             _waveAnnouncementHandlerUI.Initialize(_container.Resolve<LevelSystemSO>(), _container.Resolve<EventBus>());
 
@@ -57,7 +60,7 @@ namespace Game
         private void StartLevelSystem(OnLevelSystemStartedSignal signal)
         {
             StartCoroutine(_levelSystemConfig.StartLevelSystem(_container,
-                _coroutineUsage, _enemyStartPosition.position, _enemyTargetDestination.position));
+                _coroutineUsage, _enemyStartPosition, _enemyTargetDestination.position));
         }
 
         private void Update()

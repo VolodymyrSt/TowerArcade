@@ -14,7 +14,7 @@ namespace Game
         public float TimeBetweenEnemySpawn;
         private bool _isWaveEnded;
 
-        public IEnumerator StartWave(DIContainer container, Vector3 startPosition, Vector3 destination)
+        public IEnumerator StartWave(DIContainer container, Transform parent, Vector3 destination)
         {
             _isWaveEnded = false;
 
@@ -25,7 +25,7 @@ namespace Game
                 for(int j = 0; j < EnemyConfiguration[i].NumberOfEnemies; j++)
                 {
                     EnemyFactoryHandler factoryHandler = container.Resolve<EnemyFactoryHandler>();
-                    factoryHandler.GetEnemyFactoryByType(container, EnemyConfiguration[i].FactoryType).SpawnEnemy(startPosition, destination);
+                    factoryHandler.GetEnemyFactoryByType(container, EnemyConfiguration[i].FactoryType).SpawnEnemy(parent, destination);
                     yield return new WaitForSecondsRealtime(TimeBetweenEnemySpawn);
                 }
             }

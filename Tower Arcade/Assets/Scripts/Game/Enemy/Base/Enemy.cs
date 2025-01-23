@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour, IEnemy, IEnemyDescription
     }
 
     public void SetTargetDestination(Vector3 destination) => Agent.SetDestination(destination);
-    public void SetStartPosition(Vector3 position) => transform.position = position;
+    public void SetStartPosition(Transform parent) => transform.SetParent(parent, false);
 
     public float GetCurrentHealth() => CurrentHealth;
     public float GetSoulCost() => SoulCost;

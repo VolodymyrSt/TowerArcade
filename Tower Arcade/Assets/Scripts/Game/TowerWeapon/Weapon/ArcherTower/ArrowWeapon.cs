@@ -12,6 +12,8 @@ namespace Game
 
         public void Shoot(Enemy enemy, float attackSpeed, float damage)
         {
+            if (enemy == null) return;
+
             transform.DOMove(enemy.transform.position, attackSpeed)
                 .SetEase(Ease.Linear)
                 .Play()

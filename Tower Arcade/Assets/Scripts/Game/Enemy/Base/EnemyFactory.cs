@@ -6,12 +6,12 @@ namespace Game
     {
         public abstract IEnemy Create();
 
-        public void SpawnEnemy(Vector3 startPosition, Vector3 destination)
+        public void SpawnEnemy(Transform parent, Vector3 destination)
         {
             IEnemy enemy = Create();
             enemy.Initialize();
 
-            enemy.SetStartPosition(startPosition);
+            enemy.SetStartPosition(parent);
             enemy.SetTargetDestination(destination);
         }
     }
