@@ -14,38 +14,32 @@ namespace Game
         [Space(10f)]
         [SerializeField] private EnemyDescriptionCardUI _enemyCardHandlerUI;
 
-        [Header("LevelSystem")]
-        [SerializeField] private LevelSystemSO _levelSystemConfig;
-
-        [Header("LevelDescription")]
-        [SerializeField] private LevelDescriptionSO _levelDescription;
-
-        [Header("UI")]
-        [SerializeField] private LevelSystemActivatorUI _levelSystemActivatorUI;
-        [SerializeField] private WaveInfoHandlerUI _waveInfoHandlerUI;
-        [SerializeField] private WaveAnnouncementHandlerUI _waveAnnouncementHandlerUI;
+        [Header("Tower")]
+        [SerializeField] private TowerDescriptionCardUI _towerDescriptionCardHandlerUI;
+        [SerializeField] private List<TowerSO> towerSOs = new List<TowerSO>();
 
         [Header("TowerPlacement")]
         [SerializeField] private TowerPlacementBlocksHolder _towerPlacementBlocksHolder;
         [SerializeField] private GameInventoryHandler _gameInventoryHandler;
 
-        [Header("TowerInitialization")]
-        [SerializeField] private List<TowerSO> towerSOs = new List<TowerSO>();
+        [Header("LevelSystem")]
+        [SerializeField] private LevelSystemSO _levelSystemConfig;
+
+        [Header("LevelConfiguration")]
+        [SerializeField] private LevelConfigurationSO _levelConfiguration;
 
         private List<IUpdatable> _updatable = new List<IUpdatable>();
         private CoroutineUsager _coroutineUsage;
 
         private void Awake()
         {
-            LevelRegistrator.Register(_container);
-
             _container.RegisterInstance<LevelSystemSO>(_levelSystemConfig);
             _container.RegisterInstance<EnemyDescriptionCardUI>(_enemyCardHandlerUI);
+            _container.RegisterInstance<TowerDescriptionCardUI>(_towerDescriptionCardHandlerUI);
             _container.RegisterInstance<TowerPlacementBlocksHolder>(_towerPlacementBlocksHolder);
+            _container.RegisterInstance<LevelConfigurationSO>(_levelConfiguration);
 
-            _levelSystemActivatorUI.Initialize(_container.Resolve<LevelSystemSO>(), _container.Resolve<EventBus>(), _levelDescription);
-            _waveInfoHandlerUI.Initialize(_container.Resolve<LevelSystemSO>(), _container.Resolve<EventBus>());
-            _waveAnnouncementHandlerUI.Initialize(_container.Resolve<LevelSystemSO>(), _container.Resolve<EventBus>());
+            LevelRegistrator.Register(_container);
 
             _gameInventoryHandler.Initialize(_container, towerSOs);
 
@@ -77,6 +71,7 @@ namespace Game
             _coroutineUsage = Instantiate(coroutinePrefab);
 
             _updatable.Add(_container.Resolve<EnemyDescriptionCardHandler>());
+            _updatable.Add(_container.Resolve<TowerDescriptionCardHandler>());
         }
     }
 }

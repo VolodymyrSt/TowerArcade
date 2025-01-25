@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,29 +9,33 @@ namespace Game
     {
         private const string WAVE_INFO_ACTIVATE = "WainInfoActivate";
 
+        [Header("UI")]
         [SerializeField] private GameObject _waveInfoRoot;
 
+        [Space(5f)]
         [SerializeField] private TextMeshProUGUI _waveInfoText;
         [SerializeField] private TextMeshProUGUI _timerToNextWaveText;
         [SerializeField] private Button _skipWaveButton;
 
         private LevelSystemSO _levelSystem;
+        private EventBus _eventBus;
         private Animator _animator;
 
-        public void Initialize(LevelSystemSO levelSystem, EventBus eventBus)
+        public void Start()
         {
-            _levelSystem = levelSystem;
+            _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
+            _eventBus = LevelRegistrator.Resolve<EventBus>();
 
             _animator = GetComponent<Animator>();
 
-            eventBus.SubscribeEvent<OnLevelSystemStartedSignal>(ShowWaveInfo);
-            eventBus.SubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveInfo);
-            eventBus.SubscribeEvent<OnSkipWaveButtonShowedSignal>(ShowSkipWaveButton);
-            eventBus.SubscribeEvent<OnSkipWaveButtonHidSignal>(HideSkipWaveButton);
+            _eventBus.SubscribeEvent<OnLevelSystemStartedSignal>(ShowWaveInfo);
+            _eventBus.SubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveInfo);
+            _eventBus.SubscribeEvent<OnSkipWaveButtonShowedSignal>(ShowSkipWaveButton);
+            _eventBus.SubscribeEvent<OnSkipWaveButtonHidSignal>(HideSkipWaveButton);
 
             _skipWaveButton.onClick.AddListener(() =>
             {
-                eventBus.Invoke(new OnWaveSkippedSignal());
+                _eventBus.Invoke(new OnWaveSkippedSignal());
             });
 
             _waveInfoRoot.SetActive(false);

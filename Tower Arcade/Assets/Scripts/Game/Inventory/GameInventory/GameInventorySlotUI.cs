@@ -14,62 +14,99 @@ namespace Game
         [SerializeField] private Image _towerImage;
         [SerializeField] private TextMeshProUGUI _towerSoulCost;
 
+        [Header("Background")]
+        [SerializeField] private Image _backgraundImage;
+        [SerializeField] private Sprite _selectedBackgraundSprite;
+        [SerializeField] private Sprite _unselectedBackgraundSprite;
+
         [Header("Dependencies")]
         private DIContainer _container;
         private TowerPlacementBlocksHolder _towerPlacementBlocksHolder;
         private TowerFactoryHandler _towerFactoryHandler;
-        private Camera _camera;
+        private LevelCurencyHandler _levelCurencyHandler;
+        private GameInventoryHandler _gameInventoryHandler;
 
         private TowerSO _tower;
-        private bool _isClickedOnSlot = false;
+        private Camera _camera;
 
-        public void Initialize(DIContainer container, TowerSO tower)
+        public void Initialize(DIContainer container, TowerSO tower, GameInventoryHandler gameInventoryHandler)
         {
             _camera = Camera.main;
+
             _container = container;
             _towerFactoryHandler = container.Resolve<TowerFactoryHandler>();
             _towerPlacementBlocksHolder = container.Resolve<TowerPlacementBlocksHolder>();
+            _levelCurencyHandler = container.Resolve<LevelCurencyHandler>();
+            _gameInventoryHandler = gameInventoryHandler;
 
             _tower = tower;
 
             _towerName.text = _tower.TowerName;
             _towerImage.sprite = _tower.TowerSprite;
             _towerSoulCost.text = _tower.SoulCost.ToString();
+
+            UnSelect();
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            _isClickedOnSlot = true;
-
-            _towerPlacementBlocksHolder.TuggleHighlight();
+            if (_gameInventoryHandler.IsSlotActive(this))
+            {
+                _gameInventoryHandler.ClearActiveSlot();
+            }
+            else
+            {
+                if (_levelCurencyHandler.GetCurrentCurrencyCount() >= _tower.SoulCost)
+                {
+                    _gameInventoryHandler.SetActiveSlot(this);
+                }
+            }
         }
 
         private void Update()
         {
-            if (_isClickedOnSlot && Mouse.current.leftButton.isPressed)
+            if (_gameInventoryHandler.IsSlotActive(this) && Mouse.current.leftButton.isPressed)
             {
-                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                HandleTowerPlacement();
+            }
+        }
 
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue))
+        private void HandleTowerPlacement()
+        {
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue))
+            {
+                if (hitInfo.transform.TryGetComponent(out TowerPlacementBlock towerPlacementBlock))
                 {
-                    if (hitInfo.transform.TryGetComponent(out TowerPlacementBlock towerPlacementBlock))
-                    {
-                        _towerPlacementBlocksHolder.UnTuggleHighlight();
+                    _towerFactoryHandler.GetTowerFactoryByType(_container, _tower.TowerType)
+                        .SpawnTower(towerPlacementBlock.GetPlacePivot(), towerPlacementBlock, _levelCurencyHandler);
 
-                        _towerFactoryHandler.GetTowerFactoryByType(_container, _tower.TowerType).
-                            SpawnTower(towerPlacementBlock.GetPlacePivot());
+                    _gameInventoryHandler.ClearActiveSlot();
 
-                        towerPlacementBlock.SetOccupied(true);
+                    towerPlacementBlock.SetOccupied(true);
 
-                        _isClickedOnSlot = false;
-                    }
-                    else
-                    {
-                        _towerPlacementBlocksHolder.UnTuggleHighlight();
-                        _isClickedOnSlot = false;
-                    }
+                    _levelCurencyHandler.SubtactCurrencyCount(_tower.SoulCost);
+                }
+                else
+                {
+                    _gameInventoryHandler.ClearActiveSlot();
                 }
             }
         }
+        public void SetActive(bool isActive)
+        {
+            if (isActive)
+            {
+                _towerPlacementBlocksHolder.TuggleHighlight();
+            }
+            else
+            {
+                _towerPlacementBlocksHolder.UnTuggleHighlight();
+            }
+        }
+
+        public void Select() => _backgraundImage.sprite = _selectedBackgraundSprite;
+        public void UnSelect() => _backgraundImage.sprite = _unselectedBackgraundSprite;
     }
 }

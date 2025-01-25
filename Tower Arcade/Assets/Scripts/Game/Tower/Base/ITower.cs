@@ -1,7 +1,9 @@
+using Game;
 using UnityEngine;
 
 public interface ITower
 {
-    public void Initialize();
+    public void Initialize(LevelCurencyHandler levelCurency);
     public void SetPosition(Transform spawnPosition);
+    public void SetOccupiedBlock(TowerPlacementBlock placementBlock);
 }

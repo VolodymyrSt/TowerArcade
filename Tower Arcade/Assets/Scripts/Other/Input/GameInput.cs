@@ -10,7 +10,6 @@ namespace Game
         private void Awake()
         {
             _action = new InputActions();
-
             _action.Enable();
         }
 
@@ -23,7 +22,6 @@ namespace Game
         {
             return _action.Player.MoveCamera.ReadValue<Vector2>().normalized;
         }
-
 
         private void OnDestroy()
         {

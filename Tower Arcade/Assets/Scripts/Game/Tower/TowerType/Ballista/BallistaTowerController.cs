@@ -16,24 +16,20 @@ namespace Game
         private Vector3 _frameDirection;
         private Vector3 _bowDirection;
 
-        public override void Initialize()
+        public override void Initialize(LevelCurencyHandler levelCurency)
         {
             _arrowBulletFactory = new ArrowWeaponFactory();
 
-            base.Initialize();
+            base.Initialize(levelCurency);
         }
 
-        public override void HandleAttack(Enemy enemy)
+        public override void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurency)
         {
-            if (enemy == null) return;
-
-            _arrowBulletFactory.SpawnWeapon(_weaponPointer, enemy, AttackSpeed, AttackDamage);
+            _arrowBulletFactory.SpawnWeapon(_weaponPointer, enemy, AttackSpeed, AttackDamage, levelCurency);
         }
 
         public override void HandleLookAtEnemy(Enemy enemy)
         {
-            if (enemy == null) return;
-
             float rotationSpeed = 180 * Time.deltaTime;
 
             _frameDirection = (enemy.transform.position - _framePrefab.transform.position).normalized;
@@ -47,21 +43,21 @@ namespace Game
                 PerformSmoothLookAt(_bowDirection, _bowPrefab.transform, rotationSpeed);
             }
 
-            PlayThrowAnimation();
+            //PlayThrowAnimation();
         }
 
-        private void PlayThrowAnimation() 
-        {
-            _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z - 0.1f, 0.1f)
-            .SetEase(Ease.InBack)
-            .OnComplete(() =>
-            {
-                _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z + 0.1f, 0.1f)
-                    .SetEase(Ease.Linear)
-                    .Play();
-            })
-            .Play();
-        }
+        //private void PlayThrowAnimation() 
+        //{
+        //    _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z - 0.1f, 0.1f)
+        //    .SetEase(Ease.InBack)
+        //    .OnComplete(() =>
+        //    {
+        //        _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z + 0.1f, 0.1f)
+        //            .SetEase(Ease.Linear)
+        //            .Play();
+        //    })
+        //    .Play();
+        //}
 
         private void OnDrawGizmosSelected()
         {

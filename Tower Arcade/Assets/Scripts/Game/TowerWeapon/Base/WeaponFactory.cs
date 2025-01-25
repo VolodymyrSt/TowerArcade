@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public abstract class WeaponFactory
-{
-    public abstract IWeapon CreateBullet();
-
-    public void SpawnWeapon(Transform parent, Enemy enemy, float attackSpeed, float damage)
+namespace Game {
+    public abstract class WeaponFactory
     {
-        IWeapon bullet = CreateBullet();
-        bullet.Init(parent);
-        bullet.Shoot(enemy, attackSpeed, damage);
+        public abstract IWeapon CreateBullet();
+
+        public void SpawnWeapon(Transform parent, Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurency)
+        {
+            IWeapon bullet = CreateBullet();
+            bullet.Init(parent);
+            bullet.Shoot(enemy, attackSpeed, damage, levelCurency);
+        }
     }
 }

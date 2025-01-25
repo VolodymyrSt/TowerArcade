@@ -19,19 +19,21 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _wavesCountText;
         [SerializeField] private TextMeshProUGUI _levelDescriptionText;
 
-        private LevelDescriptionSO _levelDescriptionSO;
+        private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
+        private LevelConfigurationSO _levelConfiguration;
 
-        public void Initialize(LevelSystemSO levelSystem, EventBus eventBus, LevelDescriptionSO levelDescription)
+        private void Start()
         {
             _levelSystemActivatorRoot.gameObject.SetActive(true);
 
-            _eventBus = eventBus;
-            _levelDescriptionSO = levelDescription;
+            _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
+            _eventBus = LevelRegistrator.Resolve<EventBus>(); ;
+            _levelConfiguration = LevelRegistrator.Resolve<LevelConfigurationSO>();
 
-            LevelConfiguration(levelSystem);
+            ConfigurateLevel(_levelSystem);
 
-            _startLevelSystemButton.onClick.AddListener(() => 
+            _startLevelSystemButton.onClick.AddListener(() =>
                 StartLevelSystem()
             );
 
@@ -44,11 +46,11 @@ namespace Game
                 });
         }
 
-        private void LevelConfiguration(LevelSystemSO levelSystem)
+        private void ConfigurateLevel(LevelSystemSO levelSystem)
         {
-            _levelDifficultyText.text = $"Difficulty: {_levelDescriptionSO.GetLevelDifficulty()}";
+            _levelDifficultyText.text = $"Difficulty: {_levelConfiguration.GetLevelDifficulty()}";
             _wavesCountText.text = $"Waves: {levelSystem.GetWavesCount().ToString()}";
-            _levelDescriptionText.text = _levelDescriptionSO.GetLevelDescrition();
+            _levelDescriptionText.text = _levelConfiguration.GetLevelDescrition();
         }
 
         private void TriggerHideLevelInfoAnimation()

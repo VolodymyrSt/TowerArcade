@@ -248,6 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3738714914345769346}
   - component: {fileID: -8626332470361291169}
+  - component: {fileID: 1160254714061139116}
   m_Layer: 0
   m_Name: CannonTower
   m_TagString: Untagged
@@ -288,6 +289,27 @@ MonoBehaviour:
   _framePrefab: {fileID: 906922340405661545}
   _cannonPrefab: {fileID: 3570849039062775065}
   _weaponPointer: {fileID: 4223674632088505741}
+--- !u!135 &1160254714061139116
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4631825289553005780}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &5310658690601396728
 GameObject:
   m_ObjectHideFlags: 0

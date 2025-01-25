@@ -1,14 +1,18 @@
 using UnityEngine;
 
-public abstract class TowerFactory
+namespace Game
 {
-    public abstract ITower CreateTower();
-
-    public void SpawnTower(Transform spawnPostion)
+    public abstract class TowerFactory
     {
-        ITower tower = CreateTower();
-        tower.Initialize();
+        public abstract ITower CreateTower();
 
-        tower.SetPosition(spawnPostion);
+        public void SpawnTower(Transform spawnPostion, TowerPlacementBlock placementBlock, LevelCurencyHandler levelCurency)
+        {
+            ITower tower = CreateTower();
+            tower.Initialize(levelCurency);
+
+            tower.SetPosition(spawnPostion);
+            tower.SetOccupiedBlock(placementBlock);
+        }
     }
 }

@@ -16,18 +16,18 @@ namespace Game
         private Vector3 _frameDirection;
         private Vector3 _bowDirection;
 
-        public override void Initialize()
+        public override void Initialize(LevelCurencyHandler levelCurency)
         {
             _projectileWeaponFactory = new ProjectileWeaponFactory();
 
-            base.Initialize();
+            base.Initialize(levelCurency);
         }
 
-        public override void HandleAttack(Enemy enemy)
+        public override void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurency)
         {
             if (enemy == null) return;
 
-            _projectileWeaponFactory.SpawnWeapon(_weaponPointer, enemy, AttackSpeed, AttackDamage);
+            _projectileWeaponFactory.SpawnWeapon(_weaponPointer, enemy, AttackSpeed, AttackDamage, levelCurency);
         }
 
         public override void HandleLookAtEnemy(Enemy enemy)
@@ -47,21 +47,21 @@ namespace Game
                 PerformSmoothLookAt(_bowDirection, _cannonPrefab.transform, rotationSpeed);
             }
 
-            PlayThrowAnimation();
+            //PlayThrowAnimation();
         }
 
-        private void PlayThrowAnimation()
-        {
-            _cannonPrefab.transform.DOMoveZ(_cannonPrefab.transform.position.z - 0.1f, 0.1f)
-            .SetEase(Ease.InBack)
-            .OnComplete(() =>
-            {
-                _cannonPrefab.transform.DOMoveZ(_cannonPrefab.transform.position.z + 0.1f, 0.1f)
-                    .SetEase(Ease.Linear)
-                    .Play();
-            })
-            .Play();
-        }
+        //private void PlayThrowAnimation()
+        //{
+        //    _cannonPrefab.transform.DOMoveZ(_cannonPrefab.transform.position.z - 0.1f, 0.1f)
+        //    .SetEase(Ease.InBack)
+        //    .OnComplete(() =>
+        //    {
+        //        _cannonPrefab.transform.DOMoveZ(_cannonPrefab.transform.position.z + 0.1f, 0.1f)
+        //            .SetEase(Ease.Linear)
+        //            .Play();
+        //    })
+        //    .Play();
+        //}
 
         private void OnDrawGizmosSelected()
         {

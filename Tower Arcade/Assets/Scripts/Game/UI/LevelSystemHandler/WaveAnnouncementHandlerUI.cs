@@ -7,20 +7,23 @@ namespace Game
     {
         private const string WAVE_ANNOUNCE = "WaveAnnounce";
 
+        [Header("UI")]
         [SerializeField] private GameObject _waveAnnouncementRoot;
         [SerializeField] private TextMeshProUGUI _waveAnnouncementText;
 
         private LevelSystemSO _levelSystem;
+        private EventBus _eventBus;
         private Animator _animator;
 
-        public void Initialize(LevelSystemSO levelSystem, EventBus eventBus)
+        private void Start()
         {
-            _levelSystem = levelSystem;
+            _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
+            _eventBus = LevelRegistrator.Resolve<EventBus>();
 
             _animator = GetComponentInChildren<Animator>();
 
-            eventBus.SubscribeEvent<OnLevelSystemStartedSignal>(ShowWaveAnnouncement);
-            eventBus.SubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveAnnouncement);
+            _eventBus.SubscribeEvent<OnLevelSystemStartedSignal>(ShowWaveAnnouncement);
+            _eventBus.SubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveAnnouncement);
 
             _waveAnnouncementRoot.SetActive(false);
         }
