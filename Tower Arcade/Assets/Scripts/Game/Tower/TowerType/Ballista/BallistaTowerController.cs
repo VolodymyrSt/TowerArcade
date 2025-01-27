@@ -1,68 +1,28 @@
-using DG.Tweening;
-using UnityEngine;
-
 namespace Game
 {
     public class BallistaTowerController : Tower
     {
-        [Header("General")]
-        [SerializeField] private GameObject _framePrefab;
-        [SerializeField] private GameObject _bowPrefab;
-
-        [SerializeField] private Transform _weaponPointer;
-
-        private ArrowWeaponFactory _arrowBulletFactory;
-
-        private Vector3 _frameDirection;
-        private Vector3 _bowDirection;
-
-        public override void Initialize(LevelCurencyHandler levelCurency)
+        public override void Initialize(LevelCurencyHandler levelCurencyHandler)
         {
-            _arrowBulletFactory = new ArrowWeaponFactory();
+            LevelCurrencyHandler = levelCurencyHandler;
 
-            base.Initialize(levelCurency);
+            StateFactory = new BallistaTowerStateFactory();
+            EnterInState(StateFactory.EnterInFirstState(LevelCurrencyHandler, transform));
         }
 
-        public override void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurency)
+        public override void UpgradeTower()
         {
-            _arrowBulletFactory.SpawnWeapon(_weaponPointer, enemy, AttackSpeed, AttackDamage, levelCurency);
-        }
-
-        public override void HandleLookAtEnemy(Enemy enemy)
-        {
-            float rotationSpeed = 180 * Time.deltaTime;
-
-            _frameDirection = (enemy.transform.position - _framePrefab.transform.position).normalized;
-            _bowDirection = (enemy.transform.position - _bowPrefab.transform.position).normalized;
-
-            if (_frameDirection != Vector3.zero && _bowDirection != Vector3.zero)
+            switch (CurrentLevel)
             {
-                PerformSmoothLookAt(new Vector3(_frameDirection.x, 0f, _frameDirection.z)
-                    , _framePrefab.transform, rotationSpeed);
-
-                PerformSmoothLookAt(_bowDirection, _bowPrefab.transform, rotationSpeed);
+                case 2:
+                    EnterInState(StateFactory.EnterInSecondState(LevelCurrencyHandler, transform));
+                    break;
+                case 3:
+                    EnterInState(StateFactory.EnterInThirdtState(LevelCurrencyHandler, transform));
+                    break;
+                default:
+                    return;
             }
-
-            //PlayThrowAnimation();
-        }
-
-        //private void PlayThrowAnimation() 
-        //{
-        //    _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z - 0.1f, 0.1f)
-        //    .SetEase(Ease.InBack)
-        //    .OnComplete(() =>
-        //    {
-        //        _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z + 0.1f, 0.1f)
-        //            .SetEase(Ease.Linear)
-        //            .Play();
-        //    })
-        //    .Play();
-        //}
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, 5f);
         }
     }
 }

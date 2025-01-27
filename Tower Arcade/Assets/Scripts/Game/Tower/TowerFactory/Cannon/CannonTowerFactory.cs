@@ -6,7 +6,7 @@ namespace Game
     {
         public override ITower CreateTower()
         {
-            var cannonPrefab = Resources.Load<CannonTowerController>("Towers/CannonTower");
+            var cannonPrefab = Resources.Load<CannonTowerController>("Tower/Cannon/CannonTower");
             ITower cannonTower = Object.Instantiate(cannonPrefab);
             return cannonTower;
         }

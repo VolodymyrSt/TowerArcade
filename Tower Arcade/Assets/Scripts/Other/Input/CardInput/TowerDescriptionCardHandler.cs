@@ -6,13 +6,15 @@ namespace Game
     public class TowerDescriptionCardHandler : IUpdatable
     {
         private TowerDescriptionCardUI _towerDescriptionCardUI;
+        private LevelCurencyHandler _levelCurencyHandler;
         private Camera _camera;
 
         private HashSet<RaycastHit> hitsCache = new HashSet<RaycastHit>();
 
-        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI)
+        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler)
         {
             _towerDescriptionCardUI = descriptionCardUI;
+            _levelCurencyHandler = levelCurencyHandler;
             _camera = Camera.main;
         }
 
@@ -37,7 +39,7 @@ namespace Game
                     if (hit.transform.TryGetComponent(out ITowerProperties towerDescription))
                     {
                         _towerDescriptionCardUI.ShowCard();
-                        SetUpTowerCard(towerDescription);
+                        SetUpTowerCard(towerDescription, _levelCurencyHandler);
                     }
                     else return;
                 }
@@ -50,19 +52,19 @@ namespace Game
             else return;
         }
 
-        private void SetUpTowerCard(ITowerProperties towerDescription)
+        private void SetUpTowerCard(ITowerProperties towerDescription, LevelCurencyHandler levelCurencyHandler)
         {
             _towerDescriptionCardUI.ClearButtonListeners();
 
-            _towerDescriptionCardUI.SetUpgradeButtonListener(() => UpgradeTower(towerDescription));
+            _towerDescriptionCardUI.SetUpgradeButtonListener(() => UpgradeTower(towerDescription, levelCurencyHandler));
             _towerDescriptionCardUI.SetDelateButtonListener(() => DeleteTower(towerDescription));
 
             UpdateTowerCardUI(towerDescription);
         }
 
-        private void UpgradeTower(ITowerProperties towerDescription)
+        private void UpgradeTower(ITowerProperties towerDescription, LevelCurencyHandler levelCurencyHandler)
         {
-            towerDescription.TryToUpgradeTower();
+            towerDescription.TryToUpgradeTower(levelCurencyHandler);
             UpdateTowerCardUI(towerDescription);
         }
 
@@ -74,13 +76,22 @@ namespace Game
 
         private void UpdateTowerCardUI(ITowerProperties towerDescription)
         {
+            if (towerDescription.IsMaxLevel())
+            {
+                _towerDescriptionCardUI.SetCardTowerLevel("Max");
+                _towerDescriptionCardUI.SetCardTowerUpgradeCost("Max");
+            }
+            else
+            {
+                _towerDescriptionCardUI.SetCardTowerLevel(towerDescription.GetLevel());
+                _towerDescriptionCardUI.SetCardTowerUpgradeCost(towerDescription.GetUpgradeCost());
+            }
+
             _towerDescriptionCardUI.SetCardTowerName(towerDescription.GetName());
-            _towerDescriptionCardUI.SetCardTowerLevel(towerDescription.GetLevel());
             _towerDescriptionCardUI.SetCardTowerDamage(towerDescription.GetDamage());
             _towerDescriptionCardUI.SetCardTowerAttackSpeed(towerDescription.GetAttackSpeed());
             _towerDescriptionCardUI.SetCardTowerAttackCooldown(towerDescription.GetAttackCooldown());
             _towerDescriptionCardUI.SetCardTowerAttackRange(towerDescription.GetAttackRange());
-            _towerDescriptionCardUI.SetCardTowerUpgradeCost(towerDescription.GetUpgradeCost());
         }
     }
 }

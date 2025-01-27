@@ -5,11 +5,11 @@ namespace Game {
     {
         public abstract IWeapon CreateBullet();
 
-        public void SpawnWeapon(Transform parent, Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurency)
+        public void SpawnWeapon(Transform parent, Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler)
         {
             IWeapon bullet = CreateBullet();
             bullet.Init(parent);
-            bullet.Shoot(enemy, attackSpeed, damage, levelCurency);
+            bullet.Shoot(enemy, attackSpeed, damage, levelCurencyHandler);
         }
     }
 }

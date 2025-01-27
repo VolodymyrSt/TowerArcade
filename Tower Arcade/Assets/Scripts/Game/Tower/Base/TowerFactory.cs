@@ -6,11 +6,11 @@ namespace Game
     {
         public abstract ITower CreateTower();
 
-        public void SpawnTower(Transform spawnPostion, TowerPlacementBlock placementBlock, LevelCurencyHandler levelCurency)
+        public void SpawnTower(Transform spawnPostion, TowerPlacementBlock placementBlock, LevelCurencyHandler levelCurencyHandler)
         {
             ITower tower = CreateTower();
-            tower.Initialize(levelCurency);
 
+            tower.Initialize(levelCurencyHandler);
             tower.SetPosition(spawnPostion);
             tower.SetOccupiedBlock(placementBlock);
         }

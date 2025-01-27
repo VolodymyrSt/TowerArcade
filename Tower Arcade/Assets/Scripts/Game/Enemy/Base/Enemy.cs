@@ -20,13 +20,13 @@ public class Enemy : MonoBehaviour, IEnemy, IEnemyDescription
         CurrentHealth = EnemyConfig.MaxHealth;
         SoulCost = EnemyConfig.SoulCost;
     }
-    public virtual void ApplyDamage(float damage, LevelCurencyHandler levelCurency)
+    public virtual void ApplyDamage(float damage, LevelCurencyHandler levelCurencyHandler)
     {
         CurrentHealth -= damage;
 
         if (CurrentHealth <= 0)
         {
-            levelCurency.AddCurrencyCount(SoulCost);
+            levelCurencyHandler.AddCurrencyCount(SoulCost);
             Destroy(gameObject);
         }
     }

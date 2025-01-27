@@ -1,3 +1,4 @@
+using DG.Tweening;
 using DI;
 using TMPro;
 using UnityEngine;
@@ -7,9 +8,11 @@ using UnityEngine.UI;
 
 namespace Game
 {
-    public class GameInventorySlotUI : MonoBehaviour, IPointerClickHandler
+    public class GameInventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [Header("UI")]
+        [SerializeField] private RectTransform _slotRoot;
+        [Space(10f)]
         [SerializeField] private TextMeshProUGUI _towerName;
         [SerializeField] private Image _towerImage;
         [SerializeField] private TextMeshProUGUI _towerSoulCost;
@@ -29,7 +32,7 @@ namespace Game
         private TowerSO _tower;
         private Camera _camera;
 
-        public void Initialize(DIContainer container, TowerSO tower, GameInventoryHandler gameInventoryHandler)
+        public void InitializeSlot(DIContainer container, TowerSO tower, GameInventoryHandler gameInventoryHandler)
         {
             _camera = Camera.main;
 
@@ -48,6 +51,14 @@ namespace Game
             UnSelect();
         }
 
+        private void Update()
+        {
+            if (_gameInventoryHandler.IsSlotActive(this) && Mouse.current.leftButton.isPressed)
+            {
+                HandleTowerPlacement();
+            }
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             if (_gameInventoryHandler.IsSlotActive(this))
@@ -63,12 +74,18 @@ namespace Game
             }
         }
 
-        private void Update()
+        public void OnPointerEnter(PointerEventData eventData)
         {
-            if (_gameInventoryHandler.IsSlotActive(this) && Mouse.current.leftButton.isPressed)
-            {
-                HandleTowerPlacement();
-            }
+            _slotRoot.DOScale(1.1f, 0.2f)
+                .SetEase(Ease.Linear)
+                .Play();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _slotRoot.DOScale(1f, 0.2f)
+                .SetEase(Ease.InBack)
+                .Play();
         }
 
         private void HandleTowerPlacement()
@@ -79,14 +96,10 @@ namespace Game
             {
                 if (hitInfo.transform.TryGetComponent(out TowerPlacementBlock towerPlacementBlock))
                 {
-                    _towerFactoryHandler.GetTowerFactoryByType(_container, _tower.TowerType)
-                        .SpawnTower(towerPlacementBlock.GetPlacePivot(), towerPlacementBlock, _levelCurencyHandler);
+                    if (towerPlacementBlock.IsOccupied()) 
+                        return;
 
-                    _gameInventoryHandler.ClearActiveSlot();
-
-                    towerPlacementBlock.SetOccupied(true);
-
-                    _levelCurencyHandler.SubtactCurrencyCount(_tower.SoulCost);
+                    PlaceTowerOnBlock(towerPlacementBlock, _levelCurencyHandler);
                 }
                 else
                 {
@@ -94,6 +107,18 @@ namespace Game
                 }
             }
         }
+        private void PlaceTowerOnBlock(TowerPlacementBlock towerPlacementBlock, LevelCurencyHandler levelCurencyHandler)
+        {
+            _towerFactoryHandler.GetTowerFactoryByType(_container, _tower.TowerType)
+                        .SpawnTower(towerPlacementBlock.GetPlacePivot(), towerPlacementBlock, levelCurencyHandler);
+
+            _gameInventoryHandler.ClearActiveSlot();
+
+            towerPlacementBlock.SetOccupied(true);
+
+            _levelCurencyHandler.SubtactCurrencyCount(_tower.SoulCost);
+        }
+
         public void SetActive(bool isActive)
         {
             if (isActive)
@@ -108,5 +133,6 @@ namespace Game
 
         public void Select() => _backgraundImage.sprite = _selectedBackgraundSprite;
         public void UnSelect() => _backgraundImage.sprite = _unselectedBackgraundSprite;
+
     }
 }

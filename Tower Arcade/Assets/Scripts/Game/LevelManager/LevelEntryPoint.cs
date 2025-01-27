@@ -41,7 +41,7 @@ namespace Game
 
             LevelRegistrator.Register(_container);
 
-            _gameInventoryHandler.Initialize(_container, towerSOs);
+            _gameInventoryHandler.InitializeInventorySlots(_container, towerSOs);
 
             InitializeUtilScripts();
         }

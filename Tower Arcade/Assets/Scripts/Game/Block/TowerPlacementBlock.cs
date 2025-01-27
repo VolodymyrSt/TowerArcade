@@ -16,7 +16,10 @@ namespace Game
         private void Awake() => DOTween.Init();
 
         public Transform GetPlacePivot() => _placePivot;
+
         public void SetOccupied(bool value) => _isOccupied = value;
+
+        public bool IsOccupied() => _isOccupied;
 
         public void Highlight() 
         { 

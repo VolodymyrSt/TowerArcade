@@ -23,7 +23,7 @@ namespace Game
             _container.RegisterFactory(c => new EnemyFactoryHandler()).AsSingle();
 
             _container.RegisterFactory(c => new EnemyDescriptionCardHandler(c.Resolve<EnemyDescriptionCardUI>())).AsSingle();
-            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>())).AsSingle();
+            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>())).AsSingle();
 
             _container.RegisterFactory(c => new EventBus()).AsSingle();
 

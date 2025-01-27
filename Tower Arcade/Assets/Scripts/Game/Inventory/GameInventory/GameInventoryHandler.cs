@@ -9,13 +9,13 @@ namespace Game
     {
         private GameInventorySlotUI _activeSlot;
 
-        public void Initialize(DIContainer container, List<TowerSO> towers)
+        public void InitializeInventorySlots(DIContainer container, List<TowerSO> towers)
         {
             for (int i = 0; i < transform.childCount; i++)
             {
                 if (transform.GetChild(i).TryGetComponent(out GameInventorySlotUI gameInventorySlotUI))
                 {
-                    gameInventorySlotUI.Initialize(container, towers[i], this);
+                    gameInventorySlotUI.InitializeSlot(container, towers[i], this);
                 }
             }
         }
