@@ -4,6 +4,8 @@ namespace Game
 {
     public abstract class Tower : MonoBehaviour, ITower, ITowerProperties
     {
+        [SerializeField] private GameObject _rangeZone;
+
         protected ITowerState CurrentState;
         protected TowerStateFactory StateFactory;
         protected LevelCurencyHandler LevelCurrencyHandler;
@@ -20,7 +22,7 @@ namespace Game
         protected float AttackRange;
         protected float UpgradeCost;
 
-        public abstract void Initialize(LevelCurencyHandler levelCurencyHandler);
+        public abstract void Initialize(LevelCurencyHandler levelCurencyHandler, TowerDescriptionCardHandler towerDescriptionCardHandler);
         public void SetPosition(Transform spawnPosition) => transform.SetParent(spawnPosition, false);
         public void SetOccupiedBlock(TowerPlacementBlock placementBlock) => _towerPlacementBlock = placementBlock;
 
@@ -60,9 +62,17 @@ namespace Game
             CurrentState?.Exit();
 
             CurrentState = towerState;
-            CurrentState.InitializeStats(ref Name, ref AttackDamage, ref AttackSpeed, ref AttackCoolDown, ref AttackRange, ref UpgradeCost);
+            CurrentState.InitializeStats(ref Name, ref AttackDamage, ref AttackSpeed, ref AttackCoolDown, ref AttackRange, ref UpgradeCost, _rangeZone);
         }
 
         public bool IsMaxLevel() => CurrentLevel == _maxLevel;
+
+        public void TuggleZone(bool value) => _rangeZone.SetActive(value);
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, AttackRange);
+        }
     }
 }

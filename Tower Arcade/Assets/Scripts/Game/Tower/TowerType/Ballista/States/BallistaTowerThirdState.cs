@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 namespace Game
@@ -16,29 +18,45 @@ namespace Game
 
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
-            _arrowBulletFactory = new ArrowWeaponFactory();
+            _arrowBulletFactory = LevelRegistrator.Resolve<ArrowWeaponFactory>();
+
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }
 
         public override void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler)
         {
+            if (enemy == null) return;
+
             _arrowBulletFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler);
+        }
+
+        public override IEnumerator PerformAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler)
+        {
+            StartCoroutine(base.PerformAttack(enemy, levelCurencyHandler));
+
+            yield return new WaitForSecondsRealtime(Config.AttackSpeed);
+
+            StartCoroutine(base.PerformAttack(enemy, levelCurencyHandler));
         }
 
         public override void HandleLookAtEnemy(Enemy enemy)
         {
-            float rotationSpeed = 180 * Time.deltaTime;
+            LookAtTarget(enemy, _frameDirection, _bowDirection, _framePrefab, _bowPrefab);
 
-            _frameDirection = (enemy.transform.position - _framePrefab.transform.position).normalized;
-            _bowDirection = (enemy.transform.position - _bowPrefab.transform.position).normalized;
+            PlayThrowAnimation();
+        }
 
-            if (_frameDirection != Vector3.zero && _bowDirection != Vector3.zero)
+        private void PlayThrowAnimation()
+        {
+            _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z - 0.1f, 0.05f)
+            .SetEase(Ease.InBack)
+            .OnComplete(() =>
             {
-                PerformSmoothLookAt(new Vector3(_frameDirection.x, 0f, _frameDirection.z)
-                    , _framePrefab.transform, rotationSpeed);
-
-                PerformSmoothLookAt(_bowDirection, _bowPrefab.transform, rotationSpeed);
-            }
+                _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z + 0.1f, 0.05f)
+                    .SetEase(Ease.Linear)
+                    .Play();
+            })
+            .Play();
         }
     }
 }

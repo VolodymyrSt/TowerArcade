@@ -2,12 +2,14 @@ namespace Game
 {
     public class BallistaTowerController : Tower
     {
-        public override void Initialize(LevelCurencyHandler levelCurencyHandler)
+        public override void Initialize(LevelCurencyHandler levelCurencyHandler, TowerDescriptionCardHandler towerDescriptionCardHandler)
         {
             LevelCurrencyHandler = levelCurencyHandler;
 
-            StateFactory = new BallistaTowerStateFactory();
+            StateFactory = LevelRegistrator.Resolve<BallistaStateFactory>();
             EnterInState(StateFactory.EnterInFirstState(LevelCurrencyHandler, transform));
+
+            towerDescriptionCardHandler.UpdateActiveTower(this); //
         }
 
         public override void UpgradeTower()

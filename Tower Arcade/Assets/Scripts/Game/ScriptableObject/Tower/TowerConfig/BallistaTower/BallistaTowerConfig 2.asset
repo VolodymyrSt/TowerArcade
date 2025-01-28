@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Ballista
   Damage: 15
-  AttackSpeed: 0.1
+  AttackSpeed: 0.2
   AttackCoolDown: 1.5
   AttackRange: 7
   UpgradeCost: 125

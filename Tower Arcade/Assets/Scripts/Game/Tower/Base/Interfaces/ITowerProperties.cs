@@ -13,5 +13,6 @@ namespace Game
         public void TryToUpgradeTower(LevelCurencyHandler levelCurencyHandler);
         public void DelateTower();
         public bool IsMaxLevel();
+        public void TuggleZone(bool value);
     }
 }

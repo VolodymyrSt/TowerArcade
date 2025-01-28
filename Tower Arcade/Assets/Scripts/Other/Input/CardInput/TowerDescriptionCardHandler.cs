@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -9,7 +8,7 @@ namespace Game
         private LevelCurencyHandler _levelCurencyHandler;
         private Camera _camera;
 
-        private HashSet<RaycastHit> hitsCache = new HashSet<RaycastHit>();
+        private ITowerProperties _activeTowerPropeties;
 
         public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler)
         {
@@ -32,24 +31,39 @@ namespace Game
 
             if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue))
             {
-                if (!hitsCache.Contains(hit))
+                if (hit.transform.TryGetComponent(out ITowerProperties towerPropeties))
                 {
-                    hitsCache.Add(hit);
-
-                    if (hit.transform.TryGetComponent(out ITowerProperties towerDescription))
+                    if (_activeTowerPropeties == towerPropeties)
                     {
-                        _towerDescriptionCardUI.ShowCard();
-                        SetUpTowerCard(towerDescription, _levelCurencyHandler);
+                        HideTowerCard();
                     }
-                    else return;
+                    else
+                    {
+                        UpdateActiveTower(towerPropeties);
+                    }
                 }
-                else
-                {
-                    hitsCache.Remove(hit);
-                    _towerDescriptionCardUI.HideCard();
-                }
+                else return;
             }
             else return;
+        }
+        private void HideTowerCard()
+        {
+            _activeTowerPropeties.TuggleZone(false);
+            _towerDescriptionCardUI.HideCard();
+            _activeTowerPropeties = null;
+        }
+
+        public void UpdateActiveTower(ITowerProperties towerProperties)
+        {
+            if (_activeTowerPropeties != null)
+            {
+                _activeTowerPropeties.TuggleZone(false);
+            }
+
+            _activeTowerPropeties = towerProperties;
+            _towerDescriptionCardUI.ShowCard();
+            SetUpTowerCard(_activeTowerPropeties, _levelCurencyHandler);
+            _activeTowerPropeties.TuggleZone(true);
         }
 
         private void SetUpTowerCard(ITowerProperties towerDescription, LevelCurencyHandler levelCurencyHandler)
@@ -70,6 +84,11 @@ namespace Game
 
         private void DeleteTower(ITowerProperties towerDescription)
         {
+            if (_activeTowerPropeties == towerDescription)
+            {
+                _activeTowerPropeties = null;
+            }
+
             towerDescription.DelateTower();
             _towerDescriptionCardUI.HideCard();
         }
@@ -79,10 +98,13 @@ namespace Game
             if (towerDescription.IsMaxLevel())
             {
                 _towerDescriptionCardUI.SetCardTowerLevel("Max");
-                _towerDescriptionCardUI.SetCardTowerUpgradeCost("Max");
+
+                _towerDescriptionCardUI.HideUpgradeRoot();
             }
             else
             {
+                _towerDescriptionCardUI.ShowUpgradeRoot();
+
                 _towerDescriptionCardUI.SetCardTowerLevel(towerDescription.GetLevel());
                 _towerDescriptionCardUI.SetCardTowerUpgradeCost(towerDescription.GetUpgradeCost());
             }

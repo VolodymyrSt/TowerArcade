@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyConfiguration:
   - NumberOfEnemies: 5
-    FactoryType: 0
+    FactoryType: 2
   TimeBetweenEnemySpawn: 2

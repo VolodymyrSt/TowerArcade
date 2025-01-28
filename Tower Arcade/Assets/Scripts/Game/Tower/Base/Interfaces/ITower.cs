@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface ITower
 {
-    public void Initialize(LevelCurencyHandler levelCurencyHandler);
+    public void Initialize(LevelCurencyHandler levelCurencyHandler, TowerDescriptionCardHandler towerDescriptionCardHandler);
     public void SetPosition(Transform spawnPosition);
     public void SetOccupiedBlock(TowerPlacementBlock placementBlock);
 }

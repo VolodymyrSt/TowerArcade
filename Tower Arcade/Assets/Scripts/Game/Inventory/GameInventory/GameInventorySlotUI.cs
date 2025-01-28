@@ -28,6 +28,7 @@ namespace Game
         private TowerFactoryHandler _towerFactoryHandler;
         private LevelCurencyHandler _levelCurencyHandler;
         private GameInventoryHandler _gameInventoryHandler;
+        private TowerDescriptionCardHandler _towerDescriptionCardHandler;
 
         private TowerSO _tower;
         private Camera _camera;
@@ -40,6 +41,7 @@ namespace Game
             _towerFactoryHandler = container.Resolve<TowerFactoryHandler>();
             _towerPlacementBlocksHolder = container.Resolve<TowerPlacementBlocksHolder>();
             _levelCurencyHandler = container.Resolve<LevelCurencyHandler>();
+            _towerDescriptionCardHandler = container.Resolve<TowerDescriptionCardHandler>();
             _gameInventoryHandler = gameInventoryHandler;
 
             _tower = tower;
@@ -99,7 +101,7 @@ namespace Game
                     if (towerPlacementBlock.IsOccupied()) 
                         return;
 
-                    PlaceTowerOnBlock(towerPlacementBlock, _levelCurencyHandler);
+                    PlaceTowerOnBlock(towerPlacementBlock, _levelCurencyHandler, _towerDescriptionCardHandler);
                 }
                 else
                 {
@@ -107,10 +109,10 @@ namespace Game
                 }
             }
         }
-        private void PlaceTowerOnBlock(TowerPlacementBlock towerPlacementBlock, LevelCurencyHandler levelCurencyHandler)
+        private void PlaceTowerOnBlock(TowerPlacementBlock towerPlacementBlock, LevelCurencyHandler levelCurencyHandler,TowerDescriptionCardHandler towerDescriptionCardHandler)
         {
             _towerFactoryHandler.GetTowerFactoryByType(_container, _tower.TowerType)
-                        .SpawnTower(towerPlacementBlock.GetPlacePivot(), towerPlacementBlock, levelCurencyHandler);
+                        .SpawnTower(towerPlacementBlock.GetPlacePivot(), towerPlacementBlock, levelCurencyHandler, towerDescriptionCardHandler);
 
             _gameInventoryHandler.ClearActiveSlot();
 

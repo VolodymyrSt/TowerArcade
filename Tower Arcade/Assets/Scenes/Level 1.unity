@@ -6068,13 +6068,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598604871}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 139566542}
-  m_Father: {fileID: 921194357}
+  m_Father: {fileID: 2027985233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9324,13 +9324,12 @@ RectTransform:
   - {fileID: 302873108}
   - {fileID: 964044652}
   - {fileID: 1523261084}
-  - {fileID: 598604872}
   - {fileID: 1157940741}
   - {fileID: 871984074}
   - {fileID: 1693714649}
   - {fileID: 1939028607}
   - {fileID: 1159543114}
-  - {fileID: 1733774495}
+  - {fileID: 2027985233}
   m_Father: {fileID: 1463107026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9360,6 +9359,7 @@ MonoBehaviour:
   _towerAttackRangeText: {fileID: 194466013}
   _towerAttackCooldownText: {fileID: 1223095181}
   _towerUpgradeCostText: {fileID: 1342706134}
+  _towerUpgradeRoot: {fileID: 2027985232}
 --- !u!1001 &933686886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15695,7 +15695,7 @@ RectTransform:
   m_Children:
   - {fileID: 450640286}
   - {fileID: 1342706133}
-  m_Father: {fileID: 921194357}
+  m_Father: {fileID: 2027985233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18863,6 +18863,43 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3568894420462028187, guid: 10f12a45fc02d844c81b480943267540, type: 3}
   m_PrefabInstance: {fileID: 2024762015}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2027985232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2027985233}
+  m_Layer: 0
+  m_Name: UpgradeRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2027985233
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027985232}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 598604872}
+  - {fileID: 1733774495}
+  m_Father: {fileID: 921194357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &2040783905
 PrefabInstance:
   m_ObjectHideFlags: 0

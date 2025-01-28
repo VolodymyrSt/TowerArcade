@@ -1,29 +1,16 @@
-using DG.Tweening;
-using UnityEngine;
-
 namespace Game
 {
-    public class ProjectileWeapon : MonoBehaviour, IWeapon
+    public class ProjectileWeapon : Weapon
     {
-        public void Init(Transform parent)
+        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler)
         {
-            transform.SetParent(parent, false);
-        }
-
-        public void Shoot(Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler)
-        {
-            if(enemy == null) return;
-
-            transform.DOMove(enemy.transform.position, attackSpeed)
-                .SetEase(Ease.Linear)
-                .Play()
-                .OnComplete(() => OnReachedTarget(enemy, damage, levelCurencyHandler));
-        }
-
-        private void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler)
-        {
-            enemy.ApplyDamage(damage, levelCurencyHandler);
-            Destroy(gameObject);
+            if (enemy == null)
+                DestroySelf();
+            else
+            {
+                enemy.ApplyDamage(damage, levelCurencyHandler);
+                DestroySelf();
+            }
         }
     }
 }

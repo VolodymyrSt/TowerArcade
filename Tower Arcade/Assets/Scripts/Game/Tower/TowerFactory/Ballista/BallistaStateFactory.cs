@@ -1,9 +1,8 @@
-
 using UnityEngine;
 
 namespace Game
 {
-    public class BallistaTowerStateFactory : TowerStateFactory
+    public class BallistaStateFactory : TowerStateFactory
     {
         public override ITowerState CreateFirstState(Transform parent)
         {

@@ -14,7 +14,7 @@ namespace Game
 
         public abstract void Enter(LevelCurencyHandler levelCurencyHandler);
         public void Exit() => Destroy(gameObject);
-        public void InitializeStats(ref string name, ref float attackDamage, ref float attackSpeed, ref float attackCoolDown, ref float attackRange, ref float upgradeCost)
+        public void InitializeStats(ref string name, ref float attackDamage, ref float attackSpeed, ref float attackCoolDown, ref float attackRange, ref float upgradeCost, GameObject zone)
         {
             name = Config.Name;
             attackDamage = Config.Damage;
@@ -22,13 +22,17 @@ namespace Game
             attackCoolDown = Config.AttackCoolDown;
             attackRange = Config.AttackRange;
             upgradeCost = Config.UpgradeCost;
+
+            zone.transform.localScale = new Vector3(Config.AttackRange * 2, 0.05f, Config.AttackRange * 2);
         }
 
         public abstract void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler);
         public abstract void HandleLookAtEnemy(Enemy enemy);
 
-        public virtual IEnumerator EnemyDetecte(LevelCurencyHandler levelCurencyHandler)
+        protected IEnumerator EnemyDetecte(LevelCurencyHandler levelCurencyHandler)
         {
+            yield return new WaitForSecondsRealtime(Config.AttackCoolDown);
+
             while (true)
             {
                 DetectEnemiesInRange();
@@ -37,8 +41,7 @@ namespace Game
                 {
                     var closestEnemy = GetClosestEnemy();
 
-                    HandleLookAtEnemy(closestEnemy);
-                    HandleAttack(closestEnemy, levelCurencyHandler);
+                    StartCoroutine(PerformAttack(closestEnemy, levelCurencyHandler));
 
                     yield return new WaitForSecondsRealtime(Config.AttackCoolDown);
                 }
@@ -63,6 +66,15 @@ namespace Game
             }
         }
 
+        public virtual IEnumerator PerformAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler)
+        {
+            if (enemy == null) yield return null;
+
+            HandleLookAtEnemy(enemy);
+            HandleAttack(enemy, levelCurencyHandler);
+            yield return null;
+        }
+
         private Enemy GetClosestEnemy()
         {
             return _enemiesInAttackRange.OrderBy(enemy =>
@@ -73,6 +85,24 @@ namespace Game
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             rotation.rotation = Quaternion.Slerp(rotation.rotation, targetRotation, rotationSpeed);
+        }
+
+        protected void LookAtTarget(Enemy enemy, Vector3 frameDirection, Vector3 gunDirection, GameObject framePrefab, GameObject gunPrefab)
+        {
+            if (enemy == null) return;
+
+            float rotationSpeed = 180 * Time.deltaTime;
+
+            frameDirection = (enemy.transform.position - framePrefab.transform.position).normalized;
+            gunDirection = (enemy.transform.position - gunPrefab.transform.position).normalized;
+
+            if (frameDirection != Vector3.zero && gunDirection != Vector3.zero)
+            {
+                PerformSmoothLookAt(new Vector3(frameDirection.x, 0f, frameDirection.z)
+                    , framePrefab.transform, rotationSpeed);
+
+                PerformSmoothLookAt(gunDirection, gunPrefab.transform, rotationSpeed);
+            }
         }
     }
 }

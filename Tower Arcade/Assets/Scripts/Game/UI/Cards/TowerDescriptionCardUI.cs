@@ -22,6 +22,9 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _towerAttackCooldownText;
         [SerializeField] private TextMeshProUGUI _towerUpgradeCostText;
 
+        [Header("Root:")]
+        [SerializeField] private GameObject _towerUpgradeRoot;
+
         private void Awake() => HideCard();
 
         public void SetUpgradeButtonListener(Action update) => _upgradeButton.onClick.AddListener(() => update.Invoke());
@@ -40,7 +43,8 @@ namespace Game
         public void SetCardTowerAttackCooldown(float attackCooldown) => _towerAttackCooldownText.text = $"Cooldown: {attackCooldown.ToString()}";
         public void SetCardTowerAttackRange(float attackRange) => _towerAttackRangeText.text = $"Range: {attackRange.ToString()}";
         public void SetCardTowerUpgradeCost(float upgradeCost) => _towerUpgradeCostText.text = upgradeCost.ToString();
-        public void SetCardTowerUpgradeCost(string upgradeCost) => _towerUpgradeCostText.text = upgradeCost;
+        public void HideUpgradeRoot() => _towerUpgradeRoot.gameObject.SetActive(false);
+        public void ShowUpgradeRoot() => _towerUpgradeRoot.gameObject.SetActive(true);
 
         public void ShowCard() => _card.SetActive(true);
         public void HideCard() => _card.SetActive(false);

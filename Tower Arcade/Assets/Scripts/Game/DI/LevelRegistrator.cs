@@ -10,6 +10,8 @@ namespace Game
         {
             _container = container;
 
+            _container.RegisterFactory(c => new EventBus()).AsSingle();
+
             //enemy
             _container.RegisterFactory(c => new SkeletonMinionFactory()).AsSingle();
             _container.RegisterFactory(c => new SkeletonRogueFactory()).AsSingle();
@@ -17,17 +19,23 @@ namespace Game
 
             //tower
             _container.RegisterFactory(c => new BallistaTowerFactory()).AsSingle();
+            _container.RegisterFactory(c => new BallistaStateFactory()).AsSingle();
+
             _container.RegisterFactory(c => new CannonTowerFactory()).AsSingle();
+            _container.RegisterFactory(c => new CannonStateFactory()).AsSingle();
+
+            //towerWeapon
+            _container.RegisterFactory(c => new ArrowWeaponFactory()).AsSingle();
+            _container.RegisterFactory(c => new ProjectileWeaponFactory()).AsSingle();
+            _container.RegisterFactory(c => new BlowProjectileWeaponFactory()).AsSingle();
+
 
             //other
             _container.RegisterFactory(c => new EnemyFactoryHandler()).AsSingle();
+            _container.RegisterFactory(c => new TowerFactoryHandler()).AsSingle();
 
             _container.RegisterFactory(c => new EnemyDescriptionCardHandler(c.Resolve<EnemyDescriptionCardUI>())).AsSingle();
             _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>())).AsSingle();
-
-            _container.RegisterFactory(c => new EventBus()).AsSingle();
-
-            _container.RegisterFactory(c => new TowerFactoryHandler()).AsSingle();
 
             _container.RegisterFactory(c => new LevelCurencyHandler(c.Resolve<LevelConfigurationSO>(), c.Resolve<EventBus>())).AsSingle();
         }
