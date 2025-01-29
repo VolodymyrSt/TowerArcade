@@ -15,6 +15,6 @@ MonoBehaviour:
   Name: Cannon
   Damage: 30
   AttackSpeed: 0.3
-  AttackCoolDown: 4
-  AttackRange: 6
+  AttackCoolDown: 3
+  AttackRange: 9
   UpgradeCost: 300

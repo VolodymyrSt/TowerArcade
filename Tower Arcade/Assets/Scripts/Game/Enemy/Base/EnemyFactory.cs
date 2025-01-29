@@ -6,7 +6,7 @@ namespace Game
     {
         public abstract IEnemy Create();
 
-        public void SpawnEnemy(Transform parent, Vector3 destination)
+        public void SpawnEnemy(UnityEngine.Transform parent, Vector3 destination)
         {
             IEnemy enemy = Create();
             enemy.Initialize();

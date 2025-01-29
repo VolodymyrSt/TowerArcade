@@ -16,5 +16,5 @@ MonoBehaviour:
   Damage: 50
   AttackSpeed: 0.2
   AttackCoolDown: 2
-  AttackRange: 7
+  AttackRange: 10
   UpgradeCost: 100

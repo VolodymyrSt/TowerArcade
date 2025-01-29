@@ -4,6 +4,7 @@ namespace Game
 {
     public abstract class Tower : MonoBehaviour, ITower, ITowerProperties
     {
+        [Header("Zone")]
         [SerializeField] private GameObject _rangeZone;
 
         protected ITowerState CurrentState;
@@ -23,7 +24,7 @@ namespace Game
         protected float UpgradeCost;
 
         public abstract void Initialize(LevelCurencyHandler levelCurencyHandler, TowerDescriptionCardHandler towerDescriptionCardHandler);
-        public void SetPosition(Transform spawnPosition) => transform.SetParent(spawnPosition, false);
+        public void SetPosition(UnityEngine.Transform spawnPosition) => transform.SetParent(spawnPosition, false);
         public void SetOccupiedBlock(TowerPlacementBlock placementBlock) => _towerPlacementBlock = placementBlock;
 
         public int GetLevel() => CurrentLevel;
@@ -34,7 +35,7 @@ namespace Game
         public float GetAttackRange() => AttackRange;
         public float GetUpgradeCost() => UpgradeCost;
 
-        public void TryToUpgradeTower(LevelCurencyHandler levelCurencyHandler)
+        public void TryToUpgradeTower(LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer)
         {
             if (levelCurencyHandler.GetCurrentCurrencyCount() >= UpgradeCost)
             {
@@ -45,14 +46,17 @@ namespace Game
                     CurrentLevel++;
                     levelCurencyHandler.SubtactCurrencyCount(UpgradeCost);
                     UpgradeTower();
+
+                    effectPerformer.PlayUpgradeTowerEffect(transform.position + Vector3.up * 3);
                 }
             }
         }
 
         public abstract void UpgradeTower();
 
-        public void DelateTower()
+        public void DelateTower(EffectPerformer effectPerformer)
         {
+            effectPerformer.PlayDelateTowerEffect(transform.position);
             _towerPlacementBlock.SetOccupied(false);
             Destroy(gameObject);
         }
@@ -68,11 +72,5 @@ namespace Game
         public bool IsMaxLevel() => CurrentLevel == _maxLevel;
 
         public void TuggleZone(bool value) => _rangeZone.SetActive(value);
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, AttackRange);
-        }
     }
 }

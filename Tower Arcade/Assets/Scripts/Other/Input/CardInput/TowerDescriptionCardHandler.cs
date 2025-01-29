@@ -6,14 +6,17 @@ namespace Game
     {
         private TowerDescriptionCardUI _towerDescriptionCardUI;
         private LevelCurencyHandler _levelCurencyHandler;
+        private EffectPerformer _effectPerformer;
+
         private Camera _camera;
 
         private ITowerProperties _activeTowerPropeties;
 
-        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler)
+        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer)
         {
             _towerDescriptionCardUI = descriptionCardUI;
             _levelCurencyHandler = levelCurencyHandler;
+            _effectPerformer = effectPerformer;
             _camera = Camera.main;
         }
 
@@ -61,7 +64,7 @@ namespace Game
             }
 
             _activeTowerPropeties = towerProperties;
-            _towerDescriptionCardUI.ShowCard();
+            _towerDescriptionCardUI.ShowCard(_activeTowerPropeties);
             SetUpTowerCard(_activeTowerPropeties, _levelCurencyHandler);
             _activeTowerPropeties.TuggleZone(true);
         }
@@ -78,7 +81,7 @@ namespace Game
 
         private void UpgradeTower(ITowerProperties towerDescription, LevelCurencyHandler levelCurencyHandler)
         {
-            towerDescription.TryToUpgradeTower(levelCurencyHandler);
+            towerDescription.TryToUpgradeTower(levelCurencyHandler, _effectPerformer);
             UpdateTowerCardUI(towerDescription);
         }
 
@@ -89,7 +92,7 @@ namespace Game
                 _activeTowerPropeties = null;
             }
 
-            towerDescription.DelateTower();
+            towerDescription.DelateTower(_effectPerformer);
             _towerDescriptionCardUI.HideCard();
         }
 

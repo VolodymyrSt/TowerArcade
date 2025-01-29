@@ -24,10 +24,14 @@ namespace Game
             _container.RegisterFactory(c => new CannonTowerFactory()).AsSingle();
             _container.RegisterFactory(c => new CannonStateFactory()).AsSingle();
 
+            _container.RegisterFactory(c => new CatapultTowerFactory()).AsSingle();
+            _container.RegisterFactory(c => new CatapultStateFactory()).AsSingle();
+
             //towerWeapon
             _container.RegisterFactory(c => new ArrowWeaponFactory()).AsSingle();
             _container.RegisterFactory(c => new ProjectileWeaponFactory()).AsSingle();
             _container.RegisterFactory(c => new BlowProjectileWeaponFactory()).AsSingle();
+            _container.RegisterFactory(c => new CatapultProjectileWeaponFactory()).AsSingle();
 
 
             //other
@@ -35,7 +39,7 @@ namespace Game
             _container.RegisterFactory(c => new TowerFactoryHandler()).AsSingle();
 
             _container.RegisterFactory(c => new EnemyDescriptionCardHandler(c.Resolve<EnemyDescriptionCardUI>())).AsSingle();
-            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>())).AsSingle();
+            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>(), c.Resolve<EffectPerformer>())).AsSingle();
 
             _container.RegisterFactory(c => new LevelCurencyHandler(c.Resolve<LevelConfigurationSO>(), c.Resolve<EventBus>())).AsSingle();
         }

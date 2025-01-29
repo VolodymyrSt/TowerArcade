@@ -10,8 +10,8 @@ namespace Game
         public float GetAttackRange();
         public float GetUpgradeCost();
 
-        public void TryToUpgradeTower(LevelCurencyHandler levelCurencyHandler);
-        public void DelateTower();
+        public void TryToUpgradeTower(LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer);
+        public void DelateTower(EffectPerformer effectPerformer);
         public bool IsMaxLevel();
         public void TuggleZone(bool value);
     }

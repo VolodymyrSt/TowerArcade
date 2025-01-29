@@ -6,10 +6,12 @@ namespace Game
 {
     public class BallistaTowerThirdState : TowerState
     {
+        [Header("TowerMovableParts")]
         [SerializeField] private GameObject _framePrefab;
         [SerializeField] private GameObject _bowPrefab;
 
-        [SerializeField] private Transform _weaponPointer;
+        [Header("PointerForWeaponDirection")]
+        [SerializeField] private UnityEngine.Transform _weaponPointer;
 
         private ArrowWeaponFactory _arrowBulletFactory;
 
@@ -43,20 +45,10 @@ namespace Game
         {
             LookAtTarget(enemy, _frameDirection, _bowDirection, _framePrefab, _bowPrefab);
 
-            PlayThrowAnimation();
-        }
+            var animationDuration = 0.05f;
+            var targetPosition = _bowPrefab.transform.position - new Vector3(0, 0, 0.05f);
 
-        private void PlayThrowAnimation()
-        {
-            _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z - 0.1f, 0.05f)
-            .SetEase(Ease.InBack)
-            .OnComplete(() =>
-            {
-                _bowPrefab.transform.DOMoveZ(_bowPrefab.transform.position.z + 0.1f, 0.05f)
-                    .SetEase(Ease.Linear)
-                    .Play();
-            })
-            .Play();
+            PlayAnimation(_bowPrefab.transform, targetPosition, animationDuration, Ease.Linear);
         }
     }
 }

@@ -5,9 +5,12 @@ namespace Game
 {
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
-        public void Init(Transform parent)
+        protected EffectPerformer EffectPerformer;
+
+        public void Init(UnityEngine.Transform parent)
         {
             transform.SetParent(parent, false);
+            EffectPerformer = LevelRegistrator.Resolve<EffectPerformer>();
         }
 
         public virtual void Shoot(Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler)

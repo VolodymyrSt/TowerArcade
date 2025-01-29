@@ -13,20 +13,30 @@ namespace Game
         public float MaxTimeToNextWave;
         private float _currentTimeToNextWave;
 
-        private EventBus _eventBus;
+        private bool _isLevelActive;
         private bool _isSkipButtonPressed;
+
+        private Transform _enemyContainer;
+        private EventBus _eventBus;
 
         public IEnumerator StartLevelSystem(DIContainer container, CoroutineUsager coroutine, Transform parent, Vector3 destination)
         {
             _eventBus = container.Resolve<EventBus>();
 
             _eventBus.SubscribeEvent<OnWaveSkippedSignal>(SkipWave);
+            _eventBus.SubscribeEvent<OnGameEndedSignal>(StopLevelSystem);
+
+            _enemyContainer = parent;
+
+            _isLevelActive = true;
 
             _currentTimeToNextWave = MaxTimeToNextWave;
             _isSkipButtonPressed = false;
 
             for (int i = 0; i < Waves.Count; i++)
             {
+                //if (!_isLevelActive) break;
+
                 coroutine.StartCoroutine(Waves[i].StartWave(container, parent, destination));
                 yield return new WaitUntil(() => Waves[i].IsWaveEnded());
 
@@ -46,12 +56,28 @@ namespace Game
                 _currentTimeToNextWave = MaxTimeToNextWave;
                 _isSkipButtonPressed = false;
             }
-            Debug.Log("isEnded");
         }
 
         public int GetWavesCount() => Waves.Count;
 
         public float GetCurrentTimeToNextWave() => _currentTimeToNextWave;
-        public void SkipWave(OnWaveSkippedSignal signal) => _isSkipButtonPressed = true;
+        private void SkipWave(OnWaveSkippedSignal signal) => _isSkipButtonPressed = true;
+        private void StopLevelSystem(OnGameEndedSignal signal)
+        {
+            _isLevelActive = false;
+
+            ClearAllEnemies();
+        }
+
+        private void ClearAllEnemies()
+        {
+            foreach (Transform child in _enemyContainer.transform)
+            {
+                if (child.TryGetComponent(out Enemy enemy))
+                {
+                    enemy.DestroySelf();
+                }
+            }
+        }
     }
 }

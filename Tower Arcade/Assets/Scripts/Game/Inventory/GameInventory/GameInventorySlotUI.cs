@@ -29,6 +29,7 @@ namespace Game
         private LevelCurencyHandler _levelCurencyHandler;
         private GameInventoryHandler _gameInventoryHandler;
         private TowerDescriptionCardHandler _towerDescriptionCardHandler;
+        private EffectPerformer _effectPerformer;
 
         private TowerSO _tower;
         private Camera _camera;
@@ -42,6 +43,7 @@ namespace Game
             _towerPlacementBlocksHolder = container.Resolve<TowerPlacementBlocksHolder>();
             _levelCurencyHandler = container.Resolve<LevelCurencyHandler>();
             _towerDescriptionCardHandler = container.Resolve<TowerDescriptionCardHandler>();
+            _effectPerformer = container.Resolve<EffectPerformer>();
             _gameInventoryHandler = gameInventoryHandler;
 
             _tower = tower;
@@ -114,6 +116,8 @@ namespace Game
             _towerFactoryHandler.GetTowerFactoryByType(_container, _tower.TowerType)
                         .SpawnTower(towerPlacementBlock.GetPlacePivot(), towerPlacementBlock, levelCurencyHandler, towerDescriptionCardHandler);
 
+            _effectPerformer.PlayTowerInstalledEffect(towerPlacementBlock.GetPlacePivot().position);
+
             _gameInventoryHandler.ClearActiveSlot();
 
             towerPlacementBlock.SetOccupied(true);
@@ -135,6 +139,5 @@ namespace Game
 
         public void Select() => _backgraundImage.sprite = _selectedBackgraundSprite;
         public void UnSelect() => _backgraundImage.sprite = _unselectedBackgraundSprite;
-
     }
 }

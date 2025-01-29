@@ -1,13 +1,16 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace Game
 {
     public class CannonTowerThirdState : TowerState
     {
+        [Header("TowerMovableParts")]
         [SerializeField] private GameObject _framePrefab;
         [SerializeField] private GameObject _cannonPrefab;
 
-        [SerializeField] private Transform _weaponPointer;
+        [Header("PointerForWeaponDirection")]
+        [SerializeField] private UnityEngine.Transform _weaponPointer;
 
         private BlowProjectileWeaponFactory _blowProjectileWeapon;
 
@@ -31,6 +34,11 @@ namespace Game
         public override void HandleLookAtEnemy(Enemy enemy)
         {
             LookAtTarget(enemy, _frameDirection, _bowDirection, _framePrefab, _cannonPrefab);
+
+            var animationDuration = 0.1f;
+            var targetPosition = _cannonPrefab.transform.position - new Vector3(0, 0, 0.1f);
+
+            PlayAnimation(_cannonPrefab.transform, targetPosition, animationDuration, Ease.Linear);
         }
     }
 }

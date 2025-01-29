@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour, IEnemy, IEnemyDescription
         if (CurrentHealth <= 0)
         {
             levelCurencyHandler.AddCurrencyCount(SoulCost);
-            Destroy(gameObject);
+            DestroySelf();
         }
     }
 
@@ -40,4 +40,6 @@ public class Enemy : MonoBehaviour, IEnemy, IEnemyDescription
     public string GetEnemyDescription() => EnemyConfig.EnemyDescription;
     public EnemyType GetEnemyType() => EnemyConfig.EnemyType;
     public EnemyRank GetEnemyRank() => EnemyConfig.EnemyRank;
+
+    public void DestroySelf() => Destroy(gameObject);
 }

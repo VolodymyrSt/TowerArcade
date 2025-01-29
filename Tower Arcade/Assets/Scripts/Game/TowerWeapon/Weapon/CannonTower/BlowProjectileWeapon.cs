@@ -4,24 +4,35 @@ namespace Game
 {
     public class BlowProjectileWeapon : Weapon
     {
+        [SerializeField] private ParticleSystem _particleSystem;
+
         public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler)
         {
             if (enemy == null)
                 DestroySelf();
             else
             {
-                Collider[] enemyArray = Physics.OverlapSphere(enemy.transform.position, 1f);
-                
-                foreach (var collider in enemyArray)
-                {
-                    if (collider.TryGetComponent(out Enemy target))
-                    {
-                        target.ApplyDamage(damage, levelCurencyHandler);
-                    }
-                    else continue;
-                }
-                
+                float explodeRadious = 1f;
+
+                FindEnemiesInRangeAndApplyDamage(enemy, explodeRadious, damage, levelCurencyHandler);
+
+                EffectPerformer.PlayEffect(_particleSystem, enemy.transform.position);
+
                 DestroySelf();
+            }
+        }
+
+        private void FindEnemiesInRangeAndApplyDamage(Enemy enemy, float explodeRadious, float damage, LevelCurencyHandler levelCurencyHandler)
+        {
+            Collider[] enemyArray = Physics.OverlapSphere(enemy.transform.position, explodeRadious);
+
+            foreach (var collider in enemyArray)
+            {
+                if (collider.TryGetComponent(out Enemy target))
+                {
+                    target.ApplyDamage(damage, levelCurencyHandler);
+                }
+                else continue;
             }
         }
     }

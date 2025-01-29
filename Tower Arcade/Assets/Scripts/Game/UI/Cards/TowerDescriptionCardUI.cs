@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace Game
 {
     public class TowerDescriptionCardUI : MonoBehaviour
     {
-        [SerializeField] private GameObject _card;
+        [SerializeField] private RectTransform _card;
 
         [Header("Buttons:")]
         [SerializeField] private Button _upgradeButton;
@@ -46,7 +47,35 @@ namespace Game
         public void HideUpgradeRoot() => _towerUpgradeRoot.gameObject.SetActive(false);
         public void ShowUpgradeRoot() => _towerUpgradeRoot.gameObject.SetActive(true);
 
-        public void ShowCard() => _card.SetActive(true);
-        public void HideCard() => _card.SetActive(false);
+        public void ShowCard(ITowerProperties towerProperties)
+        {
+            if (towerProperties != null)
+            {
+                _card.DOScale(1f, 0.1f)
+                .SetEase(Ease.Linear)
+                .Play()
+                .OnComplete(() => Show());
+            }
+            else
+            {
+                Show();
+            }
+        }
+
+        public void HideCard()
+        {
+            _card.DOScale(1f, 0.1f)
+                .SetEase(Ease.Linear)
+                .Play()
+                .OnComplete(() => _card.gameObject.SetActive(false));
+        }
+
+        private void Show()
+        {
+            _card.gameObject.SetActive(true);
+            _card.DOScale(1.1f, 0.1f)
+                        .SetEase(Ease.Linear)
+                        .Play();
+        }
     }
 }

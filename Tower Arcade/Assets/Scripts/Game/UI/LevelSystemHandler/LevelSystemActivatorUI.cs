@@ -1,11 +1,12 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Game
 {
-    public class LevelSystemActivatorUI : MonoBehaviour
+    public class LevelSystemActivatorUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [Header("Root")]
         [SerializeField] private GameObject _levelSystemActivatorRoot;
@@ -44,6 +45,28 @@ namespace Game
                 {
                     _hideLevelInfoButton.onClick.AddListener(() => TriggerHideLevelInfoAnimation());
                 });
+        }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _startLevelSystemButton.transform.DOScale(1.1f, 0.2f)
+                .SetEase(Ease.Linear)
+                .Play();
+
+            _hideLevelInfoButton.transform.DOScale(1.1f, 0.2f)
+                .SetEase(Ease.Linear)
+                .Play();
+                
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _startLevelSystemButton.transform.DOScale(1f, 0.2f)
+                .SetEase(Ease.Linear)
+                .Play();
+
+            _hideLevelInfoButton.transform.DOScale(1f, 0.2f)
+                .SetEase(Ease.Linear)
+                .Play();
         }
 
         private void ConfigurateLevel(LevelSystemSO levelSystem)

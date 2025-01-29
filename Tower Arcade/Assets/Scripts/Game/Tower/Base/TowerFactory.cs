@@ -1,12 +1,10 @@
-using UnityEngine;
-
 namespace Game
 {
     public abstract class TowerFactory
     {
         public abstract ITower CreateTower();
 
-        public void SpawnTower(Transform spawnPostion, TowerPlacementBlock placementBlock, LevelCurencyHandler levelCurencyHandler, TowerDescriptionCardHandler towerDescriptionCardHandler)
+        public void SpawnTower(UnityEngine.Transform spawnPostion, TowerPlacementBlock placementBlock, LevelCurencyHandler levelCurencyHandler, TowerDescriptionCardHandler towerDescriptionCardHandler)
         {
             ITower tower = CreateTower();
 

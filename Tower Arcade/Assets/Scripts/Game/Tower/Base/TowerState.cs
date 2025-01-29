@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Game
             attackRange = Config.AttackRange;
             upgradeCost = Config.UpgradeCost;
 
-            zone.transform.localScale = new Vector3(Config.AttackRange * 2, 0.05f, Config.AttackRange * 2);
+            zone.transform.localScale = new Vector3(Config.AttackRange, 0.05f, Config.AttackRange);
         }
 
         public abstract void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler);
@@ -54,7 +55,7 @@ namespace Game
 
         private void DetectEnemiesInRange()
         {
-            Collider[] enemyArray = Physics.OverlapSphere(transform.position, Config.AttackRange);
+            Collider[] enemyArray = Physics.OverlapSphere(transform.position, Config.AttackRange / 2);
             _enemiesInAttackRange.Clear();
 
             foreach (var unit in enemyArray)
@@ -81,7 +82,7 @@ namespace Game
                     Vector3.Distance(transform.position, enemy.transform.position)).First();
         }
 
-        protected void PerformSmoothLookAt(Vector3 direction, Transform rotation, float rotationSpeed)
+        protected void PerformSmoothLookAt(Vector3 direction, UnityEngine.Transform rotation, float rotationSpeed)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             rotation.rotation = Quaternion.Slerp(rotation.rotation, targetRotation, rotationSpeed);
@@ -103,6 +104,38 @@ namespace Game
 
                 PerformSmoothLookAt(gunDirection, gunPrefab.transform, rotationSpeed);
             }
+        }
+
+        protected void PlayAnimation(UnityEngine.Transform targetTransform, Vector3 targetPosition, float duration, Ease ease)
+        {
+            Vector3 originalPosition = targetTransform.position;
+
+            targetTransform.DOMove(targetPosition, duration)
+                .SetEase(ease)
+                .Play()
+                .OnComplete(() =>
+                {
+                    targetTransform.DOMove(originalPosition, duration)
+                        .SetEase(ease)
+                        .Play();
+                });
+        }
+
+        protected void PlayRotateAngleAnimation(UnityEngine.Transform targetTransform, float targetAngle, float duration, Ease ease)
+        {
+            Quaternion originalRotation = targetTransform.rotation;
+
+            Quaternion targetRotation = Quaternion.Euler(targetAngle, originalRotation.eulerAngles.y, originalRotation.eulerAngles.z);
+
+            targetTransform.DORotateQuaternion(targetRotation, duration)
+                .SetEase(ease)
+                .Play()
+                .OnComplete(() =>
+                {
+                    targetTransform.DORotateQuaternion(originalRotation, duration)
+                        .SetEase(ease)
+                        .Play();
+                });
         }
     }
 }

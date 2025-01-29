@@ -9,8 +9,8 @@ namespace Game
         private DIContainer _container = new DIContainer();
 
         [Header("Enemy")]
-        [SerializeField] private Transform _enemyTargetDestination;
-        [SerializeField] private Transform _enemyStartPosition;
+        [SerializeField] private UnityEngine.Transform _enemyTargetDestination;
+        [SerializeField] private UnityEngine.Transform _enemyStartPosition;
         [Space(10f)]
         [SerializeField] private EnemyDescriptionCardUI _enemyCardHandlerUI;
 
@@ -28,6 +28,12 @@ namespace Game
         [Header("LevelConfiguration")]
         [SerializeField] private LevelConfigurationSO _levelConfiguration;
 
+        [Header("Effects")]
+        [SerializeField] private EffectPerformer _effectPerformer;
+
+        [Header("UI")]
+        [SerializeField] private HealthBarHandlerUI _healthBarHandler;
+
         private List<IUpdatable> _updatable = new List<IUpdatable>();
         private CoroutineUsager _coroutineUsage;
 
@@ -38,6 +44,8 @@ namespace Game
             _container.RegisterInstance<TowerDescriptionCardUI>(_towerDescriptionCardHandlerUI);
             _container.RegisterInstance<TowerPlacementBlocksHolder>(_towerPlacementBlocksHolder);
             _container.RegisterInstance<LevelConfigurationSO>(_levelConfiguration);
+            _container.RegisterInstance<EffectPerformer>(_effectPerformer);
+            _container.RegisterInstance<HealthBarHandlerUI>(_healthBarHandler);
 
             LevelRegistrator.Register(_container);
 
