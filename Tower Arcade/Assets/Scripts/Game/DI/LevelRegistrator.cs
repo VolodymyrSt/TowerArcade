@@ -27,11 +27,21 @@ namespace Game
             _container.RegisterFactory(c => new CatapultTowerFactory()).AsSingle();
             _container.RegisterFactory(c => new CatapultStateFactory()).AsSingle();
 
+            _container.RegisterFactory(c => new IceTowerFactory()).AsSingle();
+            _container.RegisterFactory(c => new IceStateFactory()).AsSingle();
+
+            _container.RegisterFactory(c => new FireTowerFactory()).AsSingle();
+            _container.RegisterFactory(c => new FireStateFactory()).AsSingle();
+
             //towerWeapon
             _container.RegisterFactory(c => new ArrowWeaponFactory()).AsSingle();
             _container.RegisterFactory(c => new ProjectileWeaponFactory()).AsSingle();
             _container.RegisterFactory(c => new BlowProjectileWeaponFactory()).AsSingle();
             _container.RegisterFactory(c => new CatapultProjectileWeaponFactory()).AsSingle();
+            _container.RegisterFactory(c => new IceCrystalWeaponFactory()).AsSingle();
+            _container.RegisterFactory(c => new BigIceCrystalWeaponFactory()).AsSingle();
+            _container.RegisterFactory(c => new FireBallWeaponFactory()).AsSingle();
+            _container.RegisterFactory(c => new MegaFireBallWeaponFactory()).AsSingle();
 
 
             //other

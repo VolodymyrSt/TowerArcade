@@ -10,7 +10,7 @@ namespace Game
         [SerializeField] private GameObject _bowPrefab;
 
         [Header("PointerForWeaponDirection")]
-        [SerializeField] private UnityEngine.Transform _weaponPointer;
+        [SerializeField] private Transform _weaponPointer;
 
         private ArrowWeaponFactory _arrowBulletFactory;
 

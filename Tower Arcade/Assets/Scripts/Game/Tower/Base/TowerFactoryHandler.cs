@@ -16,10 +16,16 @@ namespace Game
 
                 case TowerFactoryType.CatapultTower:
                     return container.Resolve<CatapultTowerFactory>();
+
+                case TowerFactoryType.IceTower:
+                    return container.Resolve<IceTowerFactory>();
+
+                case TowerFactoryType.FireTower:
+                    return container.Resolve<FireTowerFactory>();
+
                 default:
                     throw new Exception("The factory doesn`t exist");
             }
-
         }
     }
 
@@ -27,6 +33,8 @@ namespace Game
     {
         BallistaTower,
         CannonTower,
-        CatapultTower
+        CatapultTower,
+        IceTower,
+        FireTower
     }
 }

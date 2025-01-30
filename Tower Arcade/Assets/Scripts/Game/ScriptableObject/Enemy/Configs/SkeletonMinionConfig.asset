@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkeletonMinionConfig
   m_EditorClassIdentifier: 
   MaxHealth: 25
-  MoveSpeed: 0.5
+  MoveSpeed: 0.7
   SoulCost: 5
   EnemyName: Minion
   EnemyDescription: The simplest enemy ever existed

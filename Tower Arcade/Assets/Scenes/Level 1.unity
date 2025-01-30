@@ -7727,9 +7727,9 @@ MonoBehaviour:
   _enemyCardHandlerUI: {fileID: 425002913}
   _towerDescriptionCardHandlerUI: {fileID: 921194358}
   towerSOs:
-  - {fileID: 11400000, guid: 56a9db4307b45ad44a4436fecba10243, type: 2}
-  - {fileID: 11400000, guid: c74d0003a445b8745b986e119b9c70d2, type: 2}
   - {fileID: 11400000, guid: 906d4ef9f9899d04cbf576a2b06504ae, type: 2}
+  - {fileID: 11400000, guid: dc3de2ae8979da94e80dd0ffefeec402, type: 2}
+  - {fileID: 11400000, guid: 3f89504ab38302141b2b21589250715c, type: 2}
   _towerPlacementBlocksHolder: {fileID: 1265669784}
   _gameInventoryHandler: {fileID: 1322337700}
   _levelSystemConfig: {fileID: 11400000, guid: b3781e53de352f74282ce4c2bea1921f, type: 2}
@@ -20704,6 +20704,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 053f9aeb8ff75ea4793a0d4b1dd90047, type: 3}
+--- !u!1001 &6879126143657077894
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363788692073452240, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9170268326862206743, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
+      propertyPath: m_Name
+      value: MegaFireBall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb5aacdc63491374aa7fd4ed96c619d0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -20722,3 +20779,4 @@ SceneRoots:
   - {fileID: 704747618}
   - {fileID: 1174469880}
   - {fileID: 6341101747691146359}
+  - {fileID: 6879126143657077894}

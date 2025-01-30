@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkeletonWarriorConfig
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  MoveSpeed: 0.5
+  MoveSpeed: 0.7
   SoulCost: 15
   EnemyName: Warrior
   EnemyDescription: Dengarous because of his high health

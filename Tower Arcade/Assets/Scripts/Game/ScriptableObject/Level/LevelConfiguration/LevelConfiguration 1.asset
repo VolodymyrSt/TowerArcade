@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelDifficulty: 1
   LevelDescription: This level is the easiest in this country
-  StartedCurrencyCount: 650
+  StartedCurrencyCount: 1000
