@@ -32,6 +32,7 @@ namespace Game
             _eventBus.SubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveInfo);
             _eventBus.SubscribeEvent<OnSkipWaveButtonShowedSignal>(ShowSkipWaveButton);
             _eventBus.SubscribeEvent<OnSkipWaveButtonHidSignal>(HideSkipWaveButton);
+            _eventBus.SubscribeEvent<OnGameEndedSignal>(HideWaveInfoRoot);
 
             _skipWaveButton.onClick.AddListener(() =>
             {
@@ -67,14 +68,10 @@ namespace Game
             _timerToNextWaveText.text = _levelSystem.GetCurrentTimeToNextWave().ToString($"0:00");
         }
 
-        private void ShowSkipWaveButton(OnSkipWaveButtonShowedSignal signal)
-        {
-            _skipWaveButton.gameObject.SetActive(true);
-        }
+        private void ShowSkipWaveButton(OnSkipWaveButtonShowedSignal signal) => _skipWaveButton.gameObject.SetActive(true);
 
-        private void HideSkipWaveButton(OnSkipWaveButtonHidSignal signal)
-        {
-            _skipWaveButton.gameObject.SetActive(false);
-        }
+        private void HideSkipWaveButton(OnSkipWaveButtonHidSignal signal) => _skipWaveButton.gameObject.SetActive(false);
+
+        private void HideWaveInfoRoot(OnGameEndedSignal signal) => _waveInfoRoot.SetActive(false);
     }
 }

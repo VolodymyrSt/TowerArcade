@@ -10,7 +10,8 @@ namespace Game
         [SerializeField] private GameInput _gameInput;
 
         [Header("Settings:")]
-        [SerializeField] private float _moveSpeed = 10f;
+        [SerializeField, Range(0f, 50f)] private float _maxSensivity = 10f;
+        private float _currentSensivity = 10f;
         [SerializeField] private float _smoothness = 1f;
 
         [Space(10f)]
@@ -19,7 +20,10 @@ namespace Game
 
         private Camera _camera;
 
-        private void Start() => _camera = GetComponentInChildren<Camera>();
+        private void Start()
+        {
+            _camera = GetComponentInChildren<Camera>();
+        }
 
         private void LateUpdate()
         {
@@ -31,8 +35,8 @@ namespace Game
         {
             inputDelta = inputDelta * _camera.orthographicSize;
 
-            float xPosition = -inputDelta.x * _moveSpeed * Time.deltaTime;
-            float yPosition = -inputDelta.y * _moveSpeed * Time.deltaTime;
+            float xPosition = -inputDelta.x * _currentSensivity * Time.deltaTime;
+            float yPosition = -inputDelta.y * _currentSensivity * Time.deltaTime;
 
             Vector3 newPivotPosition = _pivot.transform.position + new Vector3(xPosition, 0f, yPosition);
 
@@ -41,5 +45,9 @@ namespace Game
 
             _pivot.transform.position = Vector3.Lerp(_pivot.transform.position, newPivotPosition, _smoothness * Time.deltaTime);
         }
+
+        public void ChangeSensivity(float value) => _currentSensivity = value;
+        public float GetMaxSensivity() => _maxSensivity;
+        public float GetCurrentSensivity() => _currentSensivity;
     }
 }

@@ -7,16 +7,18 @@ namespace Game
         private TowerDescriptionCardUI _towerDescriptionCardUI;
         private LevelCurencyHandler _levelCurencyHandler;
         private EffectPerformer _effectPerformer;
+        private MassegeHandlerUI _masegeHandler;
 
         private Camera _camera;
 
         private ITowerProperties _activeTowerPropeties;
 
-        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer)
+        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer, MassegeHandlerUI massegeHandlerUI)
         {
             _towerDescriptionCardUI = descriptionCardUI;
             _levelCurencyHandler = levelCurencyHandler;
             _effectPerformer = effectPerformer;
+            _masegeHandler = massegeHandlerUI;
             _camera = Camera.main;
         }
 
@@ -81,7 +83,7 @@ namespace Game
 
         private void UpgradeTower(ITowerProperties towerDescription, LevelCurencyHandler levelCurencyHandler)
         {
-            towerDescription.TryToUpgradeTower(levelCurencyHandler, _effectPerformer);
+            towerDescription.TryToUpgradeTower(levelCurencyHandler, _effectPerformer, _masegeHandler);
             UpdateTowerCardUI(towerDescription);
         }
 

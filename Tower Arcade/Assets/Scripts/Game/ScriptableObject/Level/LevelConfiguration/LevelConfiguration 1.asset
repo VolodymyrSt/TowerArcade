@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelDifficulty: 1
   LevelDescription: This level is the easiest in this country
-  StartedCurrencyCount: 1000
+  StartedCurrencyCount: 250
+  VictoryAmountOfCoins: 25
+  LostAmountOfCoins: 5

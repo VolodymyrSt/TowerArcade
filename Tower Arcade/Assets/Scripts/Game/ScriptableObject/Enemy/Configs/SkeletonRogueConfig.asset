@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d788eec7042207543befbde0ed0f04f6, type: 3}
   m_Name: SkeletonRogueConfig
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 25
   MoveSpeed: 2
   SoulCost: 10
   EnemyName: Rogue

@@ -17,6 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 47f96d1abc492ff44b59b5d350a4f486, type: 2}
   - {fileID: 11400000, guid: 029ba06e4e4a62d488edb3b3a9dd43ef, type: 2}
   - {fileID: 11400000, guid: d321fb9b3465d4b449de519b811f46ad, type: 2}
-  MaxTimeToNextWave: 5
-  LevelDifficulty: Normal
-  LevelDescription: In this level you might incounter smth like low rank enemies
+  - {fileID: 11400000, guid: 57f25fa0a18e16d4cb8ecf8884b28820, type: 2}
+  MaxTimeToNextWave: 1

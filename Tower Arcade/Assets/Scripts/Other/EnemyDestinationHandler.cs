@@ -16,7 +16,8 @@ namespace Game
             if (other.transform.TryGetComponent(out IEnemyDescription enemy))
             {
                 _healthBarHandler.ChangeHealth(enemy.GetCurrentHealth());
-                Destroy(enemy as Enemy);
+
+                Destroy(other.gameObject);
             }
             else return;
         }

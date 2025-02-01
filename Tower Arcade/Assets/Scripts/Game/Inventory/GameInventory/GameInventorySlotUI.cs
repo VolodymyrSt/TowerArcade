@@ -30,6 +30,7 @@ namespace Game
         private GameInventoryHandler _gameInventoryHandler;
         private TowerDescriptionCardHandler _towerDescriptionCardHandler;
         private EffectPerformer _effectPerformer;
+        private MassegeHandlerUI _masegeHandler;
 
         private TowerSO _tower;
         private Camera _camera;
@@ -44,6 +45,7 @@ namespace Game
             _levelCurencyHandler = container.Resolve<LevelCurencyHandler>();
             _towerDescriptionCardHandler = container.Resolve<TowerDescriptionCardHandler>();
             _effectPerformer = container.Resolve<EffectPerformer>();
+            _masegeHandler = container.Resolve<MassegeHandlerUI>();
             _gameInventoryHandler = gameInventoryHandler;
 
             _tower = tower;
@@ -74,6 +76,10 @@ namespace Game
                 if (_levelCurencyHandler.GetCurrentCurrencyCount() >= _tower.SoulCost)
                 {
                     _gameInventoryHandler.SetActiveSlot(this);
+                }
+                else
+                {
+                    _masegeHandler.ShowMassege("Dont have enough soul");
                 }
             }
         }

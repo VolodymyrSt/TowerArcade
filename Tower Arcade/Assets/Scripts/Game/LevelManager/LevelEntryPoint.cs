@@ -34,6 +34,15 @@ namespace Game
         [Header("UI")]
         [SerializeField] private HealthBarHandlerUI _healthBarHandler;
 
+        [Header("Setting")]
+        [SerializeField] private LevelSettingHandlerUI _levelSettingHandlerUI;
+        
+        [Header("Camera")]
+        [SerializeField] private CameraMoveController _cameraMoveController;
+        
+        [Header("Massege")]
+        [SerializeField] private MassegeHandlerUI _massegeHandler;
+
         private List<IUpdatable> _updatable = new List<IUpdatable>();
         private CoroutineUsager _coroutineUsage;
 
@@ -46,6 +55,9 @@ namespace Game
             _container.RegisterInstance<LevelConfigurationSO>(_levelConfiguration);
             _container.RegisterInstance<EffectPerformer>(_effectPerformer);
             _container.RegisterInstance<HealthBarHandlerUI>(_healthBarHandler);
+            _container.RegisterInstance<LevelSettingHandlerUI>(_levelSettingHandlerUI);
+            _container.RegisterInstance<CameraMoveController>(_cameraMoveController);
+            _container.RegisterInstance<MassegeHandlerUI>(_massegeHandler);
 
             LevelRegistrator.Register(_container);
 
@@ -80,6 +92,8 @@ namespace Game
 
             _updatable.Add(_container.Resolve<EnemyDescriptionCardHandler>());
             _updatable.Add(_container.Resolve<TowerDescriptionCardHandler>());
+            _updatable.Add(_container.Resolve<LevelSettingHandler>());
+            _updatable.Add(_container.Resolve<LevelSystemSO>());
         }
     }
 }

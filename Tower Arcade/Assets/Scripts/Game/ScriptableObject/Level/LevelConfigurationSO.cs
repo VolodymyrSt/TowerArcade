@@ -12,8 +12,15 @@ namespace Game
         [Header("Soul")]
         public float StartedCurrencyCount;
 
+        [Header("Coins")]
+        public float VictoryAmountOfCoins;
+        public float LostAmountOfCoins;
+
         public string GetLevelDifficulty() => LevelDifficulty.ToString();
         public string GetLevelDescrition() => LevelDescription;
+
+        public float GetVictoryCoins() => VictoryAmountOfCoins;
+        public float GetLostCoins() => LostAmountOfCoins;
     }
 
     public enum Difficulty

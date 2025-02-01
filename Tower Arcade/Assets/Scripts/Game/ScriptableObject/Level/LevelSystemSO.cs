@@ -6,36 +6,41 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(fileName = "LevelSystem", menuName = "Scriptable Object/LevelSystemConfig")]
-    public class LevelSystemSO : ScriptableObject
+    public class LevelSystemSO : ScriptableObject, IUpdatable
     {
         public List<WaveSO> Waves = new List<WaveSO>();
 
         public float MaxTimeToNextWave;
         private float _currentTimeToNextWave;
 
-        private bool _isLevelActive;
         private bool _isSkipButtonPressed;
+        private bool _isGameEnded;
+
+        private bool _isLastWave = false;
 
         private Transform _enemyContainer;
         private EventBus _eventBus;
+        private HealthBarHandlerUI _healthBarHandler;
 
         public IEnumerator StartLevelSystem(DIContainer container, CoroutineUsager coroutine, Transform parent, Vector3 destination)
         {
             _eventBus = container.Resolve<EventBus>();
+            _healthBarHandler = container.Resolve<HealthBarHandlerUI>();
 
             _eventBus.SubscribeEvent<OnWaveSkippedSignal>(SkipWave);
             _eventBus.SubscribeEvent<OnGameEndedSignal>(StopLevelSystem);
 
             _enemyContainer = parent;
 
-            _isLevelActive = true;
-
             _currentTimeToNextWave = MaxTimeToNextWave;
+
             _isSkipButtonPressed = false;
+            _isGameEnded = false;
+            _isLastWave = false;
 
             for (int i = 0; i < Waves.Count; i++)
             {
-                //if (!_isLevelActive) break;
+                if (_isGameEnded) break;
 
                 coroutine.StartCoroutine(Waves[i].StartWave(container, parent, destination));
                 yield return new WaitUntil(() => Waves[i].IsWaveEnded());
@@ -56,6 +61,20 @@ namespace Game
                 _currentTimeToNextWave = MaxTimeToNextWave;
                 _isSkipButtonPressed = false;
             }
+
+            _isLastWave = true;
+        }
+
+        public void Tick()
+        {
+            if (_isLastWave)
+            {
+                if (_enemyContainer.childCount == 0 && _healthBarHandler.GetCurrentHealth() > 0)
+                {
+                    _eventBus.Invoke<OnGameWonSignal>(new OnGameWonSignal());
+                    _isLastWave = false;
+                }
+            }
         }
 
         public int GetWavesCount() => Waves.Count;
@@ -64,7 +83,7 @@ namespace Game
         private void SkipWave(OnWaveSkippedSignal signal) => _isSkipButtonPressed = true;
         private void StopLevelSystem(OnGameEndedSignal signal)
         {
-            _isLevelActive = false;
+            _isGameEnded = true;
 
             ClearAllEnemies();
         }

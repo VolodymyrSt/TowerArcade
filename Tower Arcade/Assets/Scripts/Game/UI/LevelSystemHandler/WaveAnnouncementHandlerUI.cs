@@ -24,6 +24,7 @@ namespace Game
 
             _eventBus.SubscribeEvent<OnLevelSystemStartedSignal>(ShowWaveAnnouncement);
             _eventBus.SubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveAnnouncement);
+            _eventBus.SubscribeEvent<OnGameEndedSignal>(EndGame);
 
             _waveAnnouncementRoot.SetActive(false);
         }
@@ -49,6 +50,11 @@ namespace Game
         {
             _waveAnnouncementRoot.SetActive(false);
             _animator.ResetTrigger(WAVE_ANNOUNCE);
+        }
+
+        private void EndGame(OnGameEndedSignal signal)
+        {
+            _eventBus.UnSubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveAnnouncement);
         }
     }
 }

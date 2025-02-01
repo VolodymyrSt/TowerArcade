@@ -24,7 +24,7 @@ namespace Game
         protected float UpgradeCost;
 
         public abstract void Initialize(LevelCurencyHandler levelCurencyHandler, TowerDescriptionCardHandler towerDescriptionCardHandler);
-        public void SetPosition(UnityEngine.Transform spawnPosition) => transform.SetParent(spawnPosition, false);
+        public void SetPosition(Transform spawnPosition) => transform.SetParent(spawnPosition, false);
         public void SetOccupiedBlock(TowerPlacementBlock placementBlock) => _towerPlacementBlock = placementBlock;
 
         public int GetLevel() => CurrentLevel;
@@ -35,7 +35,7 @@ namespace Game
         public float GetAttackRange() => AttackRange;
         public float GetUpgradeCost() => UpgradeCost;
 
-        public void TryToUpgradeTower(LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer)
+        public void TryToUpgradeTower(LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer, MassegeHandlerUI massegeHandlerUI)
         {
             if (levelCurencyHandler.GetCurrentCurrencyCount() >= UpgradeCost)
             {
@@ -49,6 +49,10 @@ namespace Game
 
                     effectPerformer.PlayUpgradeTowerEffect(transform.position + Vector3.up * 3);
                 }
+            }
+            else
+            {
+                massegeHandlerUI.ShowMassege("Dont have enough soul");
             }
         }
 
