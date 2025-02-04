@@ -3219,7 +3219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -440532632, guid: 9e2aefa2142b5cf40ad5d893155e32f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8eb69fafe4f719b49bb2dd1a7358aaaa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4576,10 +4576,10 @@ RectTransform:
   - {fileID: 206729375}
   m_Father: {fileID: 1454175785}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &282928386
 MonoBehaviour:
@@ -4681,7 +4681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &289657308
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5228,7 +5228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1828283080, guid: 5984a64e5f81497499dba7830f40b318, type: 3}
+  m_Sprite: {fileID: -483435521, guid: 3e25b85f2fd92c54b8d1792c38fb626c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5503,7 +5503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -440532632, guid: 9e2aefa2142b5cf40ad5d893155e32f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8eb69fafe4f719b49bb2dd1a7358aaaa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6246,7 +6246,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 900}
-  m_SizeDelta: {x: 630, y: 574.9}
+  m_SizeDelta: {x: 630, y: 630}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &439317618
 MonoBehaviour:
@@ -6268,8 +6268,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2099698411, guid: b069386409be27a4e8c20ef68a8be8a8, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: cf1462bc694c3c249831ad8ac5293aa2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -13062,10 +13062,10 @@ RectTransform:
   - {fileID: 1132597937}
   m_Father: {fileID: 1454175785}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 162.5, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1054864471
 MonoBehaviour:
@@ -14789,7 +14789,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 900}
-  m_SizeDelta: {x: 630, y: 400}
+  m_SizeDelta: {x: 630, y: 425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222386208
 MonoBehaviour:
@@ -14811,8 +14811,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1430210310, guid: ec3a92d22959d824d8e9e1e553e217f0, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 43a7d98bd4222b64e933596512dc09ad, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -15513,7 +15513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Back
+  m_text: 'Ok
 
 '
   m_isRightToLeft: 0
@@ -16895,7 +16895,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -106.9}
-  m_SizeDelta: {x: 450, y: 250}
+  m_SizeDelta: {x: 460, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1423788664
 MonoBehaviour:
@@ -16917,8 +16917,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2099698411, guid: b069386409be27a4e8c20ef68a8be8a8, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: cf1462bc694c3c249831ad8ac5293aa2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -19160,10 +19160,10 @@ RectTransform:
   - {fileID: 1176440240}
   m_Father: {fileID: 1454175785}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 275, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1601053234
 MonoBehaviour:
@@ -20005,7 +20005,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -440532632, guid: 9e2aefa2142b5cf40ad5d893155e32f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a454050719005b444b59a84eaafba779, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20193,7 +20193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2086617820, guid: bb33e4b642e9c4943ba599263c0ef649, type: 3}
+  m_Sprite: {fileID: 1872478112, guid: 181ccf43423744e449220a23cbd7e769, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -23806,7 +23806,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2022800670
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23980,7 +23980,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 400}
+  m_SizeDelta: {x: 500, y: 420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2033430356
 MonoBehaviour:
@@ -24002,8 +24002,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2099698411, guid: b069386409be27a4e8c20ef68a8be8a8, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 43a7d98bd4222b64e933596512dc09ad, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

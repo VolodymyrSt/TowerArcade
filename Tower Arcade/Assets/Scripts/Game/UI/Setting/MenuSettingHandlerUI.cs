@@ -1,0 +1,65 @@
+using DI;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Game
+{
+    public class MenuSettingHandlerUI : MonoBehaviour
+    {
+        [Header("Buttons")]
+        [SerializeField] private Button _openSettingMenuButton;
+        [SerializeField] private Button _closeSettingMenuButton;
+        [SerializeField] private Button _quitButton;
+
+        [Header("Sliders")]
+        [SerializeField] private Slider _soundSlider;
+
+        [Header("Root")]
+        [SerializeField] private GameObject _settingMenuRoot;
+
+        private void Start()
+        {
+            SceneLoader sceneLoader = MenuRegistrator.Resolve<SceneLoader>();
+
+            InitButtons(sceneLoader);
+
+            HideSettingMenu();
+        }
+
+        public void InitSliders(float maxSensivity, float maxVoluem)
+        {
+            _soundSlider.maxValue = maxVoluem;
+        }
+
+        private void InitButtons(SceneLoader sceneLoader)
+        {
+            _openSettingMenuButton.gameObject.SetActive(true);
+            _closeSettingMenuButton.gameObject.SetActive(true);
+            _quitButton.gameObject.SetActive(true);
+
+            _openSettingMenuButton.onClick.AddListener(() =>
+            {
+                ShowSettingMenu();
+                HideOpenSettingMenuButton();
+            });
+
+            _closeSettingMenuButton.onClick.AddListener(() =>
+            {
+                HideSettingMenu();
+                ShowOpenSettingMenuButton();
+            });
+
+            _quitButton.onClick.AddListener(() => Application.Quit());
+        }
+
+        private void ShowSettingMenu() => _settingMenuRoot.SetActive(true);
+        private void HideSettingMenu() => _settingMenuRoot.SetActive(false);
+
+        private void ShowOpenSettingMenuButton() => _openSettingMenuButton.gameObject.SetActive(true);
+        private void HideOpenSettingMenuButton() => _openSettingMenuButton.gameObject.SetActive(false);
+
+        public void SetSoundSliderValue(float value) => _soundSlider.value = value;
+
+        public float GetSoundSliderValue() => _soundSlider.value;
+    }
+}

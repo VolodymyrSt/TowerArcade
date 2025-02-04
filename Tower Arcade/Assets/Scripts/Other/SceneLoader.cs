@@ -21,10 +21,24 @@ namespace Game
 
             Load(scene);
         }
+        
+        public async void LoadWithLoadingScene(string sceneName)
+        {
+            Load(Scene.Loading);
+
+            await Task.Delay((int)(_loadingTime * 1000));   
+
+            Load(sceneName);
+        }
 
         private void Load(Scene scene)
         {
             SceneManager.LoadScene(scene.ToString());
+        }
+        
+        private void Load(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
         }
 
     }
