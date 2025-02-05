@@ -1,5 +1,7 @@
+using DI;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game
@@ -8,36 +10,38 @@ namespace Game
     {
         [SerializeField] private TextMeshProUGUI _coinText;
 
-        private int _currentCoinAmount;
+        private int _currentCoinBalance;
 
-        private void Start()
+        public void Init(EventBus eventBus)
         {
-            _currentCoinAmount = 120;
+            eventBus.SubscribeEvent<OnCoinBalanceChangedSignal>(ChangeCoinBalance);
+
+            _currentCoinBalance = 120;
             UpdateCoinDisplay();
         }
 
-        public int GetCoinAmount() => _currentCoinAmount;
+        public int GetCoinBalance() => _currentCoinBalance;
 
-        public void ChangeCoinAmount(int value)
+        public void ChangeCoinBalance(OnCoinBalanceChangedSignal signal)
         {
-            if (value < 0)
+            if (signal.Value < 0)
             {
-                Debug.LogWarning($"Attempted to add a negative value: {value}");
+                Debug.LogWarning($"Attempted to add a negative value: {signal.Value}");
                 return;
             }
-            else if (_currentCoinAmount - value < 0)
+            else if (_currentCoinBalance - signal.Value < 0)
             {
-                _currentCoinAmount = 0;
+                _currentCoinBalance = 0;
             }
             else
             {
-                _currentCoinAmount -= value;
+                _currentCoinBalance -= signal.Value;
             }
 
             UpdateCoinDisplay();
         }
 
-        public void AddCoinAmount(int value)
+        public void AddCoinBalace(int value)
         {
             if (value < 0)
             {
@@ -45,13 +49,10 @@ namespace Game
                 return;
             }
 
-            _currentCoinAmount += value;
+            _currentCoinBalance += value;
             UpdateCoinDisplay();
         }
 
-        private void UpdateCoinDisplay()
-        {
-            _coinText.text = _currentCoinAmount.ToString();
-        }
+        private void UpdateCoinDisplay() => _coinText.text = _currentCoinBalance.ToString();
     }
 }

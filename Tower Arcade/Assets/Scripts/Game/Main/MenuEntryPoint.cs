@@ -13,19 +13,29 @@ namespace Game
         [SerializeField] private MenuSettingHandlerUI _menuSettingHandlerUI;
         [SerializeField] private CoinBalanceUI _coinBalanceUI;
 
+        [SerializeField] private ShopHandlerUI _shopMenuHandlerUI;
+        [SerializeField] private InventoryHandlerUI _inventoryHandlerUI;
+
         private List<IUpdatable> _updatable = new List<IUpdatable>();
 
         private void Awake()
         {
             //var gameEntryPoint = FindFirstObjectByType<GameEntryPoint>();
 
+            //gameEntryPoint.GetRootContainer().RegisterInstance<InventoryHandlerUI>(_inventoryHandlerUI);
+
             //_menuContainer = new DIContainer(gameEntryPoint.GetRootContainer());
+
             _menuContainer.RegisterInstance<MenuSettingHandlerUI>(_menuSettingHandlerUI);
             _menuContainer.RegisterInstance<CoinBalanceUI>(_coinBalanceUI);
 
-            _menuContainer.RegisterFactory(c => new SceneLoader()).AsSingle();
-
             MenuRegistrator.Register(_menuContainer);
+
+            _coinBalanceUI.Init(_menuContainer.Resolve<EventBus>());
+
+            _shopMenuHandlerUI.Init(_menuContainer.Resolve<CoinBalanceUI>(), _menuContainer.Resolve<EventBus>());
+
+            _inventoryHandlerUI.Init(_menuContainer.Resolve<EventBus>());
 
             AddUpdatables();
         }

@@ -8,5 +8,6 @@ namespace Game
         public string Name;
         public int Cost;
         public Sprite Sprite;
+        public InventoryItemSO InventoryItem;
     }
 }

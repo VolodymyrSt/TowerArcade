@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FireTower
   m_EditorClassIdentifier: 
   TowerName: Fire
-  TowerSprite: {fileID: -1319702117, guid: f7cdae8b05cb34247a8adde1e36c6182, type: 3}
+  TowerSprite: {fileID: -278153728, guid: 60477619940674e42b67a1e00f848120, type: 3}
   TowerType: 4
   SoulCost: 200

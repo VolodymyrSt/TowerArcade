@@ -52,6 +52,8 @@ namespace Game
 
             _levelContainer = new DIContainer(gameEntryPoint.GetRootContainer());
 
+            towerSOs = _levelContainer.Resolve<InventoryHandlerUI>().GetTowerGeneralList();
+
             _levelContainer.RegisterInstance<LevelSystemSO>(_levelSystemConfig);
             _levelContainer.RegisterInstance<EnemyDescriptionCardUI>(_enemyCardHandlerUI);
             _levelContainer.RegisterInstance<TowerDescriptionCardUI>(_towerDescriptionCardHandlerUI);

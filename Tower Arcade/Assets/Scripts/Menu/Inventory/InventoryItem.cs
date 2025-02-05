@@ -1,0 +1,124 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+namespace Game
+{
+    public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
+    {
+        [SerializeField] private InventoryItemSO _item;
+        [SerializeField] private Image _itemImage;
+
+        [SerializeField] private GameObject _itemStatInformer;
+
+        [Header("Stats")]
+        [SerializeField] private TextMeshProUGUI _itemName;
+        [SerializeField] private TextMeshProUGUI _itemDamage;
+        [SerializeField] private TextMeshProUGUI _itemAttackCoolDown;
+        [SerializeField] private TextMeshProUGUI _itemAttackSpeed;
+        [SerializeField] private TextMeshProUGUI _itemAttackRange;
+
+        private Transform _originalParent;
+        [SerializeField] private bool _isInMainSlot = false;
+
+        private void Awake()
+        {
+            SetSprite(_item.Sprite);
+
+            _itemStatInformer.SetActive(false);
+        }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _itemStatInformer.SetActive(true);
+
+            UpdateStats(_item.TowerConfig);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _itemStatInformer.SetActive(false);
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            if (_isInMainSlot)
+            {
+                return;
+            }
+            else
+            {
+                _itemImage.raycastTarget = false;
+
+                _originalParent = transform.parent;
+
+                transform.SetParent(transform.root);
+            }
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (_isInMainSlot)
+            {
+                return;
+            }
+            else
+            {
+                transform.position = Input.mousePosition;
+            }
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            if (_isInMainSlot)
+            {
+                return;
+            }
+            else
+            {
+                _itemImage.raycastTarget = true;
+
+                transform.SetParent(_originalParent);
+            }
+        }
+
+        public void SetParentAfterDrag(Transform newParent)
+        {
+            _originalParent = newParent;
+            transform.SetParent(newParent, false);
+        }
+
+        public void ReplaceItem(InventoryItem newItem)
+        {
+            Transform tempParent = _originalParent;
+
+            SetParentAfterDrag(newItem.GetOriginalParent());
+
+            newItem.SetParentAfterDrag(tempParent);
+        }
+
+        public Transform GetOriginalParent() => _originalParent;
+
+        public void SetToMain(bool value)
+        {
+            _itemImage.raycastTarget = true;
+            _isInMainSlot = value;
+        }
+        public bool IsInMainSlot() => _isInMainSlot;
+
+
+        public void SetSprite(Sprite sprite) => _itemImage.sprite = sprite;
+        public void SetInventoryItem(InventoryItemSO inventoryItem) => _item = inventoryItem;
+
+        public TowerSO GetTowerGeneral() => _item.TowerGeneral;
+
+        private void UpdateStats(TowerConfigSO towerConfig)
+        {
+            _itemName.text = towerConfig.Name;
+            _itemDamage.text = $"Damage: {towerConfig.Damage.ToString()}";
+            _itemAttackCoolDown.text = $"Cooldown: {towerConfig.AttackCoolDown.ToString()}";
+            _itemAttackSpeed.text = $"Speed: {towerConfig.AttackSpeed.ToString()}";
+            _itemAttackRange.text = $"Range: {towerConfig.AttackRange.ToString()}";
+        }
+    }
+}

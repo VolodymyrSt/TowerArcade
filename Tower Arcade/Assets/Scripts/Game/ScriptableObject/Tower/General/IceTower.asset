@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: IceTower
   m_EditorClassIdentifier: 
   TowerName: Ice
-  TowerSprite: {fileID: -567598277, guid: 2628b2fb5ee71ff4f8d8b7a5ee92b353, type: 3}
+  TowerSprite: {fileID: 520478591, guid: 60477619940674e42b67a1e00f848120, type: 3}
   TowerType: 3
   SoulCost: 150
