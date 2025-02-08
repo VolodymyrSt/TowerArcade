@@ -1,7 +1,5 @@
-using DI;
-using System;
 using TMPro;
-using Unity.VisualScripting;
+using UnityEditor.Overlays;
 using UnityEngine;
 
 namespace Game
@@ -10,13 +8,20 @@ namespace Game
     {
         [SerializeField] private TextMeshProUGUI _coinText;
 
-        private int _currentCoinBalance;
+        private int _currentCoinBalance = 0;
 
-        public void Init(EventBus eventBus)
+        private SaveSystem _saveSystem;
+        private SaveData _saveData;
+
+        public void Init(EventBus eventBus, SaveSystem saveSystem, SaveData saveData)
         {
             eventBus.SubscribeEvent<OnCoinBalanceChangedSignal>(ChangeCoinBalance);
 
-            _currentCoinBalance = 120;
+            _saveSystem = saveSystem;
+            _saveData = saveData;
+
+            _currentCoinBalance = _saveSystem.Load().CoinCurrency;
+
             UpdateCoinDisplay();
         }
 
@@ -38,10 +43,13 @@ namespace Game
                 _currentCoinBalance -= signal.Value;
             }
 
+            _saveData.CoinCurrency = _currentCoinBalance;
+            _saveSystem.Save(_saveData);
+
             UpdateCoinDisplay();
         }
 
-        public void AddCoinBalace(int value)
+        public void IncreaseCoinBalace(int value)
         {
             if (value < 0)
             {

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sound;
 using System.Collections;
 using UnityEngine;
 
@@ -11,9 +12,10 @@ namespace Game
         [SerializeField] private GameObject _bowPrefab;
 
         [Header("PointerForWeaponDirection")]
-        [SerializeField] private UnityEngine.Transform _weaponPointer;
+        [SerializeField] private Transform _weaponPointer;
 
         private ArrowWeaponFactory _arrowBulletFactory;
+        private SoundHandler _soundHandler;
 
         private Vector3 _frameDirection;
         private Vector3 _bowDirection;
@@ -21,6 +23,7 @@ namespace Game
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _arrowBulletFactory = LevelRegistrator.Resolve<ArrowWeaponFactory>();
+            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }
@@ -29,7 +32,9 @@ namespace Game
         {
             if (enemy == null) return;
 
-            _arrowBulletFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler);
+            _soundHandler.PlaySound(ClipName.BallistaShoot, transform.position);
+
+            _arrowBulletFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler, _soundHandler);
         }
 
         public override IEnumerator PerformAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler)

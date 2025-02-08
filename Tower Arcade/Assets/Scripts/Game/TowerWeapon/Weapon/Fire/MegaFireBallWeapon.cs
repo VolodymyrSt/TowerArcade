@@ -1,3 +1,4 @@
+using Sound;
 using UnityEngine;
 
 namespace Game
@@ -10,7 +11,7 @@ namespace Game
         [SerializeField] private int _fireCycles;
         [SerializeField] private float _fireDamage;
 
-        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler)
+        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
         {
             if (enemy == null)
                 DestroySelf();

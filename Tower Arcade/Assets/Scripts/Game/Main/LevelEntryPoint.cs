@@ -1,4 +1,6 @@
+using DG.Tweening;
 using DI;
+using Sound;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +8,8 @@ namespace Game
 {
     public class LevelEntryPoint : MonoBehaviour
     {
-        private DIContainer _levelContainer;
+        private DIContainer _levelContainer = new();
+        private DIContainer _rootContainer;
 
         [Header("Enemy")]
         [SerializeField] private Transform _enemyTargetDestination;
@@ -16,7 +19,7 @@ namespace Game
 
         [Header("Tower")]
         [SerializeField] private TowerDescriptionCardUI _towerDescriptionCardHandlerUI;
-        [SerializeField] private List<TowerSO> towerSOs = new List<TowerSO>();
+        //[SerializeField] private List<TowerSO> towerSOs = new List<TowerSO>();
 
         [Header("TowerPlacement")]
         [SerializeField] private TowerPlacementBlocksHolder _towerPlacementBlocksHolder;
@@ -48,11 +51,9 @@ namespace Game
 
         private void Awake()
         {
-            var gameEntryPoint = FindFirstObjectByType<GameEntryPoint>();
+            _rootContainer = FindFirstObjectByType<GameEntryPoint>().GetRootContainer();
 
-            _levelContainer = new DIContainer(gameEntryPoint.GetRootContainer());
-
-            towerSOs = _levelContainer.Resolve<InventoryHandlerUI>().GetTowerGeneralList();
+            _levelContainer = new DIContainer(_rootContainer);
 
             _levelContainer.RegisterInstance<LevelSystemSO>(_levelSystemConfig);
             _levelContainer.RegisterInstance<EnemyDescriptionCardUI>(_enemyCardHandlerUI);
@@ -67,7 +68,7 @@ namespace Game
 
             LevelRegistrator.Register(_levelContainer);
 
-            _gameInventoryHandler.InitializeInventorySlots(_levelContainer, towerSOs);
+            _gameInventoryHandler.InitializeInventorySlots(_levelContainer, _levelContainer.Resolve<InventoryHandlerUI>().GetTowerGeneralList());
 
             InitializeUtilScripts();
         }
@@ -96,10 +97,22 @@ namespace Game
             CoroutineUsager coroutinePrefab = Resources.Load<CoroutineUsager>("Utils/CoroutineUsager");
             _coroutineUsage = Instantiate(coroutinePrefab);
 
+            _updatable.Clear();
+
             _updatable.Add(_levelContainer.Resolve<EnemyDescriptionCardHandler>());
             _updatable.Add(_levelContainer.Resolve<TowerDescriptionCardHandler>());
             _updatable.Add(_levelContainer.Resolve<LevelSettingHandler>());
             _updatable.Add(_levelContainer.Resolve<LevelSystemSO>());
+        }
+
+        private void OnDestroy()
+        {
+            _levelContainer.Dispose();
+
+            _rootContainer.UnRegister(_rootContainer.Resolve<InventoryHandlerUI>());
+            _rootContainer.UnRegister(_rootContainer.Resolve<CoinBalanceUI>());
+            _rootContainer.UnRegister(_rootContainer.Resolve<LocationHandler>());
+            _rootContainer.UnRegister(_rootContainer.Resolve<LevelEntranceController>());
         }
     }
 }

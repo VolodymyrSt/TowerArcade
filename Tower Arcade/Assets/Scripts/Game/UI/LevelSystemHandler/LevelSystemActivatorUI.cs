@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sound;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,6 +25,7 @@ namespace Game
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
         private LevelConfigurationSO _levelConfiguration;
+        private SoundHandler _soundHandler;
 
         private void Start()
         {
@@ -32,6 +34,7 @@ namespace Game
             _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
             _eventBus = LevelRegistrator.Resolve<EventBus>(); ;
             _levelConfiguration = LevelRegistrator.Resolve<LevelConfigurationSO>();
+            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
 
             ConfigurateLevel(_levelSystem);
 
@@ -81,6 +84,8 @@ namespace Game
         {
             _hideLevelInfoButton.onClick.RemoveAllListeners();
 
+            _soundHandler.PlaySound(ClipName.Click);
+
             _levelSystemActivatorRoot.GetComponent<RectTransform>().DOAnchorPosY(450f, 1f)
                .SetEase(Ease.Linear)
                .Play()
@@ -100,6 +105,8 @@ namespace Game
         private void StartLevelSystem()
         {
             _startLevelSystemButton.onClick.RemoveAllListeners();
+
+            _soundHandler.PlaySound(ClipName.Click);
 
             _eventBus.Invoke(new OnLevelSystemStartedSignal());
 

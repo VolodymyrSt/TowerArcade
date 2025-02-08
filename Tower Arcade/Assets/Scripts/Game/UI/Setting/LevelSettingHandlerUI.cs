@@ -1,3 +1,4 @@
+using Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,8 +22,9 @@ namespace Game
         {
             SceneLoader sceneLoader = LevelRegistrator.Resolve<SceneLoader>();
             TimeHandler timeHandler = LevelRegistrator.Resolve<TimeHandler>();
+            SoundHandler soundHandler = LevelRegistrator.Resolve<SoundHandler>();
 
-            InitButtons(sceneLoader, timeHandler);
+            InitButtons(sceneLoader, timeHandler, soundHandler);
 
             HideSettingMenu();
         }
@@ -33,7 +35,7 @@ namespace Game
             _soundSlider.maxValue = maxVoluem;
         }
         
-        private void InitButtons(SceneLoader sceneLoader, TimeHandler timeHandler)
+        private void InitButtons(SceneLoader sceneLoader, TimeHandler timeHandler, SoundHandler soundHandler)
         {
             _openSettingMenuButton.gameObject.SetActive(true);
             _closeSettingMenuButton.gameObject.SetActive(true);
@@ -43,6 +45,9 @@ namespace Game
             {
                 ShowSettingMenu();
                 HideOpenSettingMenuButton();
+
+                soundHandler.PlaySound(ClipName.Click);
+
                 timeHandler.StopTime();
             });
 
@@ -52,9 +57,15 @@ namespace Game
                 ShowOpenSettingMenuButton();
 
                 timeHandler.ResumeTime();
+
+                soundHandler.PlaySound(ClipName.Click);
             });
 
-            _goToMenuButton.onClick.AddListener(() => sceneLoader.LoadWithLoadingScene(SceneLoader.Scene.Menu));
+            _goToMenuButton.onClick.AddListener(() => {
+                sceneLoader.LoadWithLoadingScene(SceneLoader.Scene.Menu);
+                timeHandler.ResumeTime();
+            });
+
         }
 
         private void ShowSettingMenu() => _settingMenuRoot.SetActive(true);

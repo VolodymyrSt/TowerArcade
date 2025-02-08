@@ -1,3 +1,4 @@
+using Sound;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -36,6 +37,8 @@ namespace Game
 
             _skipWaveButton.onClick.AddListener(() =>
             {
+                LevelRegistrator.Resolve<SoundHandler>().PlaySound(ClipName.Click);
+
                 _eventBus.Invoke(new OnWaveSkippedSignal());
             });
 

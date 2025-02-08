@@ -10,7 +10,7 @@ namespace DI
         {
             _container = container;
 
-            _container.RegisterFactory(c => new SceneLoader()).AsSingle();
+            //_container.RegisterFactory(c => new SceneLoader()).AsSingle();
 
             _container.RegisterFactory(c => new EventBus()).AsSingle();
 

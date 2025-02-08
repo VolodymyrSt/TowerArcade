@@ -1,4 +1,5 @@
 using DI;
+using Sound;
 
 namespace Game
 {
@@ -49,13 +50,16 @@ namespace Game
             _container.RegisterFactory(c => new TowerFactoryHandler()).AsSingle();
 
             _container.RegisterFactory(c => new EnemyDescriptionCardHandler(c.Resolve<EnemyDescriptionCardUI>())).AsSingle();
-            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>(), c.Resolve<EffectPerformer>(), c.Resolve<MassegeHandlerUI>())).AsSingle();
+            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>(), c.Resolve<EffectPerformer>(), c.Resolve<MassegeHandlerUI>(), c.Resolve<SoundHandler>())).AsSingle();
 
             _container.RegisterFactory(c => new LevelCurencyHandler(c.Resolve<LevelConfigurationSO>(), c.Resolve<EventBus>())).AsSingle();
 
-            _container.RegisterFactory(c => new LevelSettingHandler(c.Resolve<LevelSettingHandlerUI>(), c.Resolve<CameraMoveController>())).AsSingle();
+            _container.RegisterFactory(c => new LevelSettingHandler(c.Resolve<LevelSettingHandlerUI>(), c.Resolve<CameraMoveController>(), c.Resolve<SoundHandler>())).AsSingle();
 
             _container.RegisterFactory(c => new TimeHandler()).AsSingle();
+            //_container.RegisterFactory(c => new SceneLoader()).AsSingle();
+
+            _container.RegisterFactory(c => new SoundHandler()).AsSingle();
         }
 
         public static T Resolve<T>()

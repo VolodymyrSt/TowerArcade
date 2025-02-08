@@ -1,5 +1,5 @@
 using DG.Tweening;
-using NUnit.Framework;
+using Sound;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,25 +18,37 @@ namespace Game
 
         [Header("Text")]
         [SerializeField] private TextMeshProUGUI _coinsAmountText;
-        
+
         [Header("Stars")]
         [SerializeField] private RectTransform _starRoot;
 
         private HealthBarHandlerUI _healthBarHandler;
+        private SoundHandler _soundHandler;
+        private LevelConfigurationSO _levelConfigurationSO;
+        private CoinBalanceUI _coinBalanceUI;
+        private SaveData _saveData;
+        private SaveSystem _saveSystem;
+        private LocationHandler _locationHandler;
+        private LevelEntranceController _currentLevelEntranceController;
 
         private void Start()
         {
-            _healthBarHandler = LevelRegistrator.Resolve<HealthBarHandlerUI>();
             SceneLoader sceneLoader = LevelRegistrator.Resolve<SceneLoader>();
             TimeHandler timeHandler = LevelRegistrator.Resolve<TimeHandler>();
-            LevelConfigurationSO levelConfiguration = LevelRegistrator.Resolve<LevelConfigurationSO>();
-
             LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>(ShowWonMenu);
+
+            _levelConfigurationSO = LevelRegistrator.Resolve<LevelConfigurationSO>();
+            _healthBarHandler = LevelRegistrator.Resolve<HealthBarHandlerUI>();
+            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
+            _coinBalanceUI = LevelRegistrator.Resolve<CoinBalanceUI>();
+            _saveData = LevelRegistrator.Resolve<SaveData>();
+            _saveSystem = LevelRegistrator.Resolve<SaveSystem>();
+            _locationHandler = LevelRegistrator.Resolve<LocationHandler>();
+            _currentLevelEntranceController = LevelRegistrator.Resolve<LevelEntranceController>();
 
             InitButtons(sceneLoader, timeHandler);
 
-            _coinsAmountText.text = levelConfiguration.GetVictoryCoins().ToString();
-
+            _coinsAmountText.text = _levelConfigurationSO.GetVictoryCoins().ToString();
             transform.gameObject.SetActive(false);
         }
 
@@ -55,33 +67,45 @@ namespace Game
 
         private void ShowWonMenu(OnGameWonSignal signal)
         {
-            float duraction = 1f;
+            float duration = 1f;
 
             transform.gameObject.SetActive(true);
 
-            CountFilledStars();
+            EvaluatePassing();
 
-            _movableRoot.DOAnchorPosY(0, duraction)
+            _movableRoot.DOAnchorPosY(0, duration)
                 .SetEase(Ease.Linear)
                 .Play();
+
+            _soundHandler.PlaySound(ClipName.Victory);
+
+            _coinBalanceUI.IncreaseCoinBalace(_levelConfigurationSO.GetVictoryCoins());
+
+            _saveData.CoinCurrency = _coinBalanceUI.GetCoinBalance();
+            _saveSystem.Save(_saveData);
+
+            if (_currentLevelEntranceController.GetEntranceIndex() + 1 == _locationHandler.GetNextLockedEntrance().GetEntranceIndex())
+            {
+                _locationHandler.UnLockNextEntrance();
+            }
         }
 
-        private void CountFilledStars()
+        private void EvaluatePassing()
         {
             var stars = GetStars();
+            int starCount = 2;
 
-            if (_healthBarHandler.GetCurrentHealth() >= 90f)
+            float health = _healthBarHandler.GetCurrentHealth();
+            if (health >= 90f)
             {
-                FillStars(stars, 0);
+                starCount = 0;
             }
-            else if (_healthBarHandler.GetCurrentHealth() <= 75f && _healthBarHandler.GetCurrentHealth() >= 40f)
+            else if (health >= 75f)
             {
-                FillStars(stars, 1);
+                starCount = 1;
             }
-            else
-            {
-                FillStars(stars, 2);
-            }
+
+            FillStars(stars, starCount);
         }
 
         private void FillStars(List<StarSwitcher> stars, int countOfUnfilledStars)
@@ -94,7 +118,7 @@ namespace Game
 
         private List<StarSwitcher> GetStars()
         {
-            List <StarSwitcher> starList = new List<StarSwitcher>();
+            List<StarSwitcher> starList = new List<StarSwitcher>();
 
             foreach (Transform star in _starRoot)
             {

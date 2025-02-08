@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sound;
 using UnityEngine;
 
 namespace Game
@@ -10,9 +11,10 @@ namespace Game
         [SerializeField] private GameObject _cannonPrefab;
 
         [Header("PointerForWeaponDirection")]
-        [SerializeField] private UnityEngine.Transform _weaponPointer;
+        [SerializeField] private Transform _weaponPointer;
 
         private ProjectileWeaponFactory _projectileWeaponFactory;
+        private SoundHandler _soundHandler;
 
         private Vector3 _frameDirection;
         private Vector3 _bowDirection;
@@ -20,6 +22,7 @@ namespace Game
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _projectileWeaponFactory = LevelRegistrator.Resolve<ProjectileWeaponFactory>();
+            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }
@@ -28,7 +31,9 @@ namespace Game
         {
             if (enemy == null) return;
 
-            _projectileWeaponFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler);
+            _soundHandler.PlaySound(ClipName.CannonShoot,transform.position);
+
+            _projectileWeaponFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler, _soundHandler);
         }
 
         public override void HandleLookAtEnemy(Enemy enemy)

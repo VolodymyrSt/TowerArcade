@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BallistaTowerConfig 2
   m_EditorClassIdentifier: 
   Name: Ballista
-  Damage: 15
+  Damage: 7
   AttackSpeed: 0.2
   AttackCoolDown: 1.5
   AttackRange: 7
-  UpgradeCost: 125
+  UpgradeCost: 250

@@ -1,3 +1,4 @@
+using Sound;
 using UnityEngine;
 
 namespace Game
@@ -8,10 +9,12 @@ namespace Game
         [SerializeField] private Transform _weaponPointer;
 
         private FireBallWeaponFactory _fireBallWeaponFactory;
+        private SoundHandler _soundHandler;
 
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _fireBallWeaponFactory = LevelRegistrator.Resolve<FireBallWeaponFactory>();
+            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }
@@ -20,7 +23,9 @@ namespace Game
         {
             if (enemy == null) return;
 
-            _fireBallWeaponFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler);
+            _soundHandler.PlaySound(ClipName.FireShoot, transform.position);
+
+            _fireBallWeaponFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler, _soundHandler);
         }
 
         public override void HandleLookAtEnemy(Enemy enemy)

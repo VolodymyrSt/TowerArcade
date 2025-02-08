@@ -1,5 +1,6 @@
 using DI;
 using System.Collections.Generic;
+using UnityEditor.Overlays;
 using UnityEngine;
 
 namespace Game
@@ -10,34 +11,71 @@ namespace Game
         private List<LevelEntranceController> _levelEntranceControllers;
 
         private int _currentUnlockedEntrance = 0;
+        private SaveData _saveData;
+        private SaveSystem _saveSystem;
 
         private void Start()
         {
-            ItilializeEntrances(MenuRegistrator.Resolve<SceneLoader>());
+            _saveData = MenuRegistrator.Resolve<SaveData>();
+            _saveSystem = MenuRegistrator.Resolve<SaveSystem>();
 
-            UnLockNextEntrance();
+            _currentUnlockedEntrance = _saveSystem.Load().CurrentUnlockedEntrance;
+
+            InitializeEntrances(MenuRegistrator.Resolve<SceneLoader>(), _saveData, _saveSystem);
+
+            if (_currentUnlockedEntrance >= _levelEntranceControllers.Count)
+            {
+                _currentUnlockedEntrance = _levelEntranceControllers.Count - 1;
+            }
+
+            for (int i = 0; i <= _currentUnlockedEntrance; i++)
+            {
+                if (i < _levelEntranceControllers.Count)
+                {
+                    _levelEntranceControllers[i].UnlockLevel();
+                    _levelEntranceControllers[i].ShowLockImage(false);
+                }
+            }
         }
 
-        private void ItilializeEntrances(SceneLoader sceneLoader)
+        private void InitializeEntrances(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem)
         {
             _levelEntranceControllers = new List<LevelEntranceController>();
-
             foreach (var location in _locations)
             {
                 foreach (var entrance in location.GetEntrances())
                 {
-                    entrance.Init(sceneLoader);
+                    entrance.Init(sceneLoader, saveData, saveSystem);
                     _levelEntranceControllers.Add(entrance);
                 }
             }
         }
 
-        private void UnLockNextEntrance()
+        public void UnLockNextEntrance()
         {
-            _levelEntranceControllers[_currentUnlockedEntrance].UnlockLevel();
-            _currentUnlockedEntrance++;
+            int nextEntranceIndex = _currentUnlockedEntrance + 1;
+            if (nextEntranceIndex < _levelEntranceControllers.Count)
+            {
+                _levelEntranceControllers[nextEntranceIndex].UnlockLevel();
+                _currentUnlockedEntrance = nextEntranceIndex;
+
+                _saveData.CurrentUnlockedEntrance = _currentUnlockedEntrance;
+                _saveSystem.Save(_saveData);
+            }
         }
 
-        private LevelEntranceController GetCurrentUnlockedEntrance() => _levelEntranceControllers[_currentUnlockedEntrance];
+        public LevelEntranceController GetNextLockedEntrance()
+        {
+            var nextEntrance = _currentUnlockedEntrance + 1;
+
+            if (nextEntrance < _levelEntranceControllers.Count)
+            {
+                return _levelEntranceControllers[nextEntrance];
+            }
+
+            return null;
+        }
+
+        public int GetCurrentUnlockedEntranceIndex() => _currentUnlockedEntrance;
     }
 }

@@ -1,3 +1,4 @@
+using Sound;
 using TMPro;
 using UnityEngine;
 
@@ -13,12 +14,14 @@ namespace Game
 
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
+        private SoundHandler _soundHandler;
         private Animator _animator;
 
         private void Start()
         {
             _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
             _eventBus = LevelRegistrator.Resolve<EventBus>();
+            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
 
             _animator = GetComponentInChildren<Animator>();
 
@@ -31,11 +34,15 @@ namespace Game
 
         private void ShowWaveAnnouncement(OnLevelSystemStartedSignal signal)
         {
+            _soundHandler.PlaySound(ClipName.WaveAnnounce);
+
             ChangeWaveAnnouncementConfiguration(1); //level start with wave number 1
         }
 
         private void ShowCurrentWaveAnnouncement(OnWaveEndedSignal signal)
         {
+            _soundHandler.PlaySound(ClipName.WaveAnnounce);
+
             ChangeWaveAnnouncementConfiguration(signal.CurrentWaveIndex);
         }
 

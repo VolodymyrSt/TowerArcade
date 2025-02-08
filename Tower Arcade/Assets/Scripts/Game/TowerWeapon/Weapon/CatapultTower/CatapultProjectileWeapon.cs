@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sound;
 using UnityEngine;
 
 namespace Game
@@ -7,7 +8,7 @@ namespace Game
     {
         [SerializeField] private ParticleSystem _particleSystem;
 
-        public override void Shoot(Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler)
+        public override void Shoot(Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
         {
             if (enemy == null)
                 DestroySelf();
@@ -20,10 +21,10 @@ namespace Game
             transform.DOJump(enemy.transform.position, jumpPower, jumpCount, attackSpeed)
                 .SetEase(Ease.Linear)
                 .Play()
-                .OnComplete(() => OnReachedTarget(enemy, damage, levelCurencyHandler));
+                .OnComplete(() => OnReachedTarget(enemy, damage, levelCurencyHandler, soundHandler));
         }
 
-        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler)
+        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
         {
             float explodeRadious = 2f;
 
@@ -34,6 +35,8 @@ namespace Game
                 FindEnemiesInRangeAndApplyDamage(enemy, explodeRadious, damage, levelCurencyHandler);
 
                 EffectPerformer.PlayEffect(_particleSystem, enemy.transform.position);
+
+                soundHandler.PlaySound(ClipName.CatapultExplotion, transform.root.position);
 
                 DestroySelf();
             }

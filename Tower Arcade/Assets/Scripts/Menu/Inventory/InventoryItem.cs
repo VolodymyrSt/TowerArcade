@@ -1,3 +1,4 @@
+using DI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,12 +23,39 @@ namespace Game
         private Transform _originalParent;
         [SerializeField] private bool _isInMainSlot = false;
 
-        private void Awake()
+        private SaveData _saveData;
+        private SaveSystem _saveSystem;
+
+        private void Start()
         {
+            _saveData = MenuRegistrator.Resolve<SaveData>();
+            _saveSystem = MenuRegistrator.Resolve<SaveSystem>();
+
             SetSprite(_item.Sprite);
+
+            if (_saveData.InventoryItems.TryGetValue(_item.TowerConfig.Name, out string slotName))
+            {
+                GameObject slot = GameObject.Find(slotName);
+                if (slot != null)
+                {
+                    _originalParent = slot.transform;
+                    transform.SetParent(_originalParent, false);
+                }
+                else
+                {
+                    _saveData.InventoryItems[_item.TowerConfig.Name] = transform.parent.name;
+                    _saveSystem.Save(_saveData);
+                }
+            }
+            else
+            {
+                _saveData.InventoryItems[_item.TowerConfig.Name] = transform.parent.name;
+                _saveSystem.Save(_saveData);
+            }
 
             _itemStatInformer.SetActive(false);
         }
+
         public void OnPointerEnter(PointerEventData eventData)
         {
             _itemStatInformer.SetActive(true);
@@ -86,6 +114,9 @@ namespace Game
         {
             _originalParent = newParent;
             transform.SetParent(newParent, false);
+
+            _saveData.InventoryItems[_item.TowerConfig.Name] = newParent.name;
+            _saveSystem.Save(_saveData);
         }
 
         public void ReplaceItem(InventoryItem newItem)

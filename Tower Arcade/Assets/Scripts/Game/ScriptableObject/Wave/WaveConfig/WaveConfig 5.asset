@@ -18,3 +18,4 @@ MonoBehaviour:
   - NumberOfEnemies: 10
     FactoryType: 1
   TimeBetweenEnemySpawn: 2
+  AmountOfSoulsAfterFinish: 40

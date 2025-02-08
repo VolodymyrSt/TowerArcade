@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,27 +12,45 @@ namespace Game
 
         [SerializeField] private Image _lockImage;
 
-        [SerializeField] private List<RectTransform> _stars = new();
-
         private bool _isLocked = true;
-        private bool _isEvaluated = false;
 
-        public void Init(SceneLoader sceneLoader)
+        private SaveData _saveData;
+        private SaveSystem _saveSystem;
+
+        public void Init(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem)
         {
-            if (_isLocked)
-                LockLevel();
+            _saveData = saveData;
+            _saveSystem = saveSystem;
+
+            if (saveData.LevelEntances.TryGetValue(_levelNumber.text, out bool value))
+            {
+                _isLocked = value;
+            }
             else
+            {
+                saveData.LevelEntances[_levelNumber.text] = _isLocked;
+                saveSystem.Save(saveData);
+            }
+
+            if (!_isLocked)
+            {
                 UnlockLevel();
+                ShowLockImage(false);
+            }
+            else
+            {
+                LockLevel();
+                ShowLockImage(true);
+            }
 
             _enterButton.onClick.AddListener(() => Enter(sceneLoader));
-
-            if (!_isEvaluated)
-                CalculateStars(3);
         }
 
         private void Enter(SceneLoader sceneLoader)
         {
-            if(_isLocked) return;
+            if (_isLocked) return;
+
+            FindFirstObjectByType<GameEntryPoint>().GetRootContainer().RegisterInstance(this);
 
             sceneLoader.LoadWithLoadingScene($"Level {_levelNumber.text.ToString()}");
         }
@@ -40,37 +58,23 @@ namespace Game
         public void UnlockLevel()
         {
             _isLocked = false;
-            _lockImage.gameObject.SetActive(false);
+
+            _saveData.LevelEntances[_levelNumber.text] = false;
+            _saveSystem.Save(_saveData);
+        }
+
+        public void ShowLockImage(bool value)
+        {
+            if (value)
+                _lockImage.gameObject.SetActive(true);
+            else
+                _lockImage.gameObject.SetActive(false);
         }
         
-        private void LockLevel()
-        {
-            _isLocked = true;
-            _lockImage.gameObject.SetActive(true);
-        }
+        private void LockLevel() => _isLocked = true;
 
-        public void CalculateStars(int numberOfUnfilledStars)
-        {
-            if (numberOfUnfilledStars < 0)
-            {
-                numberOfUnfilledStars = 0;
-            }
-            else if (numberOfUnfilledStars > _stars.Count)
-            {
-                numberOfUnfilledStars = _stars.Count;
-            }
+        public bool IsLocked() => _isLocked;
 
-            int numberOfFilledStars = _stars.Count - numberOfUnfilledStars;
-
-            for (int i = 0; i < numberOfFilledStars; i++)
-            {
-                _stars[i].gameObject.SetActive(true);
-            }
-
-            for (int i = numberOfFilledStars; i < _stars.Count; i++)
-            {
-                _stars[i].gameObject.SetActive(false);
-            }
-        }
+        public int GetEntranceIndex() => Int32.Parse(_levelNumber.text);
     }
 }

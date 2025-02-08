@@ -1,5 +1,7 @@
 using DG.Tweening;
+using Sound;
 using TMPro;
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,16 +19,26 @@ namespace Game
         [Header("Text")]
         [SerializeField] private TextMeshProUGUI _coinsAmountText;
 
+        private SoundHandler _soundHandler;
+        private LevelConfigurationSO _levelConfigurationSO;
+        private CoinBalanceUI _coinBalanceUI;
+        private SaveData _saveData;
+        private SaveSystem _saveSystem;
+
         private void Start()
         {
             SceneLoader sceneLoader = LevelRegistrator.Resolve<SceneLoader>();
-            LevelConfigurationSO levelConfiguration = LevelRegistrator.Resolve<LevelConfigurationSO>();
-
             LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>(ShowLostMenu);
+
+            _levelConfigurationSO = LevelRegistrator.Resolve<LevelConfigurationSO>();
+            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
+            _coinBalanceUI = LevelRegistrator.Resolve<CoinBalanceUI>();
+            _saveData = LevelRegistrator.Resolve<SaveData>();
+            _saveSystem = LevelRegistrator.Resolve<SaveSystem>();
 
             InitButtons(sceneLoader);
 
-            _coinsAmountText.text = levelConfiguration.GetLostCoins().ToString();
+            _coinsAmountText.text = _levelConfigurationSO.GetLostCoins().ToString();
 
             transform.gameObject.SetActive(false);
         }
@@ -50,9 +62,17 @@ namespace Game
 
             transform.gameObject.SetActive(true);
 
+
             _movableRoot.DOAnchorPosY(0, duraction)
                 .SetEase(Ease.Linear)
                 .Play();
+
+            _soundHandler.PlaySound(ClipName.Lost);
+
+            _coinBalanceUI.IncreaseCoinBalace(_levelConfigurationSO.GetLostCoins());
+
+            _saveData.CoinCurrency = _coinBalanceUI.GetCoinBalance();
+            _saveSystem.Save(_saveData);
         }
     }
 }

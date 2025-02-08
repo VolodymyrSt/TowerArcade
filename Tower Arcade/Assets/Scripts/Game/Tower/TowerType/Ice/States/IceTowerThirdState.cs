@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sound;
 using UnityEngine;
 
 namespace Game
@@ -9,10 +10,12 @@ namespace Game
         [SerializeField] private Transform _weaponPointer;
 
         private BigIceCrystalWeaponFactory _bigIceCrystalWeaponFactory;
+        private SoundHandler _soundHandler;
 
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _bigIceCrystalWeaponFactory = LevelRegistrator.Resolve<BigIceCrystalWeaponFactory>();
+            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }
@@ -21,7 +24,9 @@ namespace Game
         {
             if (enemy == null) return;
 
-            _bigIceCrystalWeaponFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler);
+            _soundHandler.PlaySound(ClipName.IceShoot, transform.position);
+
+            _bigIceCrystalWeaponFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler, _soundHandler);
         }
 
         public override void HandleLookAtEnemy(Enemy enemy)

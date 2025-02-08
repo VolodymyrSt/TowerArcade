@@ -13,14 +13,14 @@ namespace Game
         public float StartedCurrencyCount;
 
         [Header("Coins")]
-        public float VictoryAmountOfCoins;
-        public float LostAmountOfCoins;
+        public int VictoryAmountOfCoins;
+        public int LostAmountOfCoins;
 
         public string GetLevelDifficulty() => LevelDifficulty.ToString();
         public string GetLevelDescrition() => LevelDescription;
 
-        public float GetVictoryCoins() => VictoryAmountOfCoins;
-        public float GetLostCoins() => LostAmountOfCoins;
+        public int GetVictoryCoins() => VictoryAmountOfCoins;
+        public int GetLostCoins() => LostAmountOfCoins;
     }
 
     public enum Difficulty

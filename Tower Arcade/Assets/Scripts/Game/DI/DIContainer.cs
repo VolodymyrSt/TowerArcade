@@ -81,6 +81,21 @@ namespace DI
             throw new Exception($"Couldn't find dependency for type {key.FullName}");
         }
 
+        public void UnRegister<T>(T instance)
+        {
+            var key = typeof(T);
+
+            if (_entriesMap.ContainsKey(key))
+            {
+                _entriesMap.Remove(key);
+            }
+            else
+            {
+                throw new Exception(
+                    $"DI: Instance with type {key.FullName} doesnt exist");
+            }
+        }
+
         public void Dispose()
         {
             foreach (var diEntry in _entriesMap.Values)

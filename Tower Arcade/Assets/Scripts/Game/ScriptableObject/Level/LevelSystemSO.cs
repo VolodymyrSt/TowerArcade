@@ -21,11 +21,13 @@ namespace Game
         private Transform _enemyContainer;
         private EventBus _eventBus;
         private HealthBarHandlerUI _healthBarHandler;
+        private LevelCurencyHandler _levelCurencyHandler;
 
         public IEnumerator StartLevelSystem(DIContainer container, CoroutineUsager coroutine, Transform parent, Vector3 destination)
         {
             _eventBus = container.Resolve<EventBus>();
             _healthBarHandler = container.Resolve<HealthBarHandlerUI>();
+            _levelCurencyHandler = container.Resolve<LevelCurencyHandler>();
 
             _eventBus.SubscribeEvent<OnWaveSkippedSignal>(SkipWave);
             _eventBus.SubscribeEvent<OnGameEndedSignal>(StopLevelSystem);
@@ -54,6 +56,8 @@ namespace Game
                     _currentTimeToNextWave -= Time.deltaTime;
                     yield return null;
                 }
+
+                _levelCurencyHandler.AddCurrencyCount(Waves[i].AmountOfSoulsAfterFinish);
 
                 _eventBus.Invoke(new OnSkipWaveButtonHidSignal());
                 _eventBus.Invoke(new OnWaveEndedSignal(i + 2)); //to end up with wave 2

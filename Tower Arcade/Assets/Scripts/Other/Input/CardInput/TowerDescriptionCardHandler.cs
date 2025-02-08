@@ -1,24 +1,29 @@
+using Sound;
 using UnityEngine;
 
 namespace Game
 {
     public class TowerDescriptionCardHandler : IUpdatable
     {
+        //Dependencies
         private TowerDescriptionCardUI _towerDescriptionCardUI;
         private LevelCurencyHandler _levelCurencyHandler;
         private EffectPerformer _effectPerformer;
         private MassegeHandlerUI _masegeHandler;
+        private SoundHandler _soundHandler;
 
         private Camera _camera;
 
         private ITowerProperties _activeTowerPropeties;
 
-        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer, MassegeHandlerUI massegeHandlerUI)
+        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer, MassegeHandlerUI massegeHandlerUI, SoundHandler soundHandler)
         {
             _towerDescriptionCardUI = descriptionCardUI;
             _levelCurencyHandler = levelCurencyHandler;
             _effectPerformer = effectPerformer;
             _masegeHandler = massegeHandlerUI;
+            _soundHandler = soundHandler;
+
             _camera = Camera.main;
         }
 
@@ -40,10 +45,12 @@ namespace Game
                 {
                     if (_activeTowerPropeties == towerPropeties)
                     {
+                        _soundHandler.PlaySound(ClipName.SoftClick);
                         HideTowerCard();
                     }
                     else
                     {
+                        _soundHandler.PlaySound(ClipName.SoftClick);
                         UpdateActiveTower(towerPropeties);
                     }
                 }
@@ -83,12 +90,16 @@ namespace Game
 
         private void UpgradeTower(ITowerProperties towerDescription, LevelCurencyHandler levelCurencyHandler)
         {
+            _soundHandler.PlaySound(ClipName.Upgrade);
+
             towerDescription.TryToUpgradeTower(levelCurencyHandler, _effectPerformer, _masegeHandler);
             UpdateTowerCardUI(towerDescription);
         }
 
         private void DeleteTower(ITowerProperties towerDescription)
         {
+            _soundHandler.PlaySound(ClipName.Delate);
+
             if (_activeTowerPropeties == towerDescription)
             {
                 _activeTowerPropeties = null;

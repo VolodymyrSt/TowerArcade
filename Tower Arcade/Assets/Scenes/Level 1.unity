@@ -9160,9 +9160,9 @@ MonoBehaviour:
   _enemyCardHandlerUI: {fileID: 425002913}
   _towerDescriptionCardHandlerUI: {fileID: 921194358}
   towerSOs:
+  - {fileID: 11400000, guid: 56a9db4307b45ad44a4436fecba10243, type: 2}
+  - {fileID: 11400000, guid: c74d0003a445b8745b986e119b9c70d2, type: 2}
   - {fileID: 11400000, guid: 906d4ef9f9899d04cbf576a2b06504ae, type: 2}
-  - {fileID: 11400000, guid: dc3de2ae8979da94e80dd0ffefeec402, type: 2}
-  - {fileID: 11400000, guid: 3f89504ab38302141b2b21589250715c, type: 2}
   _towerPlacementBlocksHolder: {fileID: 1265669784}
   _gameInventoryHandler: {fileID: 1322337700}
   _levelSystemConfig: {fileID: 11400000, guid: b3781e53de352f74282ce4c2bea1921f, type: 2}

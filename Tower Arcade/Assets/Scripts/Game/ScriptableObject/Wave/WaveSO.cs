@@ -17,6 +17,8 @@ namespace Game
         private bool _isWaveEnded;
         private bool _isGameEnded;
 
+        public int AmountOfSoulsAfterFinish;
+
         public IEnumerator StartWave(DIContainer container, Transform parent, Vector3 destination)
         {
             container.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>(StopEnemySpawn);

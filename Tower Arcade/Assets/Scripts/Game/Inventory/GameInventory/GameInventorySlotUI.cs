@@ -1,5 +1,6 @@
 using DG.Tweening;
 using DI;
+using Sound;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,7 +23,7 @@ namespace Game
         [SerializeField] private Sprite _selectedBackgraundSprite;
         [SerializeField] private Sprite _unselectedBackgraundSprite;
 
-        [Header("Dependencies")]
+        //Dependencies
         private DIContainer _container;
         private TowerPlacementBlocksHolder _towerPlacementBlocksHolder;
         private TowerFactoryHandler _towerFactoryHandler;
@@ -31,6 +32,7 @@ namespace Game
         private TowerDescriptionCardHandler _towerDescriptionCardHandler;
         private EffectPerformer _effectPerformer;
         private MassegeHandlerUI _masegeHandler;
+        private SoundHandler _soundHandler;
 
         private TowerSO _tower;
         private Camera _camera;
@@ -40,15 +42,16 @@ namespace Game
             _camera = Camera.main;
 
             _container = container;
+            _gameInventoryHandler = gameInventoryHandler;
+            _tower = tower;
+
             _towerFactoryHandler = container.Resolve<TowerFactoryHandler>();
             _towerPlacementBlocksHolder = container.Resolve<TowerPlacementBlocksHolder>();
             _levelCurencyHandler = container.Resolve<LevelCurencyHandler>();
             _towerDescriptionCardHandler = container.Resolve<TowerDescriptionCardHandler>();
             _effectPerformer = container.Resolve<EffectPerformer>();
             _masegeHandler = container.Resolve<MassegeHandlerUI>();
-            _gameInventoryHandler = gameInventoryHandler;
-
-            _tower = tower;
+            _soundHandler = container.Resolve<SoundHandler>();
 
             _towerName.text = _tower.TowerName;
             _towerImage.sprite = _tower.TowerSprite;
@@ -67,6 +70,8 @@ namespace Game
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            _soundHandler.PlaySound(ClipName.SoftClick);
+
             if (_gameInventoryHandler.IsSlotActive(this))
             {
                 _gameInventoryHandler.ClearActiveSlot();
@@ -89,6 +94,8 @@ namespace Game
             _slotRoot.DOScale(1.1f, 0.2f)
                 .SetEase(Ease.Linear)
                 .Play();
+
+            _soundHandler.PlaySound(ClipName.Selected);
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -129,6 +136,8 @@ namespace Game
             towerPlacementBlock.SetOccupied(true);
 
             _levelCurencyHandler.SubtactCurrencyCount(_tower.SoulCost);
+
+            _soundHandler.PlaySound(ClipName.SoftClick);
         }
 
         public void SetActive(bool isActive)

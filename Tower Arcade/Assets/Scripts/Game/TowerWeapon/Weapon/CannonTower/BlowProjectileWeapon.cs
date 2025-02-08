@@ -1,3 +1,4 @@
+using Sound;
 using UnityEngine;
 
 namespace Game
@@ -6,7 +7,7 @@ namespace Game
     {
         [SerializeField] private ParticleSystem _particleSystem;
 
-        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler)
+        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
         {
             if (enemy == null)
                 DestroySelf();
@@ -17,6 +18,8 @@ namespace Game
                 FindEnemiesInRangeAndApplyDamage(enemy, explodeRadious, damage, levelCurencyHandler);
 
                 EffectPerformer.PlayEffect(_particleSystem, enemy.transform.position);
+
+                soundHandler.PlaySound(ClipName.CannonExplotion, transform.root.position);
 
                 DestroySelf();
             }

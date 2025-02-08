@@ -1,5 +1,6 @@
+using DI;
+using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,21 +23,38 @@ namespace Game
         private CoinBalanceUI _coinBalanceUI;
         private EventBus _eventBus;
 
-        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus)
+        private SaveSystem _saveSystem;
+        private SaveData _saveData;
+
+        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, SaveSystem saveSystem, SaveData saveData, MainInventoryContainer mainInventoryContainer)
         {
             _coinBalanceUI = coinBalanceUI;
             _eventBus = eventBus;
 
+            _saveSystem = saveSystem;
+            _saveData = saveData;
+
             _itemImage.sprite = _itemConfig.Sprite;
             _costAmount = _itemConfig.Cost;
             _coinCostAmountText.text = _itemConfig.Cost.ToString();
+
+            if (_saveData.ShopItems.TryGetValue(_itemConfig.Name, out bool isBought))
+            {
+                _isBought = isBought;
+
+                mainInventoryContainer.AddItemToSlot(_itemConfig.InventoryItem);
+            }
+            else
+            {
+                _saveData.ShopItems[_itemConfig.Name] = _isBought;
+            }
 
             UpdateGood();
         }
 
         private void TryToBuy()
         {
-            if (_costAmount >= _coinBalanceUI.GetCoinBalance())
+            if (_costAmount <= _coinBalanceUI.GetCoinBalance())
             {
                 Buy();
             }
@@ -50,7 +68,8 @@ namespace Game
             _eventBus.Invoke<OnCoinBalanceChangedSignal>(new OnCoinBalanceChangedSignal(_costAmount));
             _eventBus.Invoke<OnItemBoughtSignal>(new OnItemBoughtSignal(_itemConfig.InventoryItem));
 
-            //Addtoinventory()
+            _saveData.ShopItems[_itemConfig.Name] = true;
+            _saveSystem.Save(_saveData);
         }
 
         private void UpdateGood()

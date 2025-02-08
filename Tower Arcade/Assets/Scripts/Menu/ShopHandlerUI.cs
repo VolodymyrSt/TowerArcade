@@ -20,7 +20,7 @@ namespace Game
 
         private CoinBalanceUI _coinBalanceUI;
 
-        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus)
+        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, SaveSystem saveSystem, SaveData saveData, MainInventoryContainer mainInventoryContainer)
         {
             _coinBalanceUI = coinBalanceUI;
 
@@ -33,7 +33,7 @@ namespace Game
 
             foreach (var item in _shopItems)
             {
-                item.Init(coinBalanceUI, eventBus);
+                item.Init(coinBalanceUI, eventBus, saveSystem, saveData, mainInventoryContainer);
             }
 
             CloseShopMenu();

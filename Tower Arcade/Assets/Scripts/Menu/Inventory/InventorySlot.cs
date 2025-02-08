@@ -4,14 +4,14 @@ namespace Game
 {
     public class InventorySlot : BaseInventorySlot
     {
-        public void AddItemToSlop(InventoryItemSO inventoryItem)
+        public void AddItemToSlop(InventoryItemSO inventoryItemConfig)
         {
             var itemPrefab = Resources.Load<InventoryItem>("Inventory/InventoryItem");
-            InventoryItem inventoryItemHandler = Instantiate(itemPrefab, transform);
+            InventoryItem inventoryItem = Instantiate(itemPrefab, transform);
 
-            inventoryItemHandler.SetInventoryItem(inventoryItem);
-            inventoryItemHandler.SetSprite(inventoryItem.Sprite);
-            inventoryItemHandler.SetToMain(false);
+            inventoryItem.SetInventoryItem(inventoryItemConfig);
+            inventoryItem.SetSprite(inventoryItemConfig.Sprite);
+            inventoryItem.SetToMain(false);
         }
     }
 }
