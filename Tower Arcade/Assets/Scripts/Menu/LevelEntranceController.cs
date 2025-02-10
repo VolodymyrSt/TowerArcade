@@ -1,11 +1,13 @@
+using Sound;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Game
 {
-    public class LevelEntranceController : MonoBehaviour
+    public class LevelEntranceController : MonoBehaviour, IPointerEnterHandler
     {
         [SerializeField] private Button _enterButton;
         [SerializeField] private TextMeshProUGUI _levelNumber;
@@ -17,10 +19,14 @@ namespace Game
         private SaveData _saveData;
         private SaveSystem _saveSystem;
 
-        public void Init(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem)
+        private MenuSoundHandler _menuSoundHandler;
+
+        public void Init(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem, MenuSoundHandler menuSoundHandler)
         {
             _saveData = saveData;
             _saveSystem = saveSystem;
+
+            _menuSoundHandler = menuSoundHandler;
 
             if (saveData.LevelEntances.TryGetValue(_levelNumber.text, out bool value))
             {
@@ -44,6 +50,11 @@ namespace Game
             }
 
             _enterButton.onClick.AddListener(() => Enter(sceneLoader));
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _menuSoundHandler.PlaySound(ClipName.Selected);
         }
 
         private void Enter(SceneLoader sceneLoader)
@@ -76,5 +87,6 @@ namespace Game
         public bool IsLocked() => _isLocked;
 
         public int GetEntranceIndex() => Int32.Parse(_levelNumber.text);
+
     }
 }

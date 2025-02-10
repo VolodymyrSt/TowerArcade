@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CatapultTower
   m_EditorClassIdentifier: 
   TowerName: Catapult
-  TowerSprite: {fileID: 1646606719, guid: 6facbae260e330149b6feaefae8f18bb, type: 3}
+  TowerSprite: {fileID: 21300000, guid: 771e3f3305513f44f8b174ffe49ee7b7, type: 3}
   TowerType: 2
   SoulCost: 125
+  Description: Attack a huge range of enemies

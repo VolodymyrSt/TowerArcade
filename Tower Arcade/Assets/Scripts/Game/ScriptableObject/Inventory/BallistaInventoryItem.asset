@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerGeneral: {fileID: 11400000, guid: 56a9db4307b45ad44a4436fecba10243, type: 2}
   TowerConfig: {fileID: 11400000, guid: 12d9e3f38f5cefb479f89ed16d5c9d4e, type: 2}
-  Sprite: {fileID: -403076053, guid: b250d48d68b5a844ebd00dddb0b5ed9d, type: 3}
+  Sprite: {fileID: 21300000, guid: 184b589a557556c4c93bb6ea87af281a, type: 3}
+  Description: Throws arrows in enemies

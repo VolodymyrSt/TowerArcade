@@ -9,6 +9,9 @@ namespace Game
     {
         public int CoinCurrency;
         public int CurrentUnlockedEntrance;
+        public float LevelVoluem;
+        public float MenuVoluem;
+        public float MouseSensivity;
         public Dictionary<string, bool> ShopItems = new();
         public Dictionary<string, string> InventoryItems = new();
         public Dictionary<string, bool> LevelEntances = new();

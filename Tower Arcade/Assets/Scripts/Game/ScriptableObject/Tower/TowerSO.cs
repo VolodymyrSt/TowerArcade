@@ -9,5 +9,6 @@ namespace Game
         public Sprite TowerSprite;
         public TowerFactoryType TowerType;
         public float SoulCost;
+        public string Description;
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: IceTower
   m_EditorClassIdentifier: 
   TowerName: Ice
-  TowerSprite: {fileID: 520478591, guid: 60477619940674e42b67a1e00f848120, type: 3}
+  TowerSprite: {fileID: 21300000, guid: 5015b7949b4ee7b4a9bf1dea7f974798, type: 3}
   TowerType: 3
   SoulCost: 150
+  Description: When hit enemies they slow down

@@ -1,3 +1,4 @@
+using Sound;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,27 +21,36 @@ namespace Game
 
         private CoinBalanceUI _coinBalanceUI;
 
-        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, SaveSystem saveSystem, SaveData saveData, MainInventoryContainer mainInventoryContainer)
+        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, MenuSoundHandler soundHandler, SaveSystem saveSystem, SaveData saveData, MainInventoryContainer mainInventoryContainer)
         {
             _coinBalanceUI = coinBalanceUI;
 
             eventBus.SubscribeEvent<OnCoinBalanceChangedSignal>(UpdateCoinBalanceText);
 
-            _openShopButton.onClick.AddListener(() => OpenShopMenu());
-            _goHomeButton.onClick.AddListener(() => CloseShopMenu());
+            _openShopButton.onClick.AddListener(() => OpenShopMenu(soundHandler));
+            _goHomeButton.onClick.AddListener(() => CloseShopMenu(soundHandler));
 
             _coinBalanceText.text = coinBalanceUI.GetCoinBalance().ToString();
 
             foreach (var item in _shopItems)
             {
-                item.Init(coinBalanceUI, eventBus, saveSystem, saveData, mainInventoryContainer);
+                item.Init(coinBalanceUI, eventBus, soundHandler, saveSystem, saveData, mainInventoryContainer);
             }
 
-            CloseShopMenu();
+            _shopMenuRoot.SetActive(false);
         }
 
-        private void OpenShopMenu() => _shopMenuRoot.SetActive(true);
-        private void CloseShopMenu() => _shopMenuRoot.SetActive(false);
+        private void OpenShopMenu(MenuSoundHandler soundHandler)
+        {
+            soundHandler.PlaySound(ClipName.Click);
+            _shopMenuRoot.SetActive(true);
+        }
+
+        private void CloseShopMenu(MenuSoundHandler soundHandler)
+        {
+            soundHandler.PlaySound(ClipName.Click);
+            _shopMenuRoot.SetActive(false);
+        }
 
         private void UpdateCoinBalanceText(OnCoinBalanceChangedSignal signal) => _coinBalanceText.text = _coinBalanceUI.GetCoinBalance().ToString();
     }

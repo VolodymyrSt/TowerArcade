@@ -1,3 +1,4 @@
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -46,8 +47,26 @@ namespace Game
             _pivot.transform.position = Vector3.Lerp(_pivot.transform.position, newPivotPosition, _smoothness * Time.deltaTime);
         }
 
-        public void ChangeSensivity(float value) => _currentSensivity = value;
+        public void InitMouseSensivity(SaveData saveData,SaveSystem saveSystem)
+        {
+            if (saveData.MouseSensivity == 0)
+            {
+                saveData.MouseSensivity = _currentSensivity;
+                saveSystem.Save(saveData);
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        public void ChangeSensivity(float value, SaveSystem saveSystem, SaveData saveData)
+        {
+            _currentSensivity = value;
+            saveData.MouseSensivity = _currentSensivity;
+            saveSystem.Save(saveData);
+        }
+
         public float GetMaxSensivity() => _maxSensivity;
-        public float GetCurrentSensivity() => _currentSensivity;
     }
 }

@@ -1,5 +1,4 @@
-using DI;
-using System.Collections.Generic;
+using Sound;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,20 +15,23 @@ namespace Game
         [SerializeField] private Image _itemImage;
         [SerializeField] private TextMeshProUGUI _coinCostAmountText;
         [SerializeField] private TextMeshProUGUI _isBoughtText;
+        [SerializeField] private TextMeshProUGUI _itemName;
 
         private int _costAmount;
         private bool _isBought = false;
 
         private CoinBalanceUI _coinBalanceUI;
         private EventBus _eventBus;
+        private MenuSoundHandler _soundHandler;
 
         private SaveSystem _saveSystem;
         private SaveData _saveData;
 
-        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, SaveSystem saveSystem, SaveData saveData, MainInventoryContainer mainInventoryContainer)
+        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, MenuSoundHandler soundHandler, SaveSystem saveSystem, SaveData saveData, MainInventoryContainer mainInventoryContainer)
         {
             _coinBalanceUI = coinBalanceUI;
             _eventBus = eventBus;
+            _soundHandler = soundHandler;
 
             _saveSystem = saveSystem;
             _saveData = saveData;
@@ -37,17 +39,19 @@ namespace Game
             _itemImage.sprite = _itemConfig.Sprite;
             _costAmount = _itemConfig.Cost;
             _coinCostAmountText.text = _itemConfig.Cost.ToString();
+            _itemName.text = _itemConfig.Name;
 
             if (_saveData.ShopItems.TryGetValue(_itemConfig.Name, out bool isBought))
             {
                 _isBought = isBought;
-
-                mainInventoryContainer.AddItemToSlot(_itemConfig.InventoryItem);
             }
             else
             {
                 _saveData.ShopItems[_itemConfig.Name] = _isBought;
             }
+
+            if (_isBought)
+                mainInventoryContainer.AddItemToSlot(_itemConfig.InventoryItem);
 
             UpdateGood();
         }
@@ -56,6 +60,7 @@ namespace Game
         {
             if (_costAmount <= _coinBalanceUI.GetCoinBalance())
             {
+                _soundHandler.PlaySound(ClipName.Click);
                 Buy();
             }
         }
@@ -84,8 +89,10 @@ namespace Game
             {
                 _buyButton.gameObject.SetActive(true);
                 _isBoughtText.gameObject.SetActive(false);
-                _buyButton.onClick.AddListener(() => Buy());
+                _buyButton.onClick.AddListener(() => TryToBuy());
             }
         }
+
+        public ShopItemSO GetItemConfig() => _itemConfig;
     }
 }

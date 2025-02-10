@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d788eec7042207543befbde0ed0f04f6, type: 3}
+  m_Name: RobinHood
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
+  MoveSpeed: 2
+  SoulCost: 15
+  EnemyName: Rob in Hood
+  EnemyDescription: Has much more health then Rogue
+  EnemyType: 2
+  EnemyRank: 3

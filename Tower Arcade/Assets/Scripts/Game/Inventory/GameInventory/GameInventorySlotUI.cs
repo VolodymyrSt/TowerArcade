@@ -32,7 +32,7 @@ namespace Game
         private TowerDescriptionCardHandler _towerDescriptionCardHandler;
         private EffectPerformer _effectPerformer;
         private MassegeHandlerUI _masegeHandler;
-        private SoundHandler _soundHandler;
+        private LevelSoundHandler _soundHandler;
 
         private TowerSO _tower;
         private Camera _camera;
@@ -51,7 +51,7 @@ namespace Game
             _towerDescriptionCardHandler = container.Resolve<TowerDescriptionCardHandler>();
             _effectPerformer = container.Resolve<EffectPerformer>();
             _masegeHandler = container.Resolve<MassegeHandlerUI>();
-            _soundHandler = container.Resolve<SoundHandler>();
+            _soundHandler = container.Resolve<LevelSoundHandler>();
 
             _towerName.text = _tower.TowerName;
             _towerImage.sprite = _tower.TowerSprite;

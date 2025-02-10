@@ -14,7 +14,7 @@ namespace Game
         [SerializeField] private Transform _weaponPointer;
 
         private ProjectileWeaponFactory _projectileWeaponFactory;
-        private SoundHandler _soundHandler;
+        private LevelSoundHandler _soundHandler;
 
         private Vector3 _frameDirection;
         private Vector3 _bowDirection;
@@ -22,7 +22,7 @@ namespace Game
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _projectileWeaponFactory = LevelRegistrator.Resolve<ProjectileWeaponFactory>();
-            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
+            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }

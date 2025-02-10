@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerGeneral: {fileID: 11400000, guid: 906d4ef9f9899d04cbf576a2b06504ae, type: 2}
   TowerConfig: {fileID: 11400000, guid: 7fae7d1cc0fb9ef44a9eef7b4e887b6b, type: 2}
-  Sprite: {fileID: 1646606719, guid: 6facbae260e330149b6feaefae8f18bb, type: 3}
+  Sprite: {fileID: 21300000, guid: 771e3f3305513f44f8b174ffe49ee7b7, type: 3}
+  Description: Attack a huge range of enemies

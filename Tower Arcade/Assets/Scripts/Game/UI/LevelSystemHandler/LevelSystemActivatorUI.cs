@@ -25,7 +25,7 @@ namespace Game
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
         private LevelConfigurationSO _levelConfiguration;
-        private SoundHandler _soundHandler;
+        private LevelSoundHandler _soundHandler;
 
         private void Start()
         {
@@ -34,7 +34,7 @@ namespace Game
             _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
             _eventBus = LevelRegistrator.Resolve<EventBus>(); ;
             _levelConfiguration = LevelRegistrator.Resolve<LevelConfigurationSO>();
-            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
+            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
 
             ConfigurateLevel(_levelSystem);
 

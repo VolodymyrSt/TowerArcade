@@ -10,12 +10,12 @@ namespace Game
         [SerializeField] private Transform _weaponPointer;
 
         private BigIceCrystalWeaponFactory _bigIceCrystalWeaponFactory;
-        private SoundHandler _soundHandler;
+        private LevelSoundHandler _soundHandler;
 
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _bigIceCrystalWeaponFactory = LevelRegistrator.Resolve<BigIceCrystalWeaponFactory>();
-            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
+            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }

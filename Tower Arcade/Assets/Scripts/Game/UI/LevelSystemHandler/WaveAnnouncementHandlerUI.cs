@@ -14,14 +14,14 @@ namespace Game
 
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
-        private SoundHandler _soundHandler;
+        private LevelSoundHandler _soundHandler;
         private Animator _animator;
 
         private void Start()
         {
             _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
             _eventBus = LevelRegistrator.Resolve<EventBus>();
-            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
+            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
 
             _animator = GetComponentInChildren<Animator>();
 

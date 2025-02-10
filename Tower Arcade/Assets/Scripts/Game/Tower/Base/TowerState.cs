@@ -32,7 +32,9 @@ namespace Game
 
         protected IEnumerator EnemyDetecte(LevelCurencyHandler levelCurencyHandler)
         {
-            yield return new WaitForSecondsRealtime(Config.AttackCoolDown);
+            float shootingPraparation = 1f;
+
+            yield return new WaitForSecondsRealtime(shootingPraparation);
 
             while (true)
             {
@@ -48,7 +50,7 @@ namespace Game
                 }
                 else
                 {
-                    yield return new WaitForSecondsRealtime(Config.AttackCoolDown);
+                    yield return new WaitForSecondsRealtime(shootingPraparation);
                 }
             }
         }

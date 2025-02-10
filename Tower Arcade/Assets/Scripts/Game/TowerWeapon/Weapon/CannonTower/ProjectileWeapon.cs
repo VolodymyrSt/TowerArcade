@@ -4,7 +4,7 @@ namespace Game
 {
     public class ProjectileWeapon : Weapon
     {
-        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
+        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler)
         {
             if (enemy == null)
                 DestroySelf();

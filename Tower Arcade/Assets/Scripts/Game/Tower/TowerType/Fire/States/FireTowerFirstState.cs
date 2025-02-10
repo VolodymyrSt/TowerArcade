@@ -9,12 +9,12 @@ namespace Game
         [SerializeField] private Transform _weaponPointer;
 
         private FireBallWeaponFactory _fireBallWeaponFactory;
-        private SoundHandler _soundHandler;
+        private LevelSoundHandler _soundHandler;
 
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _fireBallWeaponFactory = LevelRegistrator.Resolve<FireBallWeaponFactory>();
-            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
+            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }

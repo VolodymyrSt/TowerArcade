@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour, IEnemy, IEnemyDescription
         Agent.speed = EnemyConfig.MoveSpeed;
         CurrentHealth = EnemyConfig.MaxHealth;
         SoulCost = EnemyConfig.SoulCost;
+
+        ActivateAbilitySystem();
     }
     public virtual void ApplyDamage(float damage, LevelCurencyHandler levelCurencyHandler)
     {
@@ -34,6 +36,8 @@ public class Enemy : MonoBehaviour, IEnemy, IEnemyDescription
             DestroySelf();
         }
     }
+
+    public virtual void ActivateAbilitySystem() { }
 
     public void SetTargetDestination(Vector3 destination) => Agent.SetDestination(destination);
     public void SetStartPosition(Transform parent) => transform.SetParent(parent, false);
@@ -76,5 +80,14 @@ public class Enemy : MonoBehaviour, IEnemy, IEnemyDescription
         }
     }
 
+    public void IncreaseHealth(float percent)
+    {
+        if (percent < 0) return;
+
+        CurrentHealth += (int)(CurrentHealth * percent / 100f);
+
+        if (CurrentHealth > EnemyConfig.MaxHealth)
+            CurrentHealth = EnemyConfig.MaxHealth;
+    }
     public void DestroySelf() => Destroy(gameObject);
 }

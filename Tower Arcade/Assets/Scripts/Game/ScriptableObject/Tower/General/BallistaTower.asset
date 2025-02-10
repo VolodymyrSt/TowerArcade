@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BallistaTower
   m_EditorClassIdentifier: 
   TowerName: Ballista
-  TowerSprite: {fileID: -403076053, guid: b250d48d68b5a844ebd00dddb0b5ed9d, type: 3}
+  TowerSprite: {fileID: 21300000, guid: 184b589a557556c4c93bb6ea87af281a, type: 3}
   TowerType: 0
   SoulCost: 50
+  Description: Throws arrows in enemies

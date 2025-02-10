@@ -1,4 +1,5 @@
 using DI;
+using Sound;
 using System.Collections.Generic;
 using UnityEditor.Overlays;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace Game
 
             _currentUnlockedEntrance = _saveSystem.Load().CurrentUnlockedEntrance;
 
-            InitializeEntrances(MenuRegistrator.Resolve<SceneLoader>(), _saveData, _saveSystem);
+            InitializeEntrances(MenuRegistrator.Resolve<SceneLoader>(), _saveData, _saveSystem, MenuRegistrator.Resolve<MenuSoundHandler>());
 
             if (_currentUnlockedEntrance >= _levelEntranceControllers.Count)
             {
@@ -38,14 +39,14 @@ namespace Game
             }
         }
 
-        private void InitializeEntrances(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem)
+        private void InitializeEntrances(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem, MenuSoundHandler menuSoundHandler)
         {
             _levelEntranceControllers = new List<LevelEntranceController>();
             foreach (var location in _locations)
             {
                 foreach (var entrance in location.GetEntrances())
                 {
-                    entrance.Init(sceneLoader, saveData, saveSystem);
+                    entrance.Init(sceneLoader, saveData, saveSystem, menuSoundHandler);
                     _levelEntranceControllers.Add(entrance);
                 }
             }

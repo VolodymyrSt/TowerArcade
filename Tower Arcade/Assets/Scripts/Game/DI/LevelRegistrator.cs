@@ -17,6 +17,13 @@ namespace Game
             _container.RegisterFactory(c => new SkeletonMinionFactory()).AsSingle();
             _container.RegisterFactory(c => new SkeletonRogueFactory()).AsSingle();
             _container.RegisterFactory(c => new SkeletonWarriorFactory()).AsSingle();
+            _container.RegisterFactory(c => new ArmoredWarriorFactory()).AsSingle();
+            _container.RegisterFactory(c => new ArmoredMinionFactory()).AsSingle();
+            _container.RegisterFactory(c => new RobinHoodFactory()).AsSingle();
+            _container.RegisterFactory(c => new NecromancerFactory()).AsSingle();
+            _container.RegisterFactory(c => new MutatedBatFactory()).AsSingle();
+            _container.RegisterFactory(c => new DragonFactory()).AsSingle();
+            _container.RegisterFactory(c => new MutatedNecromancerFactory()).AsSingle();
 
             //tower
             _container.RegisterFactory(c => new BallistaTowerFactory()).AsSingle();
@@ -50,16 +57,16 @@ namespace Game
             _container.RegisterFactory(c => new TowerFactoryHandler()).AsSingle();
 
             _container.RegisterFactory(c => new EnemyDescriptionCardHandler(c.Resolve<EnemyDescriptionCardUI>())).AsSingle();
-            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>(), c.Resolve<EffectPerformer>(), c.Resolve<MassegeHandlerUI>(), c.Resolve<SoundHandler>())).AsSingle();
+            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>(), c.Resolve<EffectPerformer>(), c.Resolve<MassegeHandlerUI>(), c.Resolve<LevelSoundHandler>())).AsSingle();
 
             _container.RegisterFactory(c => new LevelCurencyHandler(c.Resolve<LevelConfigurationSO>(), c.Resolve<EventBus>())).AsSingle();
 
-            _container.RegisterFactory(c => new LevelSettingHandler(c.Resolve<LevelSettingHandlerUI>(), c.Resolve<CameraMoveController>(), c.Resolve<SoundHandler>())).AsSingle();
+            _container.RegisterFactory(c => new LevelSettingHandler(c.Resolve<LevelSettingHandlerUI>(), c.Resolve<CameraMoveController>(), c.Resolve<LevelSoundHandler>(), c.Resolve<SaveSystem>(), c.Resolve<SaveData>())).AsSingle();
 
             _container.RegisterFactory(c => new TimeHandler()).AsSingle();
             //_container.RegisterFactory(c => new SceneLoader()).AsSingle();
 
-            _container.RegisterFactory(c => new SoundHandler()).AsSingle();
+            _container.RegisterFactory(c => new LevelSoundHandler()).AsSingle();
         }
 
         public static T Resolve<T>()

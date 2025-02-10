@@ -14,7 +14,7 @@ namespace Game
             EffectPerformer = LevelRegistrator.Resolve<EffectPerformer>();
         }
 
-        public virtual void Shoot(Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
+        public virtual void Shoot(Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler)
         {
             if (enemy == null)
                 DestroySelf();
@@ -27,7 +27,7 @@ namespace Game
                 .OnComplete(() => OnReachedTarget(enemy, damage, levelCurencyHandler, soundHandler));
         }
 
-        public abstract void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler);
+        public abstract void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler);
 
         protected void DestroySelf() => Destroy(gameObject);
     }

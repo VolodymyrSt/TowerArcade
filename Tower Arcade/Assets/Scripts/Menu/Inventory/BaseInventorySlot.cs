@@ -1,10 +1,16 @@
+using DI;
+using Sound;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Game
 {
-    public class BaseInventorySlot : MonoBehaviour, IDropHandler
+    public class BaseInventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler
     {
+        private MenuSoundHandler _menuSoundHandler;
+
+        private void Start() => _menuSoundHandler = MenuRegistrator.Resolve<MenuSoundHandler>();
+
         public virtual void OnDrop(PointerEventData eventData)
         {
             if (eventData.pointerDrag == null) return;
@@ -42,6 +48,11 @@ namespace Game
                     existingItem.ReplaceItem(item);
                 }
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _menuSoundHandler.PlaySound(ClipName.Selected);
         }
     }
 }

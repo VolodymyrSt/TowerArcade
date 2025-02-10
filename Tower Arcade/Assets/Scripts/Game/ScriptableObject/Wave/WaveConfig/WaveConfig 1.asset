@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: WaveConfig 1
   m_EditorClassIdentifier: 
   EnemyConfiguration:
-  - NumberOfEnemies: 5
-    FactoryType: 1
+  - NumberOfEnemies: 1
+    FactoryType: 6
+  - NumberOfEnemies: 1
+    FactoryType: 9
   TimeBetweenEnemySpawn: 2
   AmountOfSoulsAfterFinish: 5

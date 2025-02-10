@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Ice Tower
   Cost: 100
-  Sprite: {fileID: 520478591, guid: 60477619940674e42b67a1e00f848120, type: 3}
+  Sprite: {fileID: 21300000, guid: 5015b7949b4ee7b4a9bf1dea7f974798, type: 3}
   InventoryItem: {fileID: 11400000, guid: 401884e84ef7a06478c2346710335546, type: 2}

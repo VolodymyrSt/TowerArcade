@@ -23,7 +23,7 @@ namespace Game
         [SerializeField] private RectTransform _starRoot;
 
         private HealthBarHandlerUI _healthBarHandler;
-        private SoundHandler _soundHandler;
+        private LevelSoundHandler _soundHandler;
         private LevelConfigurationSO _levelConfigurationSO;
         private CoinBalanceUI _coinBalanceUI;
         private SaveData _saveData;
@@ -39,7 +39,7 @@ namespace Game
 
             _levelConfigurationSO = LevelRegistrator.Resolve<LevelConfigurationSO>();
             _healthBarHandler = LevelRegistrator.Resolve<HealthBarHandlerUI>();
-            _soundHandler = LevelRegistrator.Resolve<SoundHandler>();
+            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
             _coinBalanceUI = LevelRegistrator.Resolve<CoinBalanceUI>();
             _saveData = LevelRegistrator.Resolve<SaveData>();
             _saveSystem = LevelRegistrator.Resolve<SaveSystem>();

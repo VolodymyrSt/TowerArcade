@@ -1,5 +1,6 @@
 using DI;
 using NUnit.Framework;
+using Sound;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ namespace Game
         private void Awake()
         {
             _rootContainer = FindFirstObjectByType<GameEntryPoint>().GetRootContainer();
+
             _rootContainer.RegisterInstance<InventoryHandlerUI>(_inventoryHandlerUI);
             _rootContainer.RegisterInstance<CoinBalanceUI>(_coinBalanceUI);
             _rootContainer.RegisterInstance<LocationHandler>(_locationHandler);
@@ -37,9 +39,9 @@ namespace Game
 
             _coinBalanceUI.Init(_menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<SaveSystem>(), _menuContainer.Resolve<SaveData>());
 
-            _inventoryHandlerUI.Init(_menuContainer.Resolve<EventBus>());
+            _inventoryHandlerUI.Init(_menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<MenuSoundHandler>());
 
-            _shopMenuHandlerUI.Init(_menuContainer.Resolve<CoinBalanceUI>(), _menuContainer.Resolve<EventBus>()
+            _shopMenuHandlerUI.Init(_menuContainer.Resolve<CoinBalanceUI>(), _menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<MenuSoundHandler>()
                 , _menuContainer.Resolve<SaveSystem>(), _menuContainer.Resolve<SaveData>(), _menuContainer.Resolve<MainInventoryContainer>());
 
             AddUpdatables();

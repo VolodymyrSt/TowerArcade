@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CannonTower
   m_EditorClassIdentifier: 
   TowerName: Cannon
-  TowerSprite: {fileID: 1448121244, guid: 5113a597fc3b8694cbd0be8f193b9e07, type: 3}
+  TowerSprite: {fileID: 21300000, guid: 7210bdd141260144f9e63d652f29a2a2, type: 3}
   TowerType: 1
   SoulCost: 75
+  Description: Attack a small range of enemies

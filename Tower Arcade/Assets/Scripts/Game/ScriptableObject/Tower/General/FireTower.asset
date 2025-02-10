@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireTower
   m_EditorClassIdentifier: 
   TowerName: Fire
-  TowerSprite: {fileID: -278153728, guid: 60477619940674e42b67a1e00f848120, type: 3}
+  TowerSprite: {fileID: 21300000, guid: 75e09b88523e5334cadd81a457c7da73, type: 3}
   TowerType: 4
   SoulCost: 200
+  Description: Fire enemies which do extra damage

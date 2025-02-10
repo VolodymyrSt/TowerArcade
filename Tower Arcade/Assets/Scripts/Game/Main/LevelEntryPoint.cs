@@ -1,6 +1,4 @@
-using DG.Tweening;
 using DI;
-using Sound;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +17,6 @@ namespace Game
 
         [Header("Tower")]
         [SerializeField] private TowerDescriptionCardUI _towerDescriptionCardHandlerUI;
-        //[SerializeField] private List<TowerSO> towerSOs = new List<TowerSO>();
 
         [Header("TowerPlacement")]
         [SerializeField] private TowerPlacementBlocksHolder _towerPlacementBlocksHolder;

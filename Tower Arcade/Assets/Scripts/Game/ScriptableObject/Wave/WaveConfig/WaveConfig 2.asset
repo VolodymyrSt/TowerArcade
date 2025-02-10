@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyConfiguration:
   - NumberOfEnemies: 4
-    FactoryType: 0
-  - NumberOfEnemies: 3
     FactoryType: 1
   TimeBetweenEnemySpawn: 2
   AmountOfSoulsAfterFinish: 10

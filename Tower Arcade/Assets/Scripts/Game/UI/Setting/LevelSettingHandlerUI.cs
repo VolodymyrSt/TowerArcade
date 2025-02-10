@@ -1,4 +1,5 @@
 using Sound;
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,20 +23,20 @@ namespace Game
         {
             SceneLoader sceneLoader = LevelRegistrator.Resolve<SceneLoader>();
             TimeHandler timeHandler = LevelRegistrator.Resolve<TimeHandler>();
-            SoundHandler soundHandler = LevelRegistrator.Resolve<SoundHandler>();
+            LevelSoundHandler soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
 
             InitButtons(sceneLoader, timeHandler, soundHandler);
 
             HideSettingMenu();
         }
 
-        public  void InitSliders(float maxSensivity, float maxVoluem)
+        public void InitSliders(float maxSensivity, float maxVoluem)
         {
             _mouseSensivitySlider.maxValue = maxSensivity;
             _soundSlider.maxValue = maxVoluem;
         }
         
-        private void InitButtons(SceneLoader sceneLoader, TimeHandler timeHandler, SoundHandler soundHandler)
+        private void InitButtons(SceneLoader sceneLoader, TimeHandler timeHandler, LevelSoundHandler soundHandler)
         {
             _openSettingMenuButton.gameObject.SetActive(true);
             _closeSettingMenuButton.gameObject.SetActive(true);
@@ -74,9 +75,14 @@ namespace Game
         private void ShowOpenSettingMenuButton() => _openSettingMenuButton.gameObject.SetActive(true);
         private void HideOpenSettingMenuButton() => _openSettingMenuButton.gameObject.SetActive(false);
 
-        public void SetSoundSliderValue(float value) => _soundSlider.value = value;
-        public void SetMouseSensivitySliderValue(float value) => _mouseSensivitySlider.value = value;
-
+        public void SetSoundSliderValue(float value)
+        {
+            _soundSlider.value = value;
+        }
+        public void SetMouseSensivitySliderValue(float value)
+        {
+            _mouseSensivitySlider.value = value;
+        }
         public float GetSoundSliderValue() => _soundSlider.value;
         public float GetMouseSensivitySliderValue() => _mouseSensivitySlider.value;
     }

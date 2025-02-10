@@ -1,4 +1,5 @@
 using Sound;
+using UnityEditor.Overlays;
 
 namespace Game
 {
@@ -6,25 +7,35 @@ namespace Game
     {
         private LevelSettingHandlerUI _levelSettingHandlerUI;
         private CameraMoveController _cameraMoveController;
-        private SoundHandler _soundHandler;
+        private LevelSoundHandler _levelSoundHandler;
 
-        public LevelSettingHandler(LevelSettingHandlerUI levelSettingHandlerUI, CameraMoveController cameraMoveController, SoundHandler soundHandler)
+        private SaveData _saveData;
+        private SaveSystem _saveSystem;
+
+        public LevelSettingHandler(LevelSettingHandlerUI levelSettingHandlerUI, CameraMoveController cameraMoveController, LevelSoundHandler levelSoundHandler
+            , SaveSystem saveSystem, SaveData saveData)
         {
             _levelSettingHandlerUI = levelSettingHandlerUI;
             _cameraMoveController = cameraMoveController;
-            _soundHandler = soundHandler;
+            _levelSoundHandler = levelSoundHandler;
 
-            _levelSettingHandlerUI.InitSliders(_cameraMoveController.GetMaxSensivity(), _soundHandler.GetMaxVoluem());
+            _saveData = saveData;
+            _saveSystem = saveSystem;
 
-            _levelSettingHandlerUI.SetMouseSensivitySliderValue(_cameraMoveController.GetCurrentSensivity());
-            _levelSettingHandlerUI.SetSoundSliderValue(_soundHandler.GetVoluem());
+            _cameraMoveController.InitMouseSensivity(_saveData, _saveSystem);
+            _levelSoundHandler.InitVoluem(_saveData, _saveSystem);
+
+            _levelSettingHandlerUI.InitSliders(_cameraMoveController.GetMaxSensivity(), _levelSoundHandler.GetMaxVoluem());
+
+            _levelSettingHandlerUI.SetMouseSensivitySliderValue(_saveSystem.Load().MouseSensivity);
+            _levelSettingHandlerUI.SetSoundSliderValue(_saveSystem.Load().LevelVoluem);
 
         }
 
         public void Tick()
         {
-            _cameraMoveController.ChangeSensivity(_levelSettingHandlerUI.GetMouseSensivitySliderValue());
-            _soundHandler.ChangeVoluem(_levelSettingHandlerUI.GetSoundSliderValue());
+            _cameraMoveController.ChangeSensivity(_levelSettingHandlerUI.GetMouseSensivitySliderValue(), _saveSystem, _saveData);
+            _levelSoundHandler.ChangeVoluem(_levelSettingHandlerUI.GetSoundSliderValue(), _saveData, _saveSystem);
         }
     }
 }

@@ -1,4 +1,5 @@
 using DI;
+using Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,18 +21,19 @@ namespace Game
         private void Start()
         {
             SceneLoader sceneLoader = MenuRegistrator.Resolve<SceneLoader>();
+            MenuSoundHandler soundHandler = MenuRegistrator.Resolve<MenuSoundHandler>();
 
-            InitButtons(sceneLoader);
+            InitButtons(sceneLoader, soundHandler);
 
             HideSettingMenu();
         }
 
-        public void InitSliders(float maxSensivity, float maxVoluem)
+        public void InitSliders(float maxVoluem)
         {
             _soundSlider.maxValue = maxVoluem;
         }
 
-        private void InitButtons(SceneLoader sceneLoader)
+        private void InitButtons(SceneLoader sceneLoader, MenuSoundHandler soundHandler)
         {
             _openSettingMenuButton.gameObject.SetActive(true);
             _closeSettingMenuButton.gameObject.SetActive(true);
@@ -39,12 +41,16 @@ namespace Game
 
             _openSettingMenuButton.onClick.AddListener(() =>
             {
+                soundHandler.PlaySound(ClipName.Click);
+
                 ShowSettingMenu();
                 HideOpenSettingMenuButton();
             });
 
             _closeSettingMenuButton.onClick.AddListener(() =>
             {
+                soundHandler.PlaySound(ClipName.Click);
+
                 HideSettingMenu();
                 ShowOpenSettingMenuButton();
             });

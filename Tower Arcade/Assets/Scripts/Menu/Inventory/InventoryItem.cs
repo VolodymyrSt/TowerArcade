@@ -19,6 +19,7 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _itemAttackCoolDown;
         [SerializeField] private TextMeshProUGUI _itemAttackSpeed;
         [SerializeField] private TextMeshProUGUI _itemAttackRange;
+        [SerializeField] private TextMeshProUGUI _itemDesctiption;
 
         private Transform _originalParent;
         [SerializeField] private bool _isInMainSlot = false;
@@ -150,6 +151,7 @@ namespace Game
             _itemAttackCoolDown.text = $"Cooldown: {towerConfig.AttackCoolDown.ToString()}";
             _itemAttackSpeed.text = $"Speed: {towerConfig.AttackSpeed.ToString()}";
             _itemAttackRange.text = $"Range: {towerConfig.AttackRange.ToString()}";
+            _itemDesctiption.text = _item.TowerGeneral.Description;
         }
     }
 }

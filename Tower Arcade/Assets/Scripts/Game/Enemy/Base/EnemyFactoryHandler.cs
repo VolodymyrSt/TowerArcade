@@ -18,6 +18,27 @@ namespace Game
                 case EnemyFactoryType.SkeletonWarrior:
                     return container.Resolve<SkeletonWarriorFactory>();
 
+                case EnemyFactoryType.ArmoredWarrior:
+                    return container.Resolve<ArmoredWarriorFactory>();
+                
+                case EnemyFactoryType.ArmoredMinion:
+                    return container.Resolve<ArmoredMinionFactory>();
+
+                case EnemyFactoryType.RobinHood:
+                    return container.Resolve<RobinHoodFactory>();
+
+                case EnemyFactoryType.Necromancer:
+                    return container.Resolve<NecromancerFactory>();
+
+                case EnemyFactoryType.MutatedBat:
+                    return container.Resolve<MutatedBatFactory>();
+
+                case EnemyFactoryType.Dragon:
+                    return container.Resolve<DragonFactory>();
+
+                case EnemyFactoryType.MutatedNecromancer:
+                    return container.Resolve<MutatedNecromancerFactory>();
+
                 default:
                     throw new Exception("The factory doesn`t exist");
             }
@@ -28,6 +49,13 @@ namespace Game
     {
         SkeletonMinion,
         SkeletonRogue,
-        SkeletonWarrior
+        SkeletonWarrior,
+        ArmoredWarrior,
+        ArmoredMinion,
+        RobinHood,
+        Necromancer,
+        MutatedBat,
+        Dragon,
+        MutatedNecromancer
     }
 }

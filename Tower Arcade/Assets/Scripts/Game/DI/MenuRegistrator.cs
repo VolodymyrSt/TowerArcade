@@ -1,4 +1,5 @@
 using Game;
+using Sound;
 
 namespace DI
 {
@@ -10,11 +11,11 @@ namespace DI
         {
             _container = container;
 
-            //_container.RegisterFactory(c => new SceneLoader()).AsSingle();
-
             _container.RegisterFactory(c => new EventBus()).AsSingle();
 
-            _container.RegisterFactory(c => new MenuSettingHandler(c.Resolve<MenuSettingHandlerUI>())).AsSingle();
+            _container.RegisterFactory(c => new MenuSoundHandler()).AsSingle();
+
+            _container.RegisterFactory(c => new MenuSettingHandler(c.Resolve<MenuSettingHandlerUI>(), c.Resolve<MenuSoundHandler>(), c.Resolve<SaveSystem>(), c.Resolve<SaveData>())).AsSingle();
         }
 
         public static T Resolve<T>()

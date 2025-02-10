@@ -37,7 +37,7 @@ namespace Game
 
             _skipWaveButton.onClick.AddListener(() =>
             {
-                LevelRegistrator.Resolve<SoundHandler>().PlaySound(ClipName.Click);
+                LevelRegistrator.Resolve<LevelSoundHandler>().PlaySound(ClipName.Click);
 
                 _eventBus.Invoke(new OnWaveSkippedSignal());
             });

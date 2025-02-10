@@ -1,3 +1,4 @@
+using Sound;
 using System.Collections.Generic;
 using UnityEditor.Overlays;
 using UnityEngine;
@@ -19,25 +20,25 @@ namespace Game
 
         private List<TowerSO> _towersGeneral = new List<TowerSO>();
 
-        public void Init(EventBus eventBus)
+        public void Init(EventBus eventBus, MenuSoundHandler soundHandler)
         {
-            OpenInventoryMenu();
+            _inventoryMenuRoot.gameObject.SetActive(true);
 
             _mainInventoryContainer = _inventoryMenuRoot.GetComponentInChildren<MainInventoryContainer>();
             _toolBarItemContainer = _inventoryMenuRoot.GetComponentInChildren<ToolBarItemContainer>();
 
             eventBus.SubscribeEvent<OnItemBoughtSignal>(AddItem);
 
-            _openInventoryButton.onClick.AddListener(() => OpenInventoryMenu());
+            _openInventoryButton.onClick.AddListener(() => OpenInventoryMenu(soundHandler));
 
             _goHomeButton.onClick.AddListener(() => { 
-                CloseInventoryMenu();
+                CloseInventoryMenu(soundHandler);
                 UpdateTowerGeneralList();
             });
 
             UpdateTowerGeneralList();
 
-            CloseInventoryMenu();
+            _inventoryMenuRoot.gameObject.SetActive(false);
         }
 
         public void AddItem(OnItemBoughtSignal signal) => _mainInventoryContainer.AddItemToSlot(signal.Item);
@@ -46,7 +47,16 @@ namespace Game
 
         public List<TowerSO> GetTowerGeneralList() => _towersGeneral;
 
-        private void OpenInventoryMenu() => _inventoryMenuRoot.gameObject.SetActive(true);
-        private void CloseInventoryMenu() => _inventoryMenuRoot.gameObject.SetActive(false);
+        private void OpenInventoryMenu(MenuSoundHandler soundHandler)
+        {
+            soundHandler.PlaySound(ClipName.Click);
+            _inventoryMenuRoot.gameObject.SetActive(true);
+        }
+
+        private void CloseInventoryMenu(MenuSoundHandler soundHandler)
+        {
+            soundHandler.PlaySound(ClipName.Click);
+            _inventoryMenuRoot.gameObject.SetActive(false);
+        }
     }
 }
