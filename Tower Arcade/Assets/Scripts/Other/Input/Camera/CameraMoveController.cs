@@ -50,14 +50,9 @@ namespace Game
         public void InitMouseSensivity(SaveData saveData,SaveSystem saveSystem)
         {
             if (saveData.MouseSensivity == 0)
-            {
-                saveData.MouseSensivity = _currentSensivity;
-                saveSystem.Save(saveData);
-            }
+                _currentSensivity = saveSystem.Load().MouseSensivity;
             else
-            {
                 return;
-            }
         }
 
         public void ChangeSensivity(float value, SaveSystem saveSystem, SaveData saveData)

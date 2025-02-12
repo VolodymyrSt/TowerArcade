@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IceTowerConfig 1
   m_EditorClassIdentifier: 
   Name: Ice
-  Damage: 5
+  Damage: 20
   AttackSpeed: 0.5
   AttackCoolDown: 2
   AttackRange: 7

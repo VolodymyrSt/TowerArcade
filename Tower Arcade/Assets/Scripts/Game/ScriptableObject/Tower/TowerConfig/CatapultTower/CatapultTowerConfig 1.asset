@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CatapultTowerConfig 1
   m_EditorClassIdentifier: 
   Name: Catapult
-  Damage: 35
+  Damage: 20
   AttackSpeed: 0.3
   AttackCoolDown: 5
   AttackRange: 9

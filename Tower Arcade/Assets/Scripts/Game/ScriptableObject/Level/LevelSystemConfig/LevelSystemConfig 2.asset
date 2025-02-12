@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62aa264c6529df4aa0f668a10652548, type: 3}
+  m_Name: LevelSystemConfig 2
+  m_EditorClassIdentifier: 
+  Waves:
+  - {fileID: 11400000, guid: c6947b5ea0af95c4a9dc53f1cae28a50, type: 2}
+  - {fileID: 11400000, guid: abd3d13ac795aae4e89d70119547e708, type: 2}
+  - {fileID: 11400000, guid: 3ee81a256ef546243af2e0b4a0839d03, type: 2}
+  - {fileID: 11400000, guid: 71b2e08e6b3e2424bba99f7782d4196c, type: 2}
+  - {fileID: 11400000, guid: c6c8dec5529aeb440a4c20bd754b9ce7, type: 2}
+  - {fileID: 11400000, guid: 3a82f33675b855c44b0a9f066fc2e9c3, type: 2}
+  - {fileID: 11400000, guid: 86d62c796ab47c446a69251de73ad7b6, type: 2}
+  MaxTimeToNextWave: 20

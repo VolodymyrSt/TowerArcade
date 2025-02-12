@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BallistaTowerConfig 1
   m_EditorClassIdentifier: 
   Name: Ballista
-  Damage: 5
+  Damage: 10
   AttackSpeed: 0.2
   AttackCoolDown: 2
   AttackRange: 5

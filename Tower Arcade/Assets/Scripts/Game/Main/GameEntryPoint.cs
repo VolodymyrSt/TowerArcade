@@ -1,6 +1,5 @@
 using UnityEngine;
 using DI;
-using UnityEditor.Overlays;
 
 namespace Game 
 {
@@ -24,10 +23,11 @@ namespace Game
             _saveData.LevelEntances.Clear();
             _saveData.InventoryItems.Clear();
             _saveData.CoinCurrency = 200;
-            _saveData.MouseSensivity = 0;
-            _saveData.LevelVoluem = 0;
-            _saveData.MenuVoluem = 0;
+            _saveData.MouseSensivity = 10;
+            _saveData.LevelVoluem = 1;
+            _saveData.MenuVoluem = 1;
             _saveData.CurrentUnlockedEntrance = 0;
+            _saveData.TowerGenerals = null;
 
             _saveSystem.Save(_saveData);
 

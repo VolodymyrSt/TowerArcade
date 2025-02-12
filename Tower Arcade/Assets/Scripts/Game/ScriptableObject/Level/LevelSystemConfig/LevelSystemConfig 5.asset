@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62aa264c6529df4aa0f668a10652548, type: 3}
+  m_Name: LevelSystemConfig 5
+  m_EditorClassIdentifier: 
+  Waves:
+  - {fileID: 11400000, guid: eeebea42dd726524daf476ba2934125e, type: 2}
+  - {fileID: 11400000, guid: dcec429c7251653439a2d358aa02e963, type: 2}
+  - {fileID: 11400000, guid: b80cd17368d9fc14b9fc1de5060b6d34, type: 2}
+  - {fileID: 11400000, guid: 184fc4b5e93bd0b41968e17ff6bf07c2, type: 2}
+  - {fileID: 11400000, guid: 860f04ad7a556f645b764d9101e98fe4, type: 2}
+  - {fileID: 11400000, guid: b9ca00d7757befa4fb87bb248487c163, type: 2}
+  - {fileID: 11400000, guid: 516fde023cbdf58459146313f824b3dc, type: 2}
+  - {fileID: 11400000, guid: 3ed2e2ae134b01f458ba885cd5206d10, type: 2}
+  - {fileID: 11400000, guid: 31f44588078d3e14bafc80805223f5c9, type: 2}
+  - {fileID: 11400000, guid: 2e3f3e9cf65ec724094153baf2f68d88, type: 2}
+  MaxTimeToNextWave: 20

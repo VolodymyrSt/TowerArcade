@@ -67,6 +67,8 @@ namespace Game
             //_container.RegisterFactory(c => new SceneLoader()).AsSingle();
 
             _container.RegisterFactory(c => new LevelSoundHandler()).AsSingle();
+
+            _container.RegisterFactory(c => new PlacementBlockColorHandler()).AsSingle();
         }
 
         public static T Resolve<T>()

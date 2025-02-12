@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8051e6072063124cadf5f961436cbb9, type: 3}
+  m_Name: InfernoTower
+  m_EditorClassIdentifier: 
+  TowerName: Inferno
+  TowerSprite: {fileID: 21300000, guid: 75e09b88523e5334cadd81a457c7da73, type: 3}
+  TowerType: 4
+  SoulCost: 200
+  Description: Fire enemies which do extra damage

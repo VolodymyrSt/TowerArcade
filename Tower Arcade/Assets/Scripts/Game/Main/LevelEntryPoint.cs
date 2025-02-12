@@ -100,6 +100,7 @@ namespace Game
             _updatable.Add(_levelContainer.Resolve<TowerDescriptionCardHandler>());
             _updatable.Add(_levelContainer.Resolve<LevelSettingHandler>());
             _updatable.Add(_levelContainer.Resolve<LevelSystemSO>());
+            _updatable.Add(_levelContainer.Resolve<PlacementBlockColorHandler>());
         }
 
         private void OnDestroy()

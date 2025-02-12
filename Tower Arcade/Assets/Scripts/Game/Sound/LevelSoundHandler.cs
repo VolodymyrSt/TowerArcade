@@ -8,14 +8,9 @@ namespace Sound
         public override void InitVoluem(Game.SaveData saveData, SaveSystem saveSystem)
         {
             if (saveData.LevelVoluem == 0)
-            {
-                saveData.LevelVoluem = CurrentVoluem;
-                saveSystem.Save(saveData);
-            }
+                CurrentVoluem = saveSystem.Load().LevelVoluem;
             else
-            {
                 return;
-            }
         }
 
         public override void ChangeVoluem(float value, Game.SaveData saveData, SaveSystem saveSystem)

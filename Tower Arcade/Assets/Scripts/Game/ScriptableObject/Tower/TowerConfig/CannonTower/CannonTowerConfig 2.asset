@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CannonTowerConfig 2
   m_EditorClassIdentifier: 
   Name: Cannon
-  Damage: 30
+  Damage: 35
   AttackSpeed: 0.3
   AttackCoolDown: 3
   AttackRange: 9

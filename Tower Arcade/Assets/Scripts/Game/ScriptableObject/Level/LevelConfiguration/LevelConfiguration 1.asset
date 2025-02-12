@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0adeb2de7bc3f4ea4e7282daf658cc, type: 3}
   m_Name: LevelConfiguration 1
   m_EditorClassIdentifier: 
-  LevelDifficulty: 1
+  LevelDifficulty: 0
   LevelDescription: This level is the easiest in this country
-  StartedCurrencyCount: 250
+  StartedCurrencyCount: 150
   VictoryAmountOfCoins: 25
   LostAmountOfCoins: 5

@@ -15,6 +15,7 @@ namespace Game
         public Dictionary<string, bool> ShopItems = new();
         public Dictionary<string, string> InventoryItems = new();
         public Dictionary<string, bool> LevelEntances = new();
+        public List<TowerSO> TowerGenerals = new();
     }
 }
 

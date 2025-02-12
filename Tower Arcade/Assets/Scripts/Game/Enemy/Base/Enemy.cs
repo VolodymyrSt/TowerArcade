@@ -40,7 +40,11 @@ public class Enemy : MonoBehaviour, IEnemy, IEnemyDescription
     public virtual void ActivateAbilitySystem() { }
 
     public void SetTargetDestination(Vector3 destination) => Agent.SetDestination(destination);
-    public void SetStartPosition(Transform parent) => transform.SetParent(parent, false);
+    public void SetStartPosition(Transform parent)
+    {
+        Agent.transform.SetParent(parent, false);
+        Agent.transform.localPosition = Vector3.zero;
+    }
 
     public float GetCurrentHealth() => CurrentHealth;
     public float GetSoulCost() => SoulCost;

@@ -84,7 +84,11 @@ namespace Game
             _saveData.CoinCurrency = _coinBalanceUI.GetCoinBalance();
             _saveSystem.Save(_saveData);
 
-            if (_currentLevelEntranceController.GetEntranceIndex() + 1 == _locationHandler.GetNextLockedEntrance().GetEntranceIndex())
+            if (_locationHandler.GetMaxEntranceCount() == _currentLevelEntranceController.GetEntranceIndex())
+            {
+                return;
+            }
+            else if(_currentLevelEntranceController.GetEntranceIndex() + 1 == _locationHandler.GetNextLockedEntrance().GetEntranceIndex())
             {
                 _locationHandler.UnLockNextEntrance();
             }

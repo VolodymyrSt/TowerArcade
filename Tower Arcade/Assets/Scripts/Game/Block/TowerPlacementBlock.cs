@@ -8,29 +8,55 @@ namespace Game
         [SerializeField] private Transform _placePivot;
         [SerializeField] private GameObject _highlightedZone;
 
-        private float _upPosition = 1.1f;
-        private float _downPosition = -1f;
+        [Header("Materials")]
+        [SerializeField] private Material _selectedMaterial;
+        [SerializeField] private Material _originMaterial;
 
         private bool _isOccupied = false;
+        private bool _isHighlighted = false;
 
-        private void Awake() => DOTween.Init();
+        private MeshRenderer _meshRenderer;
+
+        private void Awake()
+        {
+            DOTween.Init();
+
+            _meshRenderer = _highlightedZone.GetComponent<MeshRenderer>();
+
+            DisHighlight();
+        }
 
         public Transform GetPlacePivot() => _placePivot;
 
         public void SetOccupied(bool value) => _isOccupied = value;
 
         public bool IsOccupied() => _isOccupied;
+        public bool IsHighlighted() => _isHighlighted;
 
         public void Highlight() 
         { 
-            if (!_isOccupied) 
-                _highlightedZone.transform.DOMoveY(_upPosition, 0.5f).SetEase(Ease.Linear).Play();
+            if (!_isOccupied)
+            {
+                _highlightedZone.SetActive(true);
+                _isHighlighted = true;
+            }
         }
 
         public void DisHighlight()
         {
             if (!_isOccupied)
-                _highlightedZone.transform.DOMoveY(_downPosition, 0.5f).SetEase(Ease.InBack).Play();
+            {
+                _isHighlighted = false;
+                _highlightedZone.SetActive(false);
+            }
+        }
+
+        public void SetSelectedColor(bool isSelected)
+        {
+            if (isSelected) 
+                _meshRenderer.material = _selectedMaterial;
+            else 
+                _meshRenderer.material = _originMaterial;
         }
     }
 }
