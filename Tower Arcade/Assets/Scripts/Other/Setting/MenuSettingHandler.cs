@@ -1,11 +1,10 @@
 using Sound;
-using UnityEditor.Overlays;
-using UnityEngine;
 
 namespace Game
 {
     public class MenuSettingHandler : IUpdatable
     {
+        //Dependencies
         private MenuSettingHandlerUI _menuSettingHandlerUI;
         private MenuSoundHandler _menuSoundHandler;
 

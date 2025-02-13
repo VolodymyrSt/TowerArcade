@@ -15,7 +15,7 @@ MonoBehaviour:
   MaxHealth: 500
   MoveSpeed: 0.7
   SoulCost: 40
-  EnemyName: Necromancer
+  EnemyName: Mutated Necromancer
   EnemyDescription: Health 20% of enemie`s current health in small range
   EnemyType: 7
   EnemyRank: 4

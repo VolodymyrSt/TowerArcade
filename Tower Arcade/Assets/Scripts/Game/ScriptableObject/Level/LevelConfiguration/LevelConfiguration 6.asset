@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LevelConfiguration 6
   m_EditorClassIdentifier: 
   LevelDifficulty: 3
-  LevelDescription: This level is the easiest in this country
+  LevelDescription: This level is a battleground where fierce battles between powerful
+    creatures rage on. Only the strongest will survive this chaotic warzone
   StartedCurrencyCount: 300
   VictoryAmountOfCoins: 30
   LostAmountOfCoins: 5

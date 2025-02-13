@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Sound;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,6 +21,7 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _wavesCountText;
         [SerializeField] private TextMeshProUGUI _levelDescriptionText;
 
+        //Dependencies
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
         private LevelConfigurationSO _levelConfiguration;

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: LevelConfiguration 8
   m_EditorClassIdentifier: 
   LevelDifficulty: 5
-  LevelDescription: The flying boss is hiding there
+  LevelDescription: "A level of sheer terror, where twisted horrors that defy nature
+    lurk in the shadows. The creatures are not only stronger\u2014they\u2019re smarter,
+    hunting you relentlessly"
   StartedCurrencyCount: 350
   VictoryAmountOfCoins: 50
   LostAmountOfCoins: 5

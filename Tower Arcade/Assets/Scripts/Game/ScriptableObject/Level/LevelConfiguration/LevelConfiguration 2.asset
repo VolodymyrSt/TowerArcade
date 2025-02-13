@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LevelConfiguration 2
   m_EditorClassIdentifier: 
   LevelDifficulty: 1
-  LevelDescription: This level is the easiest in this country
+  LevelDescription: "The creatures on this level are far more aggressive, showing
+    how quickly the tower\u2019s dangers escalate. Only the brave can survive here"
   StartedCurrencyCount: 175
   VictoryAmountOfCoins: 25
   LostAmountOfCoins: 5

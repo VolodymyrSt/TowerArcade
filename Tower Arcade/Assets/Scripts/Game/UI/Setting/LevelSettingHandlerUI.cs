@@ -1,5 +1,4 @@
 using Sound;
-using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -75,14 +74,9 @@ namespace Game
         private void ShowOpenSettingMenuButton() => _openSettingMenuButton.gameObject.SetActive(true);
         private void HideOpenSettingMenuButton() => _openSettingMenuButton.gameObject.SetActive(false);
 
-        public void SetSoundSliderValue(float value)
-        {
-            _soundSlider.value = value;
-        }
-        public void SetMouseSensivitySliderValue(float value)
-        {
-            _mouseSensivitySlider.value = value;
-        }
+        public void SetSoundSliderValue(float value) => _soundSlider.value = value;
+        public void SetMouseSensivitySliderValue(float value) => _mouseSensivitySlider.value = value;
+
         public float GetSoundSliderValue() => _soundSlider.value;
         public float GetMouseSensivitySliderValue() => _mouseSensivitySlider.value;
     }

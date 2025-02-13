@@ -54,5 +54,4 @@ namespace Game
         public int NumberOfEnemies;
         public EnemyFactoryType FactoryType;
     }
-
 }

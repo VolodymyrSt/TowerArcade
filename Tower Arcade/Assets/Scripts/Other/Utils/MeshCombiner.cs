@@ -9,7 +9,7 @@ public class MeshCombiner : MonoBehaviour
         CombineInstance[] elements = new CombineInstance[transform.childCount];
 
         int index = 0;
-        foreach(UnityEngine.Transform child in gameObject.transform)
+        foreach(Transform child in gameObject.transform)
         {
             MeshFilter filter = child.GetComponent<MeshFilter>();
             elements[index].mesh = filter.sharedMesh;

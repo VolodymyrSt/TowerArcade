@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Sound;
 using TMPro;
-using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +18,7 @@ namespace Game
         [Header("Text")]
         [SerializeField] private TextMeshProUGUI _coinsAmountText;
 
+        //Dependencies
         private LevelSoundHandler _soundHandler;
         private LevelConfigurationSO _levelConfigurationSO;
         private CoinBalanceUI _coinBalanceUI;

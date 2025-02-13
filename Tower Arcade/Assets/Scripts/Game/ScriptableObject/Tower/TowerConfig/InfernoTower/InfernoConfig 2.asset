@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 872f2dbbdde0af548b3e4dfce51ba8fe, type: 3}
-  m_Name: FireTowerConfig 2
+  m_Name: InfernoConfig 2
   m_EditorClassIdentifier: 
   Name: Fire
   Damage: 25

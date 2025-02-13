@@ -1,7 +1,4 @@
 using Sound;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +13,7 @@ namespace Game
         [SerializeField] private Button _openInventoryButton;
         [SerializeField] private Button _goHomeButton;
 
+        //Dependencies
         private MainInventoryContainer _mainInventoryContainer;
         private ToolBarItemContainer _toolBarItemContainer;
 
@@ -56,8 +54,6 @@ namespace Game
             _saveData.TowerGenerals = _toolBarItemContainer.GetTowersGeneral();
             _saveSystem.Save(_saveData);    
         }
-
-        public List<TowerSO> GetTowerGeneralList() => _saveSystem.Load().TowerGenerals;
 
         private void OpenInventoryMenu(MenuSoundHandler soundHandler)
         {

@@ -84,7 +84,7 @@ namespace Game
                     Vector3.Distance(transform.position, enemy.transform.position)).First();
         }
 
-        protected void PerformSmoothLookAt(Vector3 direction, UnityEngine.Transform rotation, float rotationSpeed)
+        protected void PerformSmoothLookAt(Vector3 direction, Transform rotation, float rotationSpeed)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             rotation.rotation = Quaternion.Slerp(rotation.rotation, targetRotation, rotationSpeed);
@@ -108,7 +108,7 @@ namespace Game
             }
         }
 
-        protected void PlayAnimation(UnityEngine.Transform targetTransform, Vector3 targetPosition, float duration, Ease ease)
+        protected void PlayAnimation(Transform targetTransform, Vector3 targetPosition, float duration, Ease ease)
         {
             Vector3 originalPosition = targetTransform.position;
 
@@ -123,7 +123,7 @@ namespace Game
                 });
         }
 
-        protected void PlayRotateAngleAnimation(UnityEngine.Transform targetTransform, float targetAngle, float duration, Ease ease)
+        protected void PlayRotateAngleAnimation(Transform targetTransform, float targetAngle, float duration, Ease ease)
         {
             Quaternion originalRotation = targetTransform.rotation;
 

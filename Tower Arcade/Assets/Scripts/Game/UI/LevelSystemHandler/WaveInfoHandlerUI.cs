@@ -1,6 +1,5 @@
 using Sound;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +17,7 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _timerToNextWaveText;
         [SerializeField] private Button _skipWaveButton;
 
+        //Dependencies
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
         private Animator _animator;

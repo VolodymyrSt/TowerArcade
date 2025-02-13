@@ -13,7 +13,7 @@ namespace Game
                 DestroySelf();
             else
             {
-                float explodeRadious = 1f;
+                float explodeRadious = 1.5f;
 
                 FindEnemiesInRangeAndApplyDamage(enemy, explodeRadious, damage, levelCurencyHandler);
 

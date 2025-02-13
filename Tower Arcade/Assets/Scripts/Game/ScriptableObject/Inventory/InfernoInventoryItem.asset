@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe04ff11970bb248904e6bbee63efcc, type: 3}
-  m_Name: FireTowerItem
+  m_Script: {fileID: 11500000, guid: 3f5b964ee572a914d9f09b20c5a683ab, type: 3}
+  m_Name: InfernoInventoryItem
   m_EditorClassIdentifier: 
-  Name: Inferno
-  Cost: 200
+  TowerGeneral: {fileID: 11400000, guid: dc3de2ae8979da94e80dd0ffefeec402, type: 2}
+  TowerConfig: {fileID: 11400000, guid: 4569374acfa7c3e428d874d20c56bc25, type: 2}
   Sprite: {fileID: 21300000, guid: 75e09b88523e5334cadd81a457c7da73, type: 3}
-  InventoryItem: {fileID: 11400000, guid: 19b4e256e72ce0a46b3f4e8d955ed1fb, type: 2}
+  Description: Fire enemies which do extra damage

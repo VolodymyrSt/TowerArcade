@@ -22,10 +22,8 @@ namespace Game
         [SerializeField] private TowerPlacementBlocksHolder _towerPlacementBlocksHolder;
         [SerializeField] private GameInventoryHandler _gameInventoryHandler;
 
-        [Header("LevelSystem")]
-        [SerializeField] private LevelSystemSO _levelSystemConfig;
-
         [Header("LevelConfiguration")]
+        [SerializeField] private LevelSystemSO _levelSystemConfig;
         [SerializeField] private LevelConfigurationSO _levelConfiguration;
 
         [Header("Effects")]
@@ -65,7 +63,7 @@ namespace Game
 
             LevelRegistrator.Register(_levelContainer);
 
-            _gameInventoryHandler.InitializeInventorySlots(_levelContainer, _levelContainer.Resolve<InventoryHandlerUI>().GetTowerGeneralList());
+            _gameInventoryHandler.InitializeInventorySlots(_levelContainer, _levelContainer.Resolve<SaveData>().TowerGenerals);
 
             InitializeUtilScripts();
         }
@@ -107,7 +105,6 @@ namespace Game
         {
             _levelContainer.Dispose();
 
-            _rootContainer.UnRegister(_rootContainer.Resolve<InventoryHandlerUI>());
             _rootContainer.UnRegister(_rootContainer.Resolve<CoinBalanceUI>());
             _rootContainer.UnRegister(_rootContainer.Resolve<LocationHandler>());
             _rootContainer.UnRegister(_rootContainer.Resolve<LevelEntranceController>());

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LevelConfiguration 3
   m_EditorClassIdentifier: 
   LevelDifficulty: 2
-  LevelDescription: This level is the easiest in this country
+  LevelDescription: This level brings with it a haunting fog, obscuring your vision
+    and forcing you to rely on your instincts as unseen monsters lurk nearby
   StartedCurrencyCount: 200
   VictoryAmountOfCoins: 25
   LostAmountOfCoins: 5

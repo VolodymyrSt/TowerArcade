@@ -22,7 +22,7 @@ namespace Game
             _saveData.ShopItems.Clear();
             _saveData.LevelEntances.Clear();
             _saveData.InventoryItems.Clear();
-            _saveData.CoinCurrency = 200;
+            _saveData.CoinCurrency = 0;
             _saveData.MouseSensivity = 10;
             _saveData.LevelVoluem = 1;
             _saveData.MenuVoluem = 1;

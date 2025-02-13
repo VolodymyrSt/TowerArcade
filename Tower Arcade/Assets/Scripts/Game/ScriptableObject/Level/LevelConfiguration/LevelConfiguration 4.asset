@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: LevelConfiguration 4
   m_EditorClassIdentifier: 
   LevelDifficulty: 2
-  LevelDescription: This level is the easiest in this country
+  LevelDescription: Survival becomes harder as the tower twists reality itself. The
+    environment changes constantly, making it difficult to predict where the dangers
+    lie
   StartedCurrencyCount: 250
   VictoryAmountOfCoins: 25
   LostAmountOfCoins: 5

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LevelConfiguration 7
   m_EditorClassIdentifier: 
   LevelDifficulty: 4
-  LevelDescription: This level is the easiest in this country
+  LevelDescription: The tower's true malevolence is on full display here. Ancient,
+    forgotten guardians awaken to protect the depths, and no one can escape unscathed
   StartedCurrencyCount: 325
   VictoryAmountOfCoins: 35
   LostAmountOfCoins: 5

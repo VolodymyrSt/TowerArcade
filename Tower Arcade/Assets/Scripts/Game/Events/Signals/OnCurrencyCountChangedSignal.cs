@@ -1,4 +1,8 @@
 public class OnCurrencyCountChangedSignal
 {
-    public OnCurrencyCountChangedSignal() { }
+    public float AmoutOfCurrency;
+    public OnCurrencyCountChangedSignal(float amountOfCurrency) 
+    { 
+        AmoutOfCurrency = amountOfCurrency;
+    }
 }

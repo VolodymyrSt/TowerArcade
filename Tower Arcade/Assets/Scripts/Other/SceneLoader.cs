@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game
@@ -40,6 +38,5 @@ namespace Game
         {
             SceneManager.LoadScene(sceneName);
         }
-
     }
 }

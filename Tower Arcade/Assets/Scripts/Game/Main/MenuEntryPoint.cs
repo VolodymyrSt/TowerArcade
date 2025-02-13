@@ -11,12 +11,20 @@ namespace Game
         private DIContainer _menuContainer = new();
         private DIContainer _rootContainer;
 
-        [SerializeField] private SwipeHandler _swipeHandler;
+        [Header("Setting")]
         [SerializeField] private MenuSettingHandlerUI _menuSettingHandlerUI;
+
+        [Header("Currency")]
         [SerializeField] private CoinBalanceUI _coinBalanceUI;
+
+        [Header("Location")]
+        [SerializeField] private SwipeHandler _swipeHandler;
         [SerializeField] private LocationHandler _locationHandler;
 
+        [Header("Shop")]
         [SerializeField] private ShopHandlerUI _shopMenuHandlerUI;
+
+        [Header("Inventory")]
         [SerializeField] private InventoryHandlerUI _inventoryHandlerUI;
         [SerializeField] private MainInventoryContainer _mainInventoryContainer;
 
@@ -29,7 +37,6 @@ namespace Game
         {
             _rootContainer = FindFirstObjectByType<GameEntryPoint>().GetRootContainer();
 
-            _rootContainer.RegisterInstance<InventoryHandlerUI>(_inventoryHandlerUI);
             _rootContainer.RegisterInstance<CoinBalanceUI>(_coinBalanceUI);
             _rootContainer.RegisterInstance<LocationHandler>(_locationHandler);
 
@@ -41,14 +48,7 @@ namespace Game
 
             MenuRegistrator.Register(_menuContainer);
 
-            _coinBalanceUI.Init(_menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<SaveSystem>(), _menuContainer.Resolve<SaveData>());
-
-            _inventoryHandlerUI.Init(_menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<MenuSoundHandler>()
-                , _menuContainer.Resolve<SaveData>(), _menuContainer.Resolve<SaveSystem>());
-
-            _shopMenuHandlerUI.Init(_menuContainer.Resolve<CoinBalanceUI>(), _menuContainer.Resolve<EventBus>(),
-                _menuContainer.Resolve<MenuSoundHandler>(), _menuContainer.Resolve<SaveSystem>(), _menuContainer.Resolve<SaveData>()
-                , _menuContainer.Resolve<MainInventoryContainer>(), _menuContainer.Resolve<MassegeHandlerUI>());
+            InitializeMain();
 
             AddUpdatables();
         }
@@ -59,6 +59,18 @@ namespace Game
             {
                 update.Tick();
             }
+        }
+
+        private void InitializeMain()
+        {
+            _coinBalanceUI.Init(_menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<SaveSystem>(), _menuContainer.Resolve<SaveData>());
+
+            _inventoryHandlerUI.Init(_menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<MenuSoundHandler>()
+                , _menuContainer.Resolve<SaveData>(), _menuContainer.Resolve<SaveSystem>());
+
+            _shopMenuHandlerUI.Init(_menuContainer.Resolve<CoinBalanceUI>(), _menuContainer.Resolve<EventBus>(),
+                _menuContainer.Resolve<MenuSoundHandler>(), _menuContainer.Resolve<SaveSystem>(), _menuContainer.Resolve<SaveData>()
+                , _menuContainer.Resolve<MainInventoryContainer>(), _menuContainer.Resolve<MassegeHandlerUI>());
         }
 
         private void AddUpdatables()

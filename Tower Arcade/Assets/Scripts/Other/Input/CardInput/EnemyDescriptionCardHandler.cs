@@ -1,4 +1,3 @@
-using DI;
 using UnityEngine;
 
 namespace Game

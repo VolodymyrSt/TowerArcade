@@ -22,6 +22,7 @@ namespace Game
         [Header("Stars")]
         [SerializeField] private RectTransform _starRoot;
 
+        //Dependencies
         private HealthBarHandlerUI _healthBarHandler;
         private LevelSoundHandler _soundHandler;
         private LevelConfigurationSO _levelConfigurationSO;

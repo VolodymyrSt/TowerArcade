@@ -21,9 +21,10 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _itemAttackRange;
         [SerializeField] private TextMeshProUGUI _itemDesctiption;
 
-        private Transform _originalParent;
         [SerializeField] private bool _isInMainSlot = false;
+        private Transform _originalParent;
 
+        //Dependencies
         private SaveData _saveData;
         private SaveSystem _saveSystem;
 

@@ -19,6 +19,8 @@ namespace Game
         private bool _isLastWave = false;
 
         private Transform _enemyContainer;
+
+        //Dependencies
         private EventBus _eventBus;
         private HealthBarHandlerUI _healthBarHandler;
         private LevelCurencyHandler _levelCurencyHandler;

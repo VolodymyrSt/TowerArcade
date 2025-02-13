@@ -1,50 +1,52 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class EffectPerformer : MonoBehaviour 
+namespace Game
 {
-    [SerializeField] private ParticleSystem _upgradeTowerParticle;
-    [SerializeField] private ParticleSystem _delateTowerParticle;
-    [SerializeField] private ParticleSystem _installTowerParticle;
-
-    public void PlayUpgradeTowerEffect(Vector3 position)
+    public class EffectPerformer : MonoBehaviour
     {
-        Play(_upgradeTowerParticle, position);
-    }
-    
-    public void PlayDelateTowerEffect(Vector3 position)
-    {
-        Play(_delateTowerParticle, position);
-    }
-    
-    public void PlayTowerInstalledEffect(Vector3 position)
-    {
-        Play(_installTowerParticle, position);
-    }
+        [SerializeField] private ParticleSystem _upgradeTowerParticle;
+        [SerializeField] private ParticleSystem _delateTowerParticle;
+        [SerializeField] private ParticleSystem _installTowerParticle;
 
-    public void PlayEffect(ParticleSystem particleSystem, Vector3 position)
-    {
-        Play(particleSystem, position);
-    }
-    
-    public void Play(ParticleSystem particleSystem, Vector3 position)
-    {
-        var particle = Instantiate(particleSystem, transform);
+        public void PlayUpgradeTowerEffect(Vector3 position)
+        {
+            Play(_upgradeTowerParticle, position);
+        }
 
-        particle.transform.position = position;
+        public void PlayDelateTowerEffect(Vector3 position)
+        {
+            Play(_delateTowerParticle, position);
+        }
 
-        DestroyParticle(particle);
-    }
+        public void PlayTowerInstalledEffect(Vector3 position)
+        {
+            Play(_installTowerParticle, position);
+        }
 
-    private IEnumerator DestroyParticle(ParticleSystem particle)
-    {
-        float waitTime = particle.main.duration + particle.main.startLifetime.constantMax;
+        public void PlayEffect(ParticleSystem particleSystem, Vector3 position)
+        {
+            Play(particleSystem, position);
+        }
 
-        yield return new WaitForSeconds(waitTime);
+        public void Play(ParticleSystem particleSystem, Vector3 position)
+        {
+            var particle = Instantiate(particleSystem, transform);
 
-        particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            particle.transform.position = position;
 
-        Destroy(particle);
+            DestroyParticle(particle);
+        }
+
+        private IEnumerator DestroyParticle(ParticleSystem particle)
+        {
+            float waitTime = particle.main.duration + particle.main.startLifetime.constantMax;
+
+            yield return new WaitForSeconds(waitTime);
+
+            particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+            Destroy(particle);
+        }
     }
 }

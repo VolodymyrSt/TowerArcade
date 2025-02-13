@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-
 namespace Game
 {
     public class LevelCurencyHandler
@@ -24,13 +22,13 @@ namespace Game
         public void AddCurrencyCount(float amount)
         {
             _currentCountOfCurrency += amount;
-            _eventBus.Invoke<OnCurrencyCountChangedSignal>(new OnCurrencyCountChangedSignal());
+            _eventBus.Invoke<OnCurrencyCountChangedSignal>(new OnCurrencyCountChangedSignal(amount));
         }
         
         public void SubtactCurrencyCount(float amount)
         {
             _currentCountOfCurrency -= amount;
-            _eventBus.Invoke<OnCurrencyCountChangedSignal>(new OnCurrencyCountChangedSignal());
+            _eventBus.Invoke<OnCurrencyCountChangedSignal>(new OnCurrencyCountChangedSignal(-amount));
         }
     }
 }

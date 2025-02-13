@@ -40,7 +40,6 @@ namespace Game
             _activeSlot.UnSelect();
             _activeSlot = null;
         }
-
     }
 }
 

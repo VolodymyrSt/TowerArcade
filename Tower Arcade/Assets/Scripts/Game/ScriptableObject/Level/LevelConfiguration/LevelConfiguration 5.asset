@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: LevelConfiguration 5
   m_EditorClassIdentifier: 
   LevelDifficulty: 3
-  LevelDescription: This level is the easiest in this country
+  LevelDescription: A dark, damp cavern filled with hostile creatures. The constant
+    dripping of water echoes through the air, masking the sound of enemies as they
+    approach
   StartedCurrencyCount: 250
   VictoryAmountOfCoins: 25
   LostAmountOfCoins: 5

@@ -1,5 +1,4 @@
 using Game;
-using UnityEngine;
 
 namespace Sound
 {

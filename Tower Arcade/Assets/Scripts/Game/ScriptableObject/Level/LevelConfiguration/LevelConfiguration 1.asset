@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LevelConfiguration 1
   m_EditorClassIdentifier: 
   LevelDifficulty: 0
-  LevelDescription: This level is the easiest in this country
+  LevelDescription: "The first floor is a welcoming sight, but don't be fooled\u2014hidden
+    traps and weak monsters lay in wait, ready to test your skills and wits"
   StartedCurrencyCount: 150
   VictoryAmountOfCoins: 25
   LostAmountOfCoins: 5

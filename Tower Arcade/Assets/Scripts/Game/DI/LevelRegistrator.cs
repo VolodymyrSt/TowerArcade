@@ -25,6 +25,8 @@ namespace Game
             _container.RegisterFactory(c => new DragonFactory()).AsSingle();
             _container.RegisterFactory(c => new MutatedNecromancerFactory()).AsSingle();
 
+            _container.RegisterFactory(c => new EnemyFactoryHandler()).AsSingle();
+
             //tower
             _container.RegisterFactory(c => new BallistaTowerFactory()).AsSingle();
             _container.RegisterFactory(c => new BallistaStateFactory()).AsSingle();
@@ -41,6 +43,8 @@ namespace Game
             _container.RegisterFactory(c => new FireTowerFactory()).AsSingle();
             _container.RegisterFactory(c => new FireStateFactory()).AsSingle();
 
+            _container.RegisterFactory(c => new TowerFactoryHandler()).AsSingle();
+
             //towerWeapon
             _container.RegisterFactory(c => new ArrowWeaponFactory()).AsSingle();
             _container.RegisterFactory(c => new ProjectileWeaponFactory()).AsSingle();
@@ -52,19 +56,16 @@ namespace Game
             _container.RegisterFactory(c => new MegaFireBallWeaponFactory()).AsSingle();
 
 
-            //other
-            _container.RegisterFactory(c => new EnemyFactoryHandler()).AsSingle();
-            _container.RegisterFactory(c => new TowerFactoryHandler()).AsSingle();
-
+            //card
             _container.RegisterFactory(c => new EnemyDescriptionCardHandler(c.Resolve<EnemyDescriptionCardUI>())).AsSingle();
             _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>(), c.Resolve<EffectPerformer>(), c.Resolve<MassegeHandlerUI>(), c.Resolve<LevelSoundHandler>())).AsSingle();
 
+            //other
             _container.RegisterFactory(c => new LevelCurencyHandler(c.Resolve<LevelConfigurationSO>(), c.Resolve<EventBus>())).AsSingle();
 
             _container.RegisterFactory(c => new LevelSettingHandler(c.Resolve<LevelSettingHandlerUI>(), c.Resolve<CameraMoveController>(), c.Resolve<LevelSoundHandler>(), c.Resolve<SaveSystem>(), c.Resolve<SaveData>())).AsSingle();
 
             _container.RegisterFactory(c => new TimeHandler()).AsSingle();
-            //_container.RegisterFactory(c => new SceneLoader()).AsSingle();
 
             _container.RegisterFactory(c => new LevelSoundHandler()).AsSingle();
 

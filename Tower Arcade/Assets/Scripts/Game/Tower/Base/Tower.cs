@@ -52,7 +52,7 @@ namespace Game
             }
             else
             {
-                massegeHandlerUI.ShowMassege("Dont have enough soul");
+                massegeHandlerUI.ShowMassege("Don`t have enough soul");
             }
         }
 

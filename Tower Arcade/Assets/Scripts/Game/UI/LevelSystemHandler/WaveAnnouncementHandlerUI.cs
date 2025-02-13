@@ -12,6 +12,7 @@ namespace Game
         [SerializeField] private GameObject _waveAnnouncementRoot;
         [SerializeField] private TextMeshProUGUI _waveAnnouncementText;
 
+        //Dependencies
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
         private LevelSoundHandler _soundHandler;

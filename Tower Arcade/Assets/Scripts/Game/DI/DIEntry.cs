@@ -53,9 +53,9 @@ namespace DI
 
         public T Resolve()
         {
-            if(IsSingelton)
+            if (IsSingelton)
             {
-                if(_instance == null)
+                if (_instance == null)
                 {
                     _instance = Factory(Container);
 

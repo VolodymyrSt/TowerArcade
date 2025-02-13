@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 872f2dbbdde0af548b3e4dfce51ba8fe, type: 3}
-  m_Name: FireTowerConfig 1
+  m_Name: InfernoConfig 3
   m_EditorClassIdentifier: 
   Name: Fire
-  Damage: 15
+  Damage: 35
   AttackSpeed: 0.3
-  AttackCoolDown: 3
-  AttackRange: 7
+  AttackCoolDown: 2
+  AttackRange: 11
   UpgradeCost: 225
