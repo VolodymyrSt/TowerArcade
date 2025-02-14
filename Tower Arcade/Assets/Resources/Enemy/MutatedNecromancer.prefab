@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyConfig: {fileID: 11400000, guid: b76766b16f35c8549ab8d0f72cf9b8c8, type: 2}
-  _spellParticle: {fileID: 3280519133390621004, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
+  _spellParticle: {fileID: 6211125795773073634, guid: 12a56ee4630040c4eb17ae9707ed4cef, type: 3}
   _abillityRestoreTime: 10
   _healRadius: 3
 --- !u!1 &2424994739917298565

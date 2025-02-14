@@ -19,6 +19,7 @@ namespace Game
         private Vector3 _frameDirection;
         private Vector3 _bowDirection;
 
+
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _arrowBulletFactory = LevelRegistrator.Resolve<ArrowWeaponFactory>();
@@ -29,9 +30,9 @@ namespace Game
 
         public override void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler)
         {
-            if (enemy == null) return;
+            if (enemy == null || IsPaused) return;
 
-            _soundHandler.PlaySound(ClipName.BallistaShoot, transform.position);
+            _soundHandler.PlaySound(ClipName.BallistaShoot);
 
             _arrowBulletFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler, _soundHandler);
         }

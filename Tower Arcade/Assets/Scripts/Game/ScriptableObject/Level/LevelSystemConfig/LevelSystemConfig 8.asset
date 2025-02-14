@@ -28,4 +28,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 30e53d6c705e1ae4caa4b703a9bd83b4, type: 2}
   - {fileID: 11400000, guid: f855ac7d672e16b4e8061b38772a725e, type: 2}
   - {fileID: 11400000, guid: 2f8599ff3d4494840ac1d6177128d9b1, type: 2}
-  MaxTimeToNextWave: 20
+  MaxTimeToNextWave: 40

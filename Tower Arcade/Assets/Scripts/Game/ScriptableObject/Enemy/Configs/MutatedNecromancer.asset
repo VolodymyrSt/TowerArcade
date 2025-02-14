@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d788eec7042207543befbde0ed0f04f6, type: 3}
   m_Name: MutatedNecromancer
   m_EditorClassIdentifier: 
-  MaxHealth: 500
+  MaxHealth: 600
   MoveSpeed: 0.7
   SoulCost: 40
   EnemyName: Mutated Necromancer

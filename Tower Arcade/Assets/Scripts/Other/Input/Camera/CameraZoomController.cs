@@ -17,11 +17,24 @@ namespace Game
         private float _orthoSize;
         private float _velocity;
 
-        private void Start() => _orthoSize = _camera.orthographicSize;
+        private bool _isPaused = false;
+        private bool _isEnable = false;
+
+        private void Start() 
+        {
+            _orthoSize = _camera.orthographicSize;
+
+            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(IsGamePaused);
+            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
+            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
+        }
+
 
         private void LateUpdate()
         {
             var scrollDelta = _gameInput.GetScrollVectorNormalized().y;
+
+            if (_isPaused || _isEnable) scrollDelta = 0;
 
             PerformZoom(scrollDelta);
         }
@@ -34,5 +47,7 @@ namespace Game
 
             _camera.orthographicSize = newOrthoSize;
         }
+
+        public void IsGamePaused(OnGamePausedSignal signal) => _isPaused = signal.OnGamePaused;
     }
 }

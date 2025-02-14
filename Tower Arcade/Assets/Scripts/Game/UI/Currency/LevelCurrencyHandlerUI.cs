@@ -1,5 +1,5 @@
 using DG.Tweening;
-using System.Threading.Tasks;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -34,9 +34,8 @@ namespace Game
             _currencyChangeRoot.DOScale(1f, 0.5f)
                 .SetEase(Ease.InOutCubic)
                 .Play()
-                .OnComplete(async () => {
-                    await Task.Delay(1000);
-                    HideCurrencyChangeDisplay();
+                .OnComplete(() => {
+                    StartCoroutine(HideCurrencyChangeDisplayAfterDelay());
                 });
         }
 
@@ -44,6 +43,13 @@ namespace Game
         {
             _currencyChangeRoot.localScale = Vector3.zero;
             _currencyChangeRoot.gameObject.SetActive(false);
+        }
+        
+        private IEnumerator HideCurrencyChangeDisplayAfterDelay()
+        {
+            yield return new WaitForSecondsRealtime(1f);
+
+            HideCurrencyChangeDisplay();
         }
 
         private void DisplayCurrencyChange(OnCurrencyCountChangedSignal signal)

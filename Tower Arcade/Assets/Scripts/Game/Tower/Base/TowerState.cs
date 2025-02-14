@@ -13,6 +13,8 @@ namespace Game
 
         private HashSet<Enemy> _enemiesInAttackRange = new HashSet<Enemy>();
 
+        protected bool IsPaused = false;
+
         public abstract void Enter(LevelCurencyHandler levelCurencyHandler);
         public void Exit() => Destroy(gameObject);
         public void InitializeStats(ref string name, ref float attackDamage, ref float attackSpeed, ref float attackCoolDown, ref float attackRange, ref float upgradeCost, GameObject zone)
@@ -25,6 +27,8 @@ namespace Game
             upgradeCost = Config.UpgradeCost;
 
             zone.transform.localScale = new Vector3(Config.AttackRange, 0.05f, Config.AttackRange);
+
+            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(IsGamePaused);
         }
 
         public abstract void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler);
@@ -71,7 +75,7 @@ namespace Game
 
         public virtual IEnumerator PerformAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler)
         {
-            if (enemy == null) yield return null;
+            if (enemy == null || IsPaused) yield return null;
 
             HandleLookAtEnemy(enemy);
             HandleAttack(enemy, levelCurencyHandler);
@@ -92,7 +96,7 @@ namespace Game
 
         protected void LookAtTarget(Enemy enemy, Vector3 frameDirection, Vector3 gunDirection, GameObject framePrefab, GameObject gunPrefab)
         {
-            if (enemy == null) return;
+            if (enemy == null || IsPaused) return;
 
             float rotationSpeed = 180 * Time.deltaTime;
 
@@ -138,6 +142,12 @@ namespace Game
                         .SetEase(ease)
                         .Play();
                 });
+        }
+
+        private void IsGamePaused(OnGamePausedSignal signal)
+        {
+            if (signal != null)
+                IsPaused = signal.OnGamePaused;
         }
     }
 }

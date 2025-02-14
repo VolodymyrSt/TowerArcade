@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -62,16 +63,16 @@ namespace Game
 
         public void DestroySelf() => Destroy(gameObject);
 
-        public async void ReduceSpeed(float percentage, float duration)
+        public IEnumerator ReduceSpeed(float percentage, float duration)
         {
-            if (Agent == null) return;
+            if (Agent == null) yield return null;
 
             Agent.speed -= Agent.speed * (percentage / 100f);
             _isIceCursed = true;
 
-            await Task.Delay((int)(duration * 1000));
+            yield return new WaitForSecondsRealtime(duration);
 
-            if (Agent == null) return;
+            if (Agent == null) yield return null;
 
             ResetSpeedToOrigin();
             _isIceCursed = false;
@@ -81,9 +82,14 @@ namespace Game
 
         public bool IsIceCursed() => _isIceCursed;
 
-        public async void PerformContinuousSelfDamage(float fireDamage, float durationTime, int fireCycles, LevelCurencyHandler levelCurencyHandler)
+        public void PerformContinuousSelfDamage(float fireDamage, float durationTime, int fireCycles, LevelCurencyHandler levelCurencyHandler)
         {
-            await Task.Delay((int)(durationTime * 1000));
+            StartCoroutine(PerformSelfDamage(fireDamage, durationTime, fireCycles, levelCurencyHandler));
+        }
+        
+        public IEnumerator PerformSelfDamage(float fireDamage, float durationTime, int fireCycles, LevelCurencyHandler levelCurencyHandler)
+        {
+            yield return new WaitForSecondsRealtime(durationTime);
 
             for (int i = 0; i < fireCycles; i++)
             {
@@ -91,7 +97,7 @@ namespace Game
 
                 ApplyDamage(fireDamage, levelCurencyHandler);
 
-                await Task.Delay((int)(durationTime * 1000));
+                yield return new WaitForSecondsRealtime(durationTime);
             }
         }
 

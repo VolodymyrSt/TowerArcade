@@ -19,7 +19,7 @@ namespace Game
                 if (CurrentHealth < EnemyConfig.MaxHealth / 2f)
                 {
                     effectPerformer.PlayEffect(_spellParticle, transform.position);
-                    Agent.speed = EnemyConfig.MoveSpeed / 2f;
+                    Agent.speed = EnemyConfig.MoveSpeed * 2f;
                     break;
                 }
 

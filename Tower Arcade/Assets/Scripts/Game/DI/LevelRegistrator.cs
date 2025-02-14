@@ -65,7 +65,7 @@ namespace Game
 
             _container.RegisterFactory(c => new LevelSettingHandler(c.Resolve<LevelSettingHandlerUI>(), c.Resolve<CameraMoveController>(), c.Resolve<LevelSoundHandler>(), c.Resolve<SaveSystem>(), c.Resolve<SaveData>())).AsSingle();
 
-            _container.RegisterFactory(c => new TimeHandler()).AsSingle();
+            _container.RegisterFactory(c => new TimeHandler(c.Resolve<EventBus>())).AsSingle();
 
             _container.RegisterFactory(c => new LevelSoundHandler()).AsSingle();
 

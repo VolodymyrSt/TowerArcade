@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game
@@ -7,33 +9,47 @@ namespace Game
     {
         private float _loadingTime = 3f;
 
-        public enum Scene { 
+        private CoroutineUsager _coroutineUsager;
+
+        public SceneLoader()
+        {
+            _coroutineUsager = Object.FindFirstObjectByType<CoroutineUsager>();
+        }
+
+        public enum Scene
+        {
             Loading, Menu, Level1, Level2, Level3, Level4, Level5
         }
 
-        public async void LoadWithLoadingScene(Scene scene)
+        public void LoadWithLoadingScene(Scene scene)
+        {
+            _coroutineUsager.StartCoroutine(LoadWithLoading(scene));
+        }
+
+        public void LoadWithLoadingScene(string sceneName)
+        {
+            _coroutineUsager.StartCoroutine(LoadWithLoading(sceneName));
+        }
+
+        private IEnumerator LoadWithLoading(Scene scene)
         {
             Load(Scene.Loading);
-
-            await Task.Delay((int)(_loadingTime * 1000));   
-
+            yield return new WaitForSecondsRealtime(_loadingTime);
             Load(scene);
         }
         
-        public async void LoadWithLoadingScene(string sceneName)
+        private IEnumerator LoadWithLoading(string sceneName)
         {
             Load(Scene.Loading);
-
-            await Task.Delay((int)(_loadingTime * 1000));   
-
+            yield return new WaitForSecondsRealtime(_loadingTime);
             Load(sceneName);
         }
 
-        private void Load(Scene scene)
+        public void Load(Scene scene)
         {
             SceneManager.LoadScene(scene.ToString());
         }
-        
+
         private void Load(string sceneName)
         {
             SceneManager.LoadScene(sceneName);

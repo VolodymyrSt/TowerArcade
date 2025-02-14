@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d788eec7042207543befbde0ed0f04f6, type: 3}
   m_Name: Dragon
   m_EditorClassIdentifier: 
-  MaxHealth: 2000
-  MoveSpeed: 1.5
+  MaxHealth: 3000
+  MoveSpeed: 0.5
   SoulCost: 50
   EnemyName: Dragon
   EnemyDescription: Forest location`s Boss

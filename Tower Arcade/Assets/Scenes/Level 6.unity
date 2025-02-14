@@ -1330,18 +1330,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1012608928466915846, guid: 053f9aeb8ff75ea4793a0d4b1dd90047, type: 3}
-      propertyPath: _delateTowerParticle
-      value: 
-      objectReference: {fileID: 4425129568604114668, guid: bbeeb0ddc21369746aaaae5c5c1c09cf, type: 3}
-    - target: {fileID: 1012608928466915846, guid: 053f9aeb8ff75ea4793a0d4b1dd90047, type: 3}
-      propertyPath: _installTowerParticle
-      value: 
-      objectReference: {fileID: 6300717128283190289, guid: 90375796f996bff4cabed66da5e558cb, type: 3}
-    - target: {fileID: 1012608928466915846, guid: 053f9aeb8ff75ea4793a0d4b1dd90047, type: 3}
-      propertyPath: _upgradeTowerParticle
-      value: 
-      objectReference: {fileID: 5339739117810204696, guid: 26e1cb216e3635e4a820f58a1118d6b9, type: 3}
     - target: {fileID: 1125311733607735116, guid: 053f9aeb8ff75ea4793a0d4b1dd90047, type: 3}
       propertyPath: m_Name
       value: EffectPerformer

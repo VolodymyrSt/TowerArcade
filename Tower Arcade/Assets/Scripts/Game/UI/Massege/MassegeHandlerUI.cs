@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -21,16 +22,15 @@ namespace Game
             _root.DOScale(1, _showDuration)
                   .SetEase(Ease.OutBounce)
                   .Play()
-                  .OnComplete(async () =>
+                  .OnComplete(() =>
                   {
-                      await Task.Delay((int)(_hideDuration * 1000));
-
-                      ResetMassegeScale();
+                      StartCoroutine(ResetMassegeScale());
                   });
         }
 
-        private void ResetMassegeScale()
+        private IEnumerator ResetMassegeScale()
         {
+            yield return new WaitForSecondsRealtime(_hideDuration);
             _root.localScale = Vector3.zero;
         }
     }

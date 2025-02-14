@@ -6,7 +6,7 @@ namespace Game
     public class IceCrystalWeapon : Weapon
     {
         [SerializeField] private ParticleSystem _particleSystem;
-        [SerializeField, Range(0f, 100f)] private float _speedPercentageReduction = 2f;
+        [SerializeField, Range(0f, 100f)] private float _speedPercentageReduction = 70f;
         [SerializeField, Range(0f, 7f)] private float _effectDuration = 3f;
 
         public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler)
@@ -18,7 +18,7 @@ namespace Game
                 enemy.ApplyDamage(damage, levelCurencyHandler);
 
                 if (!enemy.IsIceCursed())
-                    enemy.ReduceSpeed(_speedPercentageReduction, _effectDuration);
+                   StartCoroutine(enemy.ReduceSpeed(_speedPercentageReduction, _effectDuration));
 
                 EffectPerformer.PlayEffect(_particleSystem, enemy.transform.position);
 

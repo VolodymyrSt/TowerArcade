@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d788eec7042207543befbde0ed0f04f6, type: 3}
   m_Name: RobinHood
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 150
   MoveSpeed: 2
   SoulCost: 15
   EnemyName: Rob in Hood

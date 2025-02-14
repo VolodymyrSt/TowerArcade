@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52cb992b3bb9cf4c8eda5f47355e788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 888444077320411737, guid: 0c2509361b13505428ce788b7f846686, type: 3}
+  _particleSystem: {fileID: 6523699520211762466, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
   _speedPercentageReduction: 65
   _effectDuration: 4
 --- !u!1 &5099324632537851710

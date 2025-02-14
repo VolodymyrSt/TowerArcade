@@ -42,7 +42,6 @@ namespace Game
         [SerializeField] private MassegeHandlerUI _massegeHandler;
 
         private List<IUpdatable> _updatable = new List<IUpdatable>();
-        private CoroutineUsager _coroutineUsage;
 
         private void Awake()
         {
@@ -76,7 +75,7 @@ namespace Game
         private void StartLevelSystem(OnLevelSystemStartedSignal signal)
         {
             StartCoroutine(_levelSystemConfig.StartLevelSystem(_levelContainer,
-                _coroutineUsage, _enemyStartPosition, _enemyTargetDestination.position));
+                FindFirstObjectByType<CoroutineUsager>(), _enemyStartPosition, _enemyTargetDestination.position));
         }
 
         private void Update()
@@ -89,9 +88,6 @@ namespace Game
 
         private void InitializeUtilScripts()
         {
-            CoroutineUsager coroutinePrefab = Resources.Load<CoroutineUsager>("Utils/CoroutineUsager");
-            _coroutineUsage = Instantiate(coroutinePrefab);
-
             _updatable.Clear();
 
             _updatable.Add(_levelContainer.Resolve<EnemyDescriptionCardHandler>());

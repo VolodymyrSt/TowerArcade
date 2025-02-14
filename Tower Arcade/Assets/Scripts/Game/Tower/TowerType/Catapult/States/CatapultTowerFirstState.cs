@@ -29,9 +29,9 @@ namespace Game
 
         public override void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler)
         {
-            if (enemy == null) return;
+            if (enemy == null || IsPaused) return;
 
-            _soundHandler.PlaySound(ClipName.CatapultShoot, transform.position);
+            _soundHandler.PlaySound(ClipName.CatapultShoot);
 
             _catapultProjectileWeaponFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler, _soundHandler);
         }

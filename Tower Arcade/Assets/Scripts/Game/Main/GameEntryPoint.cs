@@ -10,6 +10,8 @@ namespace Game
         private SaveData _saveData;
         private SaveSystem _saveSystem;
 
+        private CoroutineUsager _coroutineUsage;
+
         private void Awake()
         {
             _rootContainer.RegisterFactory(c => new SceneLoader()).AsSingle();
@@ -31,9 +33,18 @@ namespace Game
 
             _saveSystem.Save(_saveData);
 
+            InitializeUtilScripts();
+
             DontDestroyOnLoad(this);
 
             _rootContainer.Resolve<SceneLoader>().LoadWithLoadingScene(SceneLoader.Scene.Menu);
+        }
+
+        private void InitializeUtilScripts()
+        {
+            CoroutineUsager coroutinePrefab = Resources.Load<CoroutineUsager>("Utils/CoroutineUsager");
+            _coroutineUsage = Instantiate(coroutinePrefab);
+            DontDestroyOnLoad(_coroutineUsage.gameObject);
         }
 
         public DIContainer GetRootContainer() => _rootContainer;

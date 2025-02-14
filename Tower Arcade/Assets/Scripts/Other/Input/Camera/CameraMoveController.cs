@@ -20,14 +20,24 @@ namespace Game
 
         private Camera _camera;
 
+        private bool _isPaused = false;
+        private bool _isEnable = false;
+
         private void Start()
         {
             _camera = GetComponentInChildren<Camera>();
+
+            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(DisableMovement);
+            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
+            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
         }
 
         private void LateUpdate()
         {
             Vector2 moveInput = Mouse.current.leftButton.isPressed ? _gameInput.GetCameraMoveVectorNormalized() : Vector2.zero;
+
+            if (_isPaused || _isEnable) moveInput = Vector2.zero;
+
             MoveCamera(moveInput);
         }
 
@@ -62,5 +72,7 @@ namespace Game
         }
 
         public float GetMaxSensivity() => _maxSensivity;
+
+        public void DisableMovement(OnGamePausedSignal signal) => _isPaused = signal.OnGamePaused;
     }
 }

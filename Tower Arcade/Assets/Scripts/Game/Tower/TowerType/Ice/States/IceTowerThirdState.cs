@@ -1,4 +1,3 @@
-using DG.Tweening;
 using Sound;
 using UnityEngine;
 
@@ -22,9 +21,9 @@ namespace Game
 
         public override void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler)
         {
-            if (enemy == null) return;
+            if (enemy == null || IsPaused) return;
 
-            _soundHandler.PlaySound(ClipName.IceShoot, transform.position);
+            _soundHandler.PlaySound(ClipName.IceShoot);
 
             _bigIceCrystalWeaponFactory.SpawnWeapon(_weaponPointer, enemy, Config.AttackSpeed, Config.Damage, levelCurencyHandler, _soundHandler);
         }

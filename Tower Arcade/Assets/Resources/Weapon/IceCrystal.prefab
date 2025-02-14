@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6234939ce79024b86932bec74dc18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 888444077320411737, guid: 0c2509361b13505428ce788b7f846686, type: 3}
+  _particleSystem: {fileID: 6523699520211762466, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
   _speedPercentageReduction: 30
   _effectDuration: 3
 --- !u!1 &4842924815251574156
