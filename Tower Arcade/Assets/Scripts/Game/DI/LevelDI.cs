@@ -3,7 +3,7 @@ using Sound;
 
 namespace Game
 {
-    public static class LevelRegistrator
+    public static class LevelDI
     {
         private static DIContainer _container;
 
@@ -69,7 +69,7 @@ namespace Game
 
             _container.RegisterFactory(c => new LevelSoundHandler()).AsSingle();
 
-            _container.RegisterFactory(c => new PlacementBlockColorHandler()).AsSingle();
+            _container.RegisterFactory(c => new PlacementBlockColorHandler(c.Resolve<GameInventoryHandler>())).AsSingle();
         }
 
         public static T Resolve<T>()

@@ -10,5 +10,6 @@ namespace Game
         public TowerFactoryType TowerType;
         public float SoulCost;
         public string Description;
+        public TowerConfigSO FirstState;
     }
 }

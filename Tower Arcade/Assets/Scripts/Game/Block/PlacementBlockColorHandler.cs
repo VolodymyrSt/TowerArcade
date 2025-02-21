@@ -5,10 +5,15 @@ namespace Game
     public class PlacementBlockColorHandler : IUpdatable
     {
         private TowerPlacementBlock _activePlacementBlock;
+        private GameInventoryHandler _gameInventoryHandler;
 
         private Camera _camera;
 
-        public PlacementBlockColorHandler() => _camera = Camera.main;
+        public PlacementBlockColorHandler(GameInventoryHandler gameInventoryHandler)
+        {
+            _camera = Camera.main;
+            _gameInventoryHandler = gameInventoryHandler;
+        }
 
         public void Tick() => HandleTowerPlacementBlockSelection();
 
@@ -20,18 +25,20 @@ namespace Game
             {
                 if (hit.transform.TryGetComponent(out TowerPlacementBlock placementBlock))
                 {
-                    if (placementBlock.IsHighlighted())
+                    var activeSlot = _gameInventoryHandler.GetActiveSlot();
+
+                    if (placementBlock.IsHighlighted() && activeSlot != null)
                     {
                         if (_activePlacementBlock == null)
                         {
-                            _activePlacementBlock = placementBlock;
-                            placementBlock.SetSelectedColor(true);
+                            Illustrate(placementBlock, activeSlot);
                         }
                         else if (_activePlacementBlock != placementBlock)
                         {
                             _activePlacementBlock.SetSelectedColor(false);
-                            _activePlacementBlock = placementBlock;
-                            placementBlock.SetSelectedColor(true);
+                            _activePlacementBlock.HideIllistaration();
+
+                            Illustrate(placementBlock, activeSlot);
                         }
                     }
                     else return;
@@ -47,11 +54,19 @@ namespace Game
             }
         }
 
+        private void Illustrate(TowerPlacementBlock placementBlock, GameInventorySlotUI activeSlot)
+        {
+            _activePlacementBlock = placementBlock;
+            placementBlock.SetSelectedColor(true);
+            placementBlock.ShowIllistaration(activeSlot.Tower.FirstState.AttackRange);
+        }
+
         private void ClearActivePlacementBlock()
         {
             if (_activePlacementBlock != null)
             {
                 _activePlacementBlock.SetSelectedColor(false);
+                _activePlacementBlock.HideIllistaration();
                 _activePlacementBlock = null;
             }
         }

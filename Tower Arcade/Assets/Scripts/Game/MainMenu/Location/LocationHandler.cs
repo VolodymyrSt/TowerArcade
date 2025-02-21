@@ -16,12 +16,12 @@ namespace Game
 
         private void Start()
         {
-            _saveData = MenuRegistrator.Resolve<SaveData>();
-            _saveSystem = MenuRegistrator.Resolve<SaveSystem>();
+            _saveData = MenuDI.Resolve<SaveData>();
+            _saveSystem = MenuDI.Resolve<SaveSystem>();
 
             _currentUnlockedEntrance = _saveSystem.Load().CurrentUnlockedEntrance;
 
-            InitializeEntrances(MenuRegistrator.Resolve<SceneLoader>(), _saveData, _saveSystem, MenuRegistrator.Resolve<MenuSoundHandler>(), MenuRegistrator.Resolve<MassegeHandlerUI>());
+            InitializeEntrances(MenuDI.Resolve<SceneLoader>(), _saveData, _saveSystem, MenuDI.Resolve<MenuSoundHandler>(), MenuDI.Resolve<MassegeHandlerUI>());
 
             if (_currentUnlockedEntrance >= _levelEntranceControllers.Count)
             {

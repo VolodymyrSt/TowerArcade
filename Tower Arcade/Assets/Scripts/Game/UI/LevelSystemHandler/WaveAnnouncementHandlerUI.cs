@@ -20,9 +20,9 @@ namespace Game
 
         private void Start()
         {
-            _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
-            _eventBus = LevelRegistrator.Resolve<EventBus>();
-            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
+            _levelSystem = LevelDI.Resolve<LevelSystemSO>();
+            _eventBus = LevelDI.Resolve<EventBus>();
+            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
 
             _animator = GetComponentInChildren<Animator>();
 

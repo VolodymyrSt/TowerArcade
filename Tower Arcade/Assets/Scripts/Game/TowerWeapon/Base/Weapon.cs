@@ -11,7 +11,7 @@ namespace Game
         public void Init(Transform parent)
         {
             transform.SetParent(parent, false);
-            EffectPerformer = LevelRegistrator.Resolve<EffectPerformer>();
+            EffectPerformer = LevelDI.Resolve<EffectPerformer>();
         }
 
         public virtual void Shoot(Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler)

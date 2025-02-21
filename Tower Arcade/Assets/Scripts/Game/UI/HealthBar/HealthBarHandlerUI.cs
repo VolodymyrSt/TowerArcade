@@ -20,7 +20,7 @@ namespace Game
 
             _currentHealth = _maxHealth;
 
-            _eventBus = LevelRegistrator.Resolve<EventBus>();
+            _eventBus = LevelDI.Resolve<EventBus>();
         }
 
         public void ChangeHealth(float value)

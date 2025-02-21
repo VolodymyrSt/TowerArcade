@@ -21,8 +21,8 @@ namespace Game
 
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
-            _blowProjectileWeapon = LevelRegistrator.Resolve<BlowProjectileWeaponFactory>();
-            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
+            _blowProjectileWeapon = LevelDI.Resolve<BlowProjectileWeaponFactory>();
+            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }

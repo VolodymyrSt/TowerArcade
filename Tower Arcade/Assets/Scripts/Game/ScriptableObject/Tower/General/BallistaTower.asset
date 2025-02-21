@@ -17,3 +17,4 @@ MonoBehaviour:
   TowerType: 0
   SoulCost: 50
   Description: Throws arrows in enemies
+  FirstState: {fileID: 11400000, guid: 12d9e3f38f5cefb479f89ed16d5c9d4e, type: 2}

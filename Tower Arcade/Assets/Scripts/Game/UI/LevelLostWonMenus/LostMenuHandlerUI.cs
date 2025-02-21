@@ -27,14 +27,14 @@ namespace Game
 
         private void Start()
         {
-            SceneLoader sceneLoader = LevelRegistrator.Resolve<SceneLoader>();
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>(ShowLostMenu);
+            SceneLoader sceneLoader = LevelDI.Resolve<SceneLoader>();
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>(ShowLostMenu);
 
-            _levelConfigurationSO = LevelRegistrator.Resolve<LevelConfigurationSO>();
-            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
-            _coinBalanceUI = LevelRegistrator.Resolve<CoinBalanceUI>();
-            _saveData = LevelRegistrator.Resolve<SaveData>();
-            _saveSystem = LevelRegistrator.Resolve<SaveSystem>();
+            _levelConfigurationSO = LevelDI.Resolve<LevelConfigurationSO>();
+            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
+            _coinBalanceUI = LevelDI.Resolve<CoinBalanceUI>();
+            _saveData = LevelDI.Resolve<SaveData>();
+            _saveSystem = LevelDI.Resolve<SaveSystem>();
 
             InitButtons(sceneLoader);
 

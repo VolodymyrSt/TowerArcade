@@ -24,9 +24,9 @@ namespace Game
         {
             _orthoSize = _camera.orthographicSize;
 
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(IsGamePaused);
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(IsGamePaused);
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
         }
 
 

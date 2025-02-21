@@ -17,3 +17,4 @@ MonoBehaviour:
   TowerType: 3
   SoulCost: 150
   Description: When hit enemies they slow down
+  FirstState: {fileID: 11400000, guid: afc76030f0febca4a9a5b70d1336572a, type: 2}

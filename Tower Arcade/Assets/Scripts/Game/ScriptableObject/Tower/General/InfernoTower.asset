@@ -17,3 +17,4 @@ MonoBehaviour:
   TowerType: 4
   SoulCost: 200
   Description: Fire enemies which do extra damage
+  FirstState: {fileID: 11400000, guid: 4569374acfa7c3e428d874d20c56bc25, type: 2}

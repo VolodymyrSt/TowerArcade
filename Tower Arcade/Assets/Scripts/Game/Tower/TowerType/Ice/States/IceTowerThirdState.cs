@@ -13,8 +13,8 @@ namespace Game
 
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
-            _bigIceCrystalWeaponFactory = LevelRegistrator.Resolve<BigIceCrystalWeaponFactory>();
-            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
+            _bigIceCrystalWeaponFactory = LevelDI.Resolve<BigIceCrystalWeaponFactory>();
+            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }

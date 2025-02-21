@@ -6,7 +6,7 @@ namespace Game
         {
             LevelCurrencyHandler = levelCurencyHandler;
 
-            StateFactory = LevelRegistrator.Resolve<IceStateFactory>();
+            StateFactory = LevelDI.Resolve<IceStateFactory>();
             EnterInState(StateFactory.EnterInFirstState(LevelCurrencyHandler, transform));
 
             towerDescriptionCardHandler.UpdateActiveTower(this);

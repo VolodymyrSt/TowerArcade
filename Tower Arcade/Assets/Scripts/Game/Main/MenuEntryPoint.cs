@@ -46,7 +46,7 @@ namespace Game
             _menuContainer.RegisterInstance<MainInventoryContainer>(_mainInventoryContainer);
             _menuContainer.RegisterInstance<MassegeHandlerUI>(_massegeHandler);
 
-            MenuRegistrator.Register(_menuContainer);
+            MenuDI.Register(_menuContainer);
 
             InitializeMain();
 

@@ -9,7 +9,7 @@ namespace Game
 
         public override void ActivateAbilitySystem()
         {
-            StartCoroutine(UseAbility(LevelRegistrator.Resolve<EffectPerformer>()));
+            StartCoroutine(UseAbility(LevelDI.Resolve<EffectPerformer>()));
         }
 
         private IEnumerator UseAbility(EffectPerformer effectPerformer)

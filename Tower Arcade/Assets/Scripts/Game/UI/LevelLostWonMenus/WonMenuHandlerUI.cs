@@ -34,18 +34,18 @@ namespace Game
 
         private void Start()
         {
-            SceneLoader sceneLoader = LevelRegistrator.Resolve<SceneLoader>();
-            TimeHandler timeHandler = LevelRegistrator.Resolve<TimeHandler>();
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>(ShowWonMenu);
+            SceneLoader sceneLoader = LevelDI.Resolve<SceneLoader>();
+            TimeHandler timeHandler = LevelDI.Resolve<TimeHandler>();
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>(ShowWonMenu);
 
-            _levelConfigurationSO = LevelRegistrator.Resolve<LevelConfigurationSO>();
-            _healthBarHandler = LevelRegistrator.Resolve<HealthBarHandlerUI>();
-            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
-            _coinBalanceUI = LevelRegistrator.Resolve<CoinBalanceUI>();
-            _saveData = LevelRegistrator.Resolve<SaveData>();
-            _saveSystem = LevelRegistrator.Resolve<SaveSystem>();
-            _locationHandler = LevelRegistrator.Resolve<LocationHandler>();
-            _currentLevelEntranceController = LevelRegistrator.Resolve<LevelEntranceController>();
+            _levelConfigurationSO = LevelDI.Resolve<LevelConfigurationSO>();
+            _healthBarHandler = LevelDI.Resolve<HealthBarHandlerUI>();
+            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
+            _coinBalanceUI = LevelDI.Resolve<CoinBalanceUI>();
+            _saveData = LevelDI.Resolve<SaveData>();
+            _saveSystem = LevelDI.Resolve<SaveSystem>();
+            _locationHandler = LevelDI.Resolve<LocationHandler>();
+            _currentLevelEntranceController = LevelDI.Resolve<LevelEntranceController>();
 
             InitButtons(sceneLoader, timeHandler);
 

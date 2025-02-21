@@ -8,6 +8,9 @@ namespace Game
         [SerializeField] private Transform _placePivot;
         [SerializeField] private GameObject _highlightedZone;
 
+        [SerializeField] private GameObject _towerIllustaration;
+        [SerializeField] private Transform _towerIllustarationZone;
+
         [Header("Materials")]
         [SerializeField] private Material _selectedMaterial;
         [SerializeField] private Material _originMaterial;
@@ -24,6 +27,8 @@ namespace Game
             _meshRenderer = _highlightedZone.GetComponent<MeshRenderer>();
 
             DisHighlight();
+
+            HideIllistaration();
         }
 
         public Transform GetPlacePivot() => _placePivot;
@@ -58,5 +63,14 @@ namespace Game
             else 
                 _meshRenderer.material = _originMaterial;
         }
+
+        public void ShowIllistaration(float zoneRadious)
+        {
+            _towerIllustaration.SetActive(true);
+            _towerIllustarationZone.localScale = new Vector3(zoneRadious, 0.05f, zoneRadious);
+        }
+
+        public void HideIllistaration() => 
+            _towerIllustaration.SetActive(false);
     }
 }

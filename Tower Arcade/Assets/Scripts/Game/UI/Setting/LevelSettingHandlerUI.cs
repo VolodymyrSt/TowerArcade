@@ -20,9 +20,9 @@ namespace Game
 
         private void Start()
         {
-            SceneLoader sceneLoader = LevelRegistrator.Resolve<SceneLoader>();
-            TimeHandler timeHandler = LevelRegistrator.Resolve<TimeHandler>();
-            LevelSoundHandler soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
+            SceneLoader sceneLoader = LevelDI.Resolve<SceneLoader>();
+            TimeHandler timeHandler = LevelDI.Resolve<TimeHandler>();
+            LevelSoundHandler soundHandler = LevelDI.Resolve<LevelSoundHandler>();
 
             InitButtons(sceneLoader, timeHandler, soundHandler);
 

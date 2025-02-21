@@ -40,6 +40,9 @@ namespace Game
             _activeSlot.UnSelect();
             _activeSlot = null;
         }
+
+        public GameInventorySlotUI GetActiveSlot() =>
+            _activeSlot;
     }
 }
 

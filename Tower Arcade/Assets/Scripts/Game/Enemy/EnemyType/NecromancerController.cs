@@ -18,7 +18,7 @@ namespace Game
         {
             _animator = GetComponentInChildren<Animator>();
 
-            StartCoroutine(UseAbility(_abillityRestoreTime, LevelRegistrator.Resolve<EffectPerformer>()));
+            StartCoroutine(UseAbility(_abillityRestoreTime, LevelDI.Resolve<EffectPerformer>()));
         }
 
         private IEnumerator UseAbility(float AbilityRestoreTime, EffectPerformer effectPerformer)

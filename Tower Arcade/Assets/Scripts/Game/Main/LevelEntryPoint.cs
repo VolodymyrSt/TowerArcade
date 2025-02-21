@@ -59,8 +59,9 @@ namespace Game
             _levelContainer.RegisterInstance<LevelSettingHandlerUI>(_levelSettingHandlerUI);
             _levelContainer.RegisterInstance<CameraMoveController>(_cameraMoveController);
             _levelContainer.RegisterInstance<MassegeHandlerUI>(_massegeHandler);
+            _levelContainer.RegisterInstance<GameInventoryHandler>(_gameInventoryHandler);
 
-            LevelRegistrator.Register(_levelContainer);
+            LevelDI.Register(_levelContainer);
 
             _gameInventoryHandler.InitializeInventorySlots(_levelContainer, _levelContainer.Resolve<SaveData>().TowerGenerals);
 

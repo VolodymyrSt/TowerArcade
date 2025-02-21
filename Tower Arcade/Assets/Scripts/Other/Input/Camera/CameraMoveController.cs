@@ -27,9 +27,9 @@ namespace Game
         {
             _camera = GetComponentInChildren<Camera>();
 
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(DisableMovement);
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(DisableMovement);
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
         }
 
         private void LateUpdate()

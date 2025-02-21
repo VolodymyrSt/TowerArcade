@@ -43,7 +43,7 @@ namespace Game
             UpdateButtonStates();
         }
 
-        private void Start() => _soundHandler = MenuRegistrator.Resolve<MenuSoundHandler>();
+        private void Start() => _soundHandler = MenuDI.Resolve<MenuSoundHandler>();
 
         private void NextContent()
         {

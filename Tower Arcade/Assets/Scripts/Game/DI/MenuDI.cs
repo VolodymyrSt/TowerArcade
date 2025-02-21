@@ -3,7 +3,7 @@ using Sound;
 
 namespace DI
 {
-    public static class MenuRegistrator
+    public static class MenuDI
     {
         private static DIContainer _container;
 

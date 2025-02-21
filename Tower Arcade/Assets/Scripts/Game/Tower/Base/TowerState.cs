@@ -28,7 +28,7 @@ namespace Game
 
             zone.transform.localScale = new Vector3(Config.AttackRange, 0.05f, Config.AttackRange);
 
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(IsGamePaused);
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(IsGamePaused);
         }
 
         public abstract void HandleAttack(Enemy enemy, LevelCurencyHandler levelCurencyHandler);

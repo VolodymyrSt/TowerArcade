@@ -13,8 +13,8 @@ namespace Game
 
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
-            _megaFireBallWeaponFactory = LevelRegistrator.Resolve<MegaFireBallWeaponFactory>();
-            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
+            _megaFireBallWeaponFactory = LevelDI.Resolve<MegaFireBallWeaponFactory>();
+            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }

@@ -30,8 +30,8 @@ namespace Game
 
         public void Start()
         {
-            _saveData = MenuRegistrator.Resolve<SaveData>();
-            _saveSystem = MenuRegistrator.Resolve<SaveSystem>();
+            _saveData = MenuDI.Resolve<SaveData>();
+            _saveSystem = MenuDI.Resolve<SaveSystem>();
 
             SetSprite(_item.Sprite);
 

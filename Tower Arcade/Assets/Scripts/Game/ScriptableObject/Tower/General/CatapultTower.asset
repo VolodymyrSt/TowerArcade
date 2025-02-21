@@ -17,3 +17,4 @@ MonoBehaviour:
   TowerType: 2
   SoulCost: 125
   Description: Attack a huge range of enemies
+  FirstState: {fileID: 11400000, guid: 7fae7d1cc0fb9ef44a9eef7b4e887b6b, type: 2}

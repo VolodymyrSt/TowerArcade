@@ -31,10 +31,10 @@ namespace Game
         {
             _levelSystemActivatorRoot.gameObject.SetActive(true);
 
-            _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
-            _eventBus = LevelRegistrator.Resolve<EventBus>(); ;
-            _levelConfiguration = LevelRegistrator.Resolve<LevelConfigurationSO>();
-            _soundHandler = LevelRegistrator.Resolve<LevelSoundHandler>();
+            _levelSystem = LevelDI.Resolve<LevelSystemSO>();
+            _eventBus = LevelDI.Resolve<EventBus>(); ;
+            _levelConfiguration = LevelDI.Resolve<LevelConfigurationSO>();
+            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
 
             ConfigurateLevel(_levelSystem);
 

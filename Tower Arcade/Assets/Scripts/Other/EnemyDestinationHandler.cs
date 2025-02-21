@@ -8,7 +8,7 @@ namespace Game
 
         private void Start()
         {
-            _healthBarHandler = LevelRegistrator.Resolve<HealthBarHandlerUI>();
+            _healthBarHandler = LevelDI.Resolve<HealthBarHandlerUI>();
         }
 
         private void OnTriggerEnter(Collider other)

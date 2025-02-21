@@ -16,9 +16,9 @@ namespace Game
 
         private void Start()
         {
-            _curencyHandler = LevelRegistrator.Resolve<LevelCurencyHandler>();
+            _curencyHandler = LevelDI.Resolve<LevelCurencyHandler>();
 
-            LevelRegistrator.Resolve<EventBus>().SubscribeEvent<OnCurrencyCountChangedSignal>(UpdateCurrencyCount);
+            LevelDI.Resolve<EventBus>().SubscribeEvent<OnCurrencyCountChangedSignal>(UpdateCurrencyCount);
 
             _soulCountText.text = _curencyHandler.GetStartedCurrencyCount().ToString();
 

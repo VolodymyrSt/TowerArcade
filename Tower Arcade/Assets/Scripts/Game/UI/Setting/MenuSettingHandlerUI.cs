@@ -20,8 +20,8 @@ namespace Game
 
         private void Start()
         {
-            SceneLoader sceneLoader = MenuRegistrator.Resolve<SceneLoader>();
-            MenuSoundHandler soundHandler = MenuRegistrator.Resolve<MenuSoundHandler>();
+            SceneLoader sceneLoader = MenuDI.Resolve<SceneLoader>();
+            MenuSoundHandler soundHandler = MenuDI.Resolve<MenuSoundHandler>();
 
             InitButtons(sceneLoader, soundHandler);
 

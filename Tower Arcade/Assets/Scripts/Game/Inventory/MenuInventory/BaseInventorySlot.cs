@@ -9,7 +9,7 @@ namespace Game
     {
         private MenuSoundHandler _menuSoundHandler;
 
-        private void Start() => _menuSoundHandler = MenuRegistrator.Resolve<MenuSoundHandler>();
+        private void Start() => _menuSoundHandler = MenuDI.Resolve<MenuSoundHandler>();
 
         public virtual void OnDrop(PointerEventData eventData)
         {

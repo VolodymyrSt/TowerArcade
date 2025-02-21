@@ -25,7 +25,7 @@ namespace Game
 
         private void Start()
         {
-            _soundHandler = MenuRegistrator.Resolve<MenuSoundHandler>();
+            _soundHandler = MenuDI.Resolve<MenuSoundHandler>();
             HideInfo();
         }
 

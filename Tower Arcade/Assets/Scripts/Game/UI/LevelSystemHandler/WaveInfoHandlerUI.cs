@@ -24,8 +24,8 @@ namespace Game
 
         public void Start()
         {
-            _levelSystem = LevelRegistrator.Resolve<LevelSystemSO>();
-            _eventBus = LevelRegistrator.Resolve<EventBus>();
+            _levelSystem = LevelDI.Resolve<LevelSystemSO>();
+            _eventBus = LevelDI.Resolve<EventBus>();
 
             _animator = GetComponent<Animator>();
 
@@ -37,7 +37,7 @@ namespace Game
 
             _skipWaveButton.onClick.AddListener(() =>
             {
-                LevelRegistrator.Resolve<LevelSoundHandler>().PlaySound(ClipName.Click);
+                LevelDI.Resolve<LevelSoundHandler>().PlaySound(ClipName.Click);
 
                 _eventBus.Invoke(new OnWaveSkippedSignal());
             });

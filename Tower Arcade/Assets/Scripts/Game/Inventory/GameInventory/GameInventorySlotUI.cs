@@ -34,7 +34,7 @@ namespace Game
         private MassegeHandlerUI _masegeHandler;
         private LevelSoundHandler _soundHandler;
 
-        private TowerSO _tower;
+        public TowerSO Tower { get; private set; }
         private Camera _camera;
 
         public void InitializeSlot(DIContainer container, TowerSO tower, GameInventoryHandler gameInventoryHandler)
@@ -43,7 +43,7 @@ namespace Game
 
             _container = container;
             _gameInventoryHandler = gameInventoryHandler;
-            _tower = tower;
+            Tower = tower;
 
             _towerFactoryHandler = container.Resolve<TowerFactoryHandler>();
             _towerPlacementBlocksHolder = container.Resolve<TowerPlacementBlocksHolder>();
@@ -53,9 +53,9 @@ namespace Game
             _masegeHandler = container.Resolve<MassegeHandlerUI>();
             _soundHandler = container.Resolve<LevelSoundHandler>();
 
-            _towerName.text = _tower.TowerName;
-            _towerImage.sprite = _tower.TowerSprite;
-            _towerSoulCost.text = _tower.SoulCost.ToString();
+            _towerName.text = Tower.TowerName;
+            _towerImage.sprite = Tower.TowerSprite;
+            _towerSoulCost.text = Tower.SoulCost.ToString();
 
             UnSelect();
         }
@@ -78,7 +78,7 @@ namespace Game
             }
             else
             {
-                if (_levelCurencyHandler.GetCurrentCurrencyCount() >= _tower.SoulCost)
+                if (_levelCurencyHandler.GetCurrentCurrencyCount() >= Tower.SoulCost)
                 {
                     _gameInventoryHandler.SetActiveSlot(this);
                 }
@@ -126,7 +126,7 @@ namespace Game
         }
         private void PlaceTowerOnBlock(TowerPlacementBlock towerPlacementBlock, LevelCurencyHandler levelCurencyHandler,TowerDescriptionCardHandler towerDescriptionCardHandler)
         {
-            _towerFactoryHandler.GetTowerFactoryByType(_container, _tower.TowerType)
+            _towerFactoryHandler.GetTowerFactoryByType(_container, Tower.TowerType)
                         .SpawnTower(towerPlacementBlock.GetPlacePivot(), towerPlacementBlock, levelCurencyHandler, towerDescriptionCardHandler);
 
             _effectPerformer.PlayTowerInstalledEffect(towerPlacementBlock.GetPlacePivot().position);
@@ -135,7 +135,7 @@ namespace Game
 
             towerPlacementBlock.SetOccupied(true);
 
-            _levelCurencyHandler.SubtactCurrencyCount(_tower.SoulCost);
+            _levelCurencyHandler.SubtactCurrencyCount(Tower.SoulCost);
 
             _soundHandler.PlaySound(ClipName.SoftClick);
         }
