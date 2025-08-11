@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Sound;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,39 +20,42 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _coinsAmountText;
 
         //Dependencies
-        private LevelSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
         private LevelConfigurationSO _levelConfigurationSO;
         private CoinBalanceUI _coinBalanceUI;
         private SaveData _saveData;
         private SaveSystem _saveSystem;
+        private SceneLoader _sceneLoader;
+        private EventBus _eventBus;
 
-        private void Start()
+        private void Awake()
         {
-            SceneLoader sceneLoader = LevelDI.Resolve<SceneLoader>();
-            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>(ShowLostMenu);
-
+            _sceneLoader = LevelDI.Resolve<SceneLoader>();
+            _eventBus = LevelDI.Resolve<EventBus>();
             _levelConfigurationSO = LevelDI.Resolve<LevelConfigurationSO>();
-            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
+            _soundHandler = LevelDI.Resolve<SoundHandler>();
             _coinBalanceUI = LevelDI.Resolve<CoinBalanceUI>();
             _saveData = LevelDI.Resolve<SaveData>();
             _saveSystem = LevelDI.Resolve<SaveSystem>();
+        }
 
-            InitButtons(sceneLoader);
+        private void Start()
+        {
+            _eventBus.SubscribeEvent<OnGameEndedSignal>(ShowLostMenu);
+
+            InitButtons();
 
             _coinsAmountText.text = _levelConfigurationSO.GetLostCoins().ToString();
-
             transform.gameObject.SetActive(false);
         }
 
-        private void InitButtons(SceneLoader sceneLoader)
+        private void InitButtons()
         {
-            _goToMenuButton.onClick.AddListener(() =>
-            {
-                sceneLoader.LoadWithLoadingScene(SceneLoader.Scene.Menu);
+            _goToMenuButton.onClick.AddListener(() => {
+                _sceneLoader.LoadWithLoadingScene(SceneLoader.Scene.Menu);
             });
 
-            _exitButton.onClick.AddListener(() =>
-            {
+            _exitButton.onClick.AddListener(() => {
                 Application.Quit();
             });
         }
@@ -61,7 +65,6 @@ namespace Game
             float duraction = 1f;
 
             transform.gameObject.SetActive(true);
-
 
             _movableRoot.DOAnchorPosY(0, duraction)
                 .SetEase(Ease.Linear)
@@ -73,6 +76,11 @@ namespace Game
 
             _saveData.CoinCurrency = _coinBalanceUI.GetCoinBalance();
             _saveSystem.Save(_saveData);
+        }
+
+        private void OnDestroy()
+        {
+            _eventBus?.UnSubscribeEvent<OnGameEndedSignal>(ShowLostMenu);
         }
     }
 }

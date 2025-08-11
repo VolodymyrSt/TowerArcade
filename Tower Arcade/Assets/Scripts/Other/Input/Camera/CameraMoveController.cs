@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,7 @@ namespace Game
     {
         [Header("Controllers:")]
         [SerializeField] private GameObject _pivot;
-        [SerializeField] private GameInput _gameInput;
+        [SerializeField] private Camera _camera;
 
         [Header("Settings:")]
         [SerializeField, Range(0f, 50f)] private float _maxSensivity = 10f;
@@ -18,18 +19,23 @@ namespace Game
         [SerializeField] private Vector2 _limitX = new Vector2(0f, 40f);
         [SerializeField] private Vector2 _limitZ = new Vector2(-20f, 30f);
 
-        private Camera _camera;
+        private GameInput _gameInput;
+        private EventBus _eventBus;
 
         private bool _isPaused = false;
         private bool _isEnable = false;
 
+        private void Awake()
+        {
+            _gameInput = LevelDI.Resolve<GameInput>();
+            _eventBus = LevelDI.Resolve<EventBus>();
+        }
+
         private void Start()
         {
-            _camera = GetComponentInChildren<Camera>();
-
-            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(DisableMovement);
-            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
-            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
+            _eventBus.SubscribeEvent<OnGamePausedSignal>(DisableMovement);
+            _eventBus.SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
+            _eventBus.SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
         }
 
         private void LateUpdate()
@@ -56,23 +62,29 @@ namespace Game
             _pivot.transform.position = Vector3.Lerp(_pivot.transform.position, newPivotPosition, _smoothness * Time.deltaTime);
         }
 
-        public void InitMouseSensivity(SaveData saveData,SaveSystem saveSystem)
+        public void InitMouseSensivity(SaveData saveData)
         {
-            if (saveData.MouseSensivity == 0)
-                _currentSensivity = saveSystem.Load().MouseSensivity;
+            if (saveData != null)
+                _currentSensivity = saveData.MouseSensivity;
             else
-                return;
+                _currentSensivity = 0f;
         }
 
-        public void ChangeSensivity(float value, SaveSystem saveSystem, SaveData saveData)
+        public void ChangeSensivity(float value, SaveData saveData)
         {
             _currentSensivity = value;
             saveData.MouseSensivity = _currentSensivity;
-            saveSystem.Save(saveData);
         }
 
         public float GetMaxSensivity() => _maxSensivity;
 
         public void DisableMovement(OnGamePausedSignal signal) => _isPaused = signal.OnGamePaused;
+
+        private void OnDestroy()
+        {
+            _eventBus?.UnSubscribeEvent<OnGamePausedSignal>(DisableMovement);
+            _eventBus?.UnSubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
+            _eventBus?.UnSubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
+        }
     }
 }

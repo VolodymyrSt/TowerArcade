@@ -78,9 +78,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8950925051452078226}
     m_Modifications:
+    - target: {fileID: 6261476700080113311, guid: aa9ab22bbb52b4f4d93c13b94f2baae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6635569906884185842, guid: aa9ab22bbb52b4f4d93c13b94f2baae2, type: 3}
       propertyPath: m_Name
       value: RangeZone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635569906884185842, guid: aa9ab22bbb52b4f4d93c13b94f2baae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8757964595823211419, guid: aa9ab22bbb52b4f4d93c13b94f2baae2, type: 3}
       propertyPath: m_LocalPosition.x

@@ -15,17 +15,19 @@ namespace Game
         //Dependencies
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
-        private LevelSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
         private Animator _animator;
 
-        private void Start()
+        private void Awake()
         {
             _levelSystem = LevelDI.Resolve<LevelSystemSO>();
             _eventBus = LevelDI.Resolve<EventBus>();
-            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
-
+            _soundHandler = LevelDI.Resolve<SoundHandler>();
             _animator = GetComponentInChildren<Animator>();
+        }
 
+        private void Start()
+        {
             _eventBus.SubscribeEvent<OnLevelSystemStartedSignal>(ShowWaveAnnouncement);
             _eventBus.SubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveAnnouncement);
             _eventBus.SubscribeEvent<OnGameEndedSignal>(EndGame);
@@ -60,9 +62,15 @@ namespace Game
             _animator.ResetTrigger(WAVE_ANNOUNCE);
         }
 
-        private void EndGame(OnGameEndedSignal signal)
-        {
+        private void EndGame(OnGameEndedSignal signal) => 
             _eventBus.UnSubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveAnnouncement);
+
+        private void OnDestroy()
+        {
+            _eventBus?.UnSubscribeEvent<OnLevelSystemStartedSignal>(ShowWaveAnnouncement);
+            _eventBus?.UnSubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveAnnouncement);
+            _eventBus?.UnSubscribeEvent<OnGameEndedSignal>(EndGame);
         }
+
     }
 }

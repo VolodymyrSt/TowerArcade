@@ -2,6 +2,7 @@ using DG.Tweening;
 using Sound;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,44 +25,49 @@ namespace Game
 
         //Dependencies
         private HealthBarHandlerUI _healthBarHandler;
-        private LevelSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
         private LevelConfigurationSO _levelConfigurationSO;
         private CoinBalanceUI _coinBalanceUI;
         private SaveData _saveData;
         private SaveSystem _saveSystem;
         private LocationHandler _locationHandler;
         private LevelEntranceController _currentLevelEntranceController;
+        private SceneLoader _sceneLoader;
+        private EventBus _eventBus;
 
-        private void Start()
+        private void Awake()
         {
-            SceneLoader sceneLoader = LevelDI.Resolve<SceneLoader>();
-            TimeHandler timeHandler = LevelDI.Resolve<TimeHandler>();
-            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>(ShowWonMenu);
+            _sceneLoader = LevelDI.Resolve<SceneLoader>();
+            _eventBus = LevelDI.Resolve<EventBus>();
 
+            _sceneLoader = LevelDI.Resolve<SceneLoader>();
             _levelConfigurationSO = LevelDI.Resolve<LevelConfigurationSO>();
             _healthBarHandler = LevelDI.Resolve<HealthBarHandlerUI>();
-            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
+            _soundHandler = LevelDI.Resolve<SoundHandler>();
             _coinBalanceUI = LevelDI.Resolve<CoinBalanceUI>();
             _saveData = LevelDI.Resolve<SaveData>();
             _saveSystem = LevelDI.Resolve<SaveSystem>();
             _locationHandler = LevelDI.Resolve<LocationHandler>();
             _currentLevelEntranceController = LevelDI.Resolve<LevelEntranceController>();
+        }
 
-            InitButtons(sceneLoader, timeHandler);
+        private void Start()
+        {
+            _eventBus.SubscribeEvent<OnGameWonSignal>(ShowWonMenu);
+
+            InitButtons();
 
             _coinsAmountText.text = _levelConfigurationSO.GetVictoryCoins().ToString();
             transform.gameObject.SetActive(false);
         }
 
-        private void InitButtons(SceneLoader sceneLoader, TimeHandler timeHandler)
+        private void InitButtons()
         {
-            _goToMenuButton.onClick.AddListener(() =>
-            {
-                sceneLoader.LoadWithLoadingScene(SceneLoader.Scene.Menu);
+            _goToMenuButton.onClick.AddListener(() => {
+                _sceneLoader.LoadWithLoadingScene(SceneLoader.Scene.Menu);
             });
 
-            _exitButton.onClick.AddListener(() =>
-            {
+            _exitButton.onClick.AddListener(() => {
                 Application.Quit();
             });
         }
@@ -135,5 +141,8 @@ namespace Game
 
             return starList;
         }
+
+        private void OnDestroy() => 
+            _eventBus?.UnSubscribeEvent<OnGameWonSignal>(ShowWonMenu);
     }
 }

@@ -4872,7 +4872,7 @@ GameObject:
   - component: {fileID: 781567560}
   - component: {fileID: 781567561}
   m_Layer: 0
-  m_Name: MenuEndryPoint
+  m_Name: MenuEntryPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4905,9 +4905,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41512a5de5004e443bf17980ceff1edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _swipeHandler: {fileID: 1074789782}
   _menuSettingHandlerUI: {fileID: 1100266690}
   _coinBalanceUI: {fileID: 1147340509}
+  _swipeHandler: {fileID: 1074789782}
   _locationHandler: {fileID: 1759381584}
   _shopMenuHandlerUI: {fileID: 829199100}
   _inventoryHandlerUI: {fileID: 1250966011}

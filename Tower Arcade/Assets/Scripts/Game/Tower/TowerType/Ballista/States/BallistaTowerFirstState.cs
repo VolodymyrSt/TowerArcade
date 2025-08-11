@@ -14,16 +14,15 @@ namespace Game
         [SerializeField] private Transform _weaponPointer;
 
         private ArrowWeaponFactory _arrowBulletFactory;
-        private LevelSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
 
         private Vector3 _frameDirection;
         private Vector3 _bowDirection;
 
-
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _arrowBulletFactory = LevelDI.Resolve<ArrowWeaponFactory>();
-            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
+            _soundHandler = LevelDI.Resolve<SoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }

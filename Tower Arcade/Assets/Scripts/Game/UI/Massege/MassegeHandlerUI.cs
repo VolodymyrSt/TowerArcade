@@ -30,7 +30,7 @@ namespace Game
 
         private IEnumerator ResetMassegeScale()
         {
-            yield return new WaitForSecondsRealtime(_hideDuration);
+            yield return new WaitForSeconds(_hideDuration);
             _root.localScale = Vector3.zero;
         }
     }

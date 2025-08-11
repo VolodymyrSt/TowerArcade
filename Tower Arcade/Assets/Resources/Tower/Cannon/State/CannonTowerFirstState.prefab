@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4420719129423808493
 Transform:
@@ -407,6 +407,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 080c24af048460b4ba9a1c2c6b7f92ee, type: 3}
       propertyPath: m_Name
       value: towerRound_middleA
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 080c24af048460b4ba9a1c2c6b7f92ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 080c24af048460b4ba9a1c2c6b7f92ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -22,13 +22,13 @@ namespace Game
 
         private CoinBalanceUI _coinBalanceUI;
         private EventBus _eventBus;
-        private MenuSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
         private MassegeHandlerUI _masegeHandlerUI;
 
         private SaveSystem _saveSystem;
         private SaveData _saveData;
 
-        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, MenuSoundHandler soundHandler, SaveSystem saveSystem
+        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, SoundHandler soundHandler, SaveSystem saveSystem
             , SaveData saveData, MainInventoryContainer mainInventoryContainer, MassegeHandlerUI massegeHandler)
         {
             _coinBalanceUI = coinBalanceUI;

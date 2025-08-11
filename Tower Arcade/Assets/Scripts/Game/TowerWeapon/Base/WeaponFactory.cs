@@ -6,7 +6,7 @@ namespace Game {
     {
         public abstract IWeapon CreateBullet();
 
-        public void SpawnWeapon(Transform parent, Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler)
+        public void SpawnWeapon(Transform parent, Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
         {
             IWeapon bullet = CreateBullet();
             bullet.Init(parent);

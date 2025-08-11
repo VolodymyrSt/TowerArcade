@@ -56,26 +56,22 @@ namespace Game
         private void Update()
         {
             foreach (var update in _updatable)
-            {
                 update.Tick();
-            }
         }
 
         private void InitializeMain()
         {
             _coinBalanceUI.Init(_menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<SaveSystem>(), _menuContainer.Resolve<SaveData>());
 
-            _inventoryHandlerUI.Init(_menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<MenuSoundHandler>()
+            _inventoryHandlerUI.Init(_menuContainer.Resolve<EventBus>(), _menuContainer.Resolve<SoundHandler>()
                 , _menuContainer.Resolve<SaveData>(), _menuContainer.Resolve<SaveSystem>());
 
             _shopMenuHandlerUI.Init(_menuContainer.Resolve<CoinBalanceUI>(), _menuContainer.Resolve<EventBus>(),
-                _menuContainer.Resolve<MenuSoundHandler>(), _menuContainer.Resolve<SaveSystem>(), _menuContainer.Resolve<SaveData>()
+                _menuContainer.Resolve<SoundHandler>(), _menuContainer.Resolve<SaveSystem>(), _menuContainer.Resolve<SaveData>()
                 , _menuContainer.Resolve<MainInventoryContainer>(), _menuContainer.Resolve<MassegeHandlerUI>());
         }
 
-        private void AddUpdatables()
-        {
+        private void AddUpdatables() => 
             _updatable.Add(_menuContainer.Resolve<MenuSettingHandler>());
-        }
     }
 }

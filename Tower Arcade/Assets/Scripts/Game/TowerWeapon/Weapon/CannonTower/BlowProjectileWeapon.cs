@@ -7,7 +7,7 @@ namespace Game
     {
         [SerializeField] private ParticleSystem _particleSystem;
 
-        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler)
+        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
         {
             if (enemy == null)
                 DestroySelf();

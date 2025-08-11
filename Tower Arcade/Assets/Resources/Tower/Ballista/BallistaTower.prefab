@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 3523
       objectReference: {fileID: 0}
+    - target: {fileID: 6261476700080113311, guid: aa9ab22bbb52b4f4d93c13b94f2baae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6635569906884185842, guid: aa9ab22bbb52b4f4d93c13b94f2baae2, type: 3}
       propertyPath: m_Name
       value: RangeZone
@@ -87,6 +91,10 @@ PrefabInstance:
     - target: {fileID: 6635569906884185842, guid: aa9ab22bbb52b4f4d93c13b94f2baae2, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635569906884185842, guid: aa9ab22bbb52b4f4d93c13b94f2baae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8757964595823211419, guid: aa9ab22bbb52b4f4d93c13b94f2baae2, type: 3}
       propertyPath: m_LocalPosition.x

@@ -26,7 +26,7 @@ namespace Game
         [SerializeField] private Vector3 _offsetPosition;
         [SerializeField] private float _animationDuration = 1f;
 
-        private MenuSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
 
         private int _currentIndex;
         private bool _isSwiped = false;
@@ -43,7 +43,7 @@ namespace Game
             UpdateButtonStates();
         }
 
-        private void Start() => _soundHandler = MenuDI.Resolve<MenuSoundHandler>();
+        private void Start() => _soundHandler = MenuDI.Resolve<SoundHandler>();
 
         private void NextContent()
         {

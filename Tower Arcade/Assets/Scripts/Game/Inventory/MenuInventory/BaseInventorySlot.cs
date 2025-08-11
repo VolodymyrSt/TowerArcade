@@ -7,9 +7,10 @@ namespace Game
 {
     public class BaseInventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler
     {
-        private MenuSoundHandler _menuSoundHandler;
+        private SoundHandler _menuSoundHandler;
 
-        private void Start() => _menuSoundHandler = MenuDI.Resolve<MenuSoundHandler>();
+        private void Awake() => 
+            _menuSoundHandler = MenuDI.Resolve<SoundHandler>();
 
         public virtual void OnDrop(PointerEventData eventData)
         {
@@ -50,9 +51,7 @@ namespace Game
             }
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
+        public void OnPointerEnter(PointerEventData eventData) => 
             _menuSoundHandler.PlaySound(ClipName.Selected);
-        }
     }
 }

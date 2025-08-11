@@ -20,10 +20,10 @@ namespace Game
         private SaveData _saveData;
         private SaveSystem _saveSystem;
 
-        private MenuSoundHandler _menuSoundHandler;
+        private SoundHandler _menuSoundHandler;
         private MassegeHandlerUI _masegeHandler;
 
-        public void Init(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem, MenuSoundHandler menuSoundHandler, MassegeHandlerUI massegeHandler)
+        public void Init(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem, SoundHandler menuSoundHandler, MassegeHandlerUI massegeHandler)
         {
             _saveData = saveData;
             _saveSystem = saveSystem;
@@ -55,10 +55,8 @@ namespace Game
             _enterButton.onClick.AddListener(() => Enter(sceneLoader));
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
+        public void OnPointerEnter(PointerEventData eventData) => 
             _menuSoundHandler.PlaySound(ClipName.Selected);
-        }
 
         private void Enter(SceneLoader sceneLoader)
         {
@@ -94,6 +92,5 @@ namespace Game
         public bool IsLocked() => _isLocked;
 
         public int GetEntranceIndex() => Int32.Parse(_levelNumber.text);
-
     }
 }

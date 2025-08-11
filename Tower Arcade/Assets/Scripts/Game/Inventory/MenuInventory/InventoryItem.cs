@@ -26,13 +26,12 @@ namespace Game
 
         //Dependencies
         private SaveData _saveData;
-        private SaveSystem _saveSystem;
+
+        private void Awake() => 
+            _saveData = MenuDI.Resolve<SaveData>();
 
         public void Start()
         {
-            _saveData = MenuDI.Resolve<SaveData>();
-            _saveSystem = MenuDI.Resolve<SaveSystem>();
-
             SetSprite(_item.Sprite);
 
             if (_saveData.InventoryItems.TryGetValue(_item.TowerConfig.Name, out string slotName))
@@ -50,16 +49,10 @@ namespace Game
                     transform.SetParent(_originalParent, false);
                 }
                 else
-                {
                     _saveData.InventoryItems[_item.TowerConfig.Name] = transform.parent.name;
-                    _saveSystem.Save(_saveData);
-                }
             }
             else
-            {
                 _saveData.InventoryItems[_item.TowerConfig.Name] = transform.parent.name;
-                _saveSystem.Save(_saveData);
-            }
 
             _itemStatInformer.SetActive(false);
         }
@@ -95,21 +88,15 @@ namespace Game
         public void OnDrag(PointerEventData eventData)
         {
             if (_isInMainSlot)
-            {
                 return;
-            }
             else
-            {
                 transform.position = Input.mousePosition;
-            }
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
             if (_isInMainSlot)
-            {
                 return;
-            }
             else
             {
                 _itemImage.raycastTarget = true;
@@ -124,15 +111,12 @@ namespace Game
             transform.SetParent(newParent, false);
 
             _saveData.InventoryItems[_item.TowerConfig.Name] = newParent.name;
-            _saveSystem.Save(_saveData);
         }
 
         public void ReplaceItem(InventoryItem newItem)
         {
             Transform tempParent = _originalParent;
-
             SetParentAfterDrag(newItem.GetOriginalParent());
-
             newItem.SetParentAfterDrag(tempParent);
         }
 

@@ -18,14 +18,19 @@ namespace Game
         [Header("Root")]
         [SerializeField] private GameObject _settingMenuRoot;
 
+        private SceneLoader _sceneLoader;
+        private TimeHandler _timeHandler;
+        private SoundHandler _soundHandler;
+
+        private void Awake()
+        {
+            _sceneLoader = LevelDI.Resolve<SceneLoader>();
+            _timeHandler = LevelDI.Resolve<TimeHandler>();
+            _soundHandler = LevelDI.Resolve<SoundHandler>();
+        }
         private void Start()
         {
-            SceneLoader sceneLoader = LevelDI.Resolve<SceneLoader>();
-            TimeHandler timeHandler = LevelDI.Resolve<TimeHandler>();
-            LevelSoundHandler soundHandler = LevelDI.Resolve<LevelSoundHandler>();
-
-            InitButtons(sceneLoader, timeHandler, soundHandler);
-
+            InitButtons(_sceneLoader, _timeHandler, _soundHandler);
             HideSettingMenu();
         }
 
@@ -35,7 +40,7 @@ namespace Game
             _soundSlider.maxValue = maxVoluem;
         }
         
-        private void InitButtons(SceneLoader sceneLoader, TimeHandler timeHandler, LevelSoundHandler soundHandler)
+        private void InitButtons(SceneLoader sceneLoader, TimeHandler timeHandler, SoundHandler soundHandler)
         {
             _openSettingMenuButton.gameObject.SetActive(true);
             _closeSettingMenuButton.gameObject.SetActive(true);

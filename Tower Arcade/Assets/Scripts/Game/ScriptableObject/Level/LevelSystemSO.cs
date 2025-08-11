@@ -8,7 +8,7 @@ namespace Game
     [CreateAssetMenu(fileName = "LevelSystem", menuName = "Scriptable Object/LevelSystemConfig")]
     public class LevelSystemSO : ScriptableObject, IUpdatable
     {
-        public List<WaveSO> Waves = new List<WaveSO>();
+        public List<WaveSO> Waves = new();
 
         public float MaxTimeToNextWave;
         private float _currentTimeToNextWave;
@@ -91,6 +91,9 @@ namespace Game
         {
             _isGameEnded = true;
 
+            _eventBus?.UnSubscribeEvent<OnWaveSkippedSignal>(SkipWave);
+            _eventBus?.UnSubscribeEvent<OnGameEndedSignal>(StopLevelSystem);
+
             ClearAllEnemies();
         }
 
@@ -99,9 +102,7 @@ namespace Game
             foreach (Transform child in _enemyContainer.transform)
             {
                 if (child.TryGetComponent(out Enemy enemy))
-                {
                     enemy.DestroySelf();
-                }
             }
         }
     }

@@ -63,7 +63,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &209649502978254839
 Transform:
@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4726dff4cff57a24ca896214d4885bbc, type: 2}
+    - target: {fileID: -8848437439432763094, guid: c9f0c2e11594e174794912551f676b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9f0c2e11594e174794912551f676b19, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -140,6 +144,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4726dff4cff57a24ca896214d4885bbc, type: 2}
+    - target: {fileID: -2287223201522926096, guid: c9f0c2e11594e174794912551f676b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -2202892853515455343, guid: c9f0c2e11594e174794912551f676b19, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -152,10 +160,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: towerRound_crystals
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c9f0c2e11594e174794912551f676b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817730403265522004, guid: c9f0c2e11594e174794912551f676b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366217309324531319, guid: c9f0c2e11594e174794912551f676b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5955824637679129403, guid: c9f0c2e11594e174794912551f676b19, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4726dff4cff57a24ca896214d4885bbc, type: 2}
+    - target: {fileID: 9053023591900777244, guid: c9f0c2e11594e174794912551f676b19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4607668393258877731, guid: c9f0c2e11594e174794912551f676b19, type: 3}
@@ -222,6 +246,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c3eb23e20ffa6ba439a16c7231be83ba, type: 3}
       propertyPath: m_Name
       value: towerRound_bottomB
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3eb23e20ffa6ba439a16c7231be83ba, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: c3eb23e20ffa6ba439a16c7231be83ba, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -4,32 +4,25 @@ namespace Game
 {
     public class MenuSettingHandler : IUpdatable
     {
-        //Dependencies
-        private MenuSettingHandlerUI _menuSettingHandlerUI;
-        private MenuSoundHandler _menuSoundHandler;
+        private readonly MenuSettingHandlerUI _menuSettingHandlerUI;
+        private readonly SoundHandler _menuSoundHandler;
 
-        private SaveData _saveData;
-        private SaveSystem _saveSystem;
+        private readonly SaveData _saveData;
 
-        public MenuSettingHandler(MenuSettingHandlerUI menuSettingHandlerUI, MenuSoundHandler menuSoundHandler, SaveSystem saveSystem, SaveData saveData)
+        public MenuSettingHandler(MenuSettingHandlerUI menuSettingHandlerUI, SoundHandler menuSoundHandler, SaveData saveData)
         {
             _menuSettingHandlerUI = menuSettingHandlerUI;
-
             _menuSoundHandler = menuSoundHandler;
 
             _saveData = saveData;
-            _saveSystem = saveSystem;
 
-            _menuSoundHandler.InitVoluem(_saveData, _saveSystem);
-
+            _menuSoundHandler.InitVoluem(_saveData);
             _menuSettingHandlerUI.InitSliders(_menuSoundHandler.GetMaxVoluem());
-
-            _menuSettingHandlerUI.SetSoundSliderValue(_saveSystem.Load().MenuVoluem);
+            _menuSettingHandlerUI.SetSoundSliderValue(_saveData.MenuVoluem);
         }
 
-        public void Tick()
-        {
-            _menuSoundHandler.ChangeVoluem(_menuSettingHandlerUI.GetSoundSliderValue(), _saveData, _saveSystem);
-        }
+        public void Tick() => 
+            _menuSoundHandler.ChangeVoluem(_menuSettingHandlerUI.GetSoundSliderValue()
+                , _saveData);
     }
 }

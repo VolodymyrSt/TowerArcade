@@ -20,7 +20,7 @@ namespace Game
         private SaveSystem _saveSystem;
         private SaveData _saveData;
 
-        public void Init(EventBus eventBus, MenuSoundHandler soundHandler, SaveData saveData, SaveSystem saveSystem)
+        public void Init(EventBus eventBus, SoundHandler soundHandler, SaveData saveData, SaveSystem saveSystem)
         {
             ShowInventoryMenu();
 
@@ -38,33 +38,29 @@ namespace Game
                 GoToMenu(soundHandler);
             });
 
-            if (_saveData.TowerGenerals == null)
-            {
-                _saveData.TowerGenerals = _toolBarItemContainer.GetTowersGeneral();
-                _saveSystem.Save(_saveData);
-            }
+            _saveData.TowerGenerals = _toolBarItemContainer.GetTowersGeneral();
 
             HideInventoryMenu();
         }
 
         public void AddItem(OnItemBoughtSignal signal) => _mainInventoryContainer.AddItemToSlot(signal.Item);
 
-        public void UpdateTowerGeneralList()
+        public void UpdateAndSaveTowerGeneralList()
         {
             _saveData.TowerGenerals = _toolBarItemContainer.GetTowersGeneral();
             _saveSystem.Save(_saveData);    
         }
 
-        private void OpenInventoryMenu(MenuSoundHandler soundHandler)
+        private void OpenInventoryMenu(SoundHandler soundHandler)
         {
             soundHandler.PlaySound(ClipName.Click);
             _inventoryMenuRoot.gameObject.SetActive(true);
         }
 
-        private void GoToMenu(MenuSoundHandler soundHandler)
+        private void GoToMenu(SoundHandler soundHandler)
         {
             soundHandler.PlaySound(ClipName.Click);
-            UpdateTowerGeneralList();
+            UpdateAndSaveTowerGeneralList();
             HideInventoryMenu();
         }
 

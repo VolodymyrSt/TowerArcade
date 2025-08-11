@@ -8,7 +8,7 @@ namespace Game
     {
         [SerializeField] private ParticleSystem _particleSystem;
 
-        public override void Shoot(Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler)
+        public override void Shoot(Enemy enemy, float attackSpeed, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
         {
             if (enemy == null)
                 DestroySelf();
@@ -24,7 +24,7 @@ namespace Game
                 .OnComplete(() => OnReachedTarget(enemy, damage, levelCurencyHandler, soundHandler));
         }
 
-        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler)
+        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
         {
             float explodeRadious = 2f;
 

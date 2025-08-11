@@ -38,7 +38,7 @@ namespace Game
         {
             float shootingPraparation = 1f;
 
-            yield return new WaitForSecondsRealtime(shootingPraparation);
+            yield return new WaitForSeconds(shootingPraparation);
 
             while (true)
             {
@@ -50,11 +50,11 @@ namespace Game
 
                     StartCoroutine(PerformAttack(closestEnemy, levelCurencyHandler));
 
-                    yield return new WaitForSecondsRealtime(Config.AttackCoolDown);
+                    yield return new WaitForSeconds(Config.AttackCoolDown);
                 }
                 else
                 {
-                    yield return new WaitForSecondsRealtime(shootingPraparation);
+                    yield return new WaitForSeconds(shootingPraparation);
                 }
             }
         }

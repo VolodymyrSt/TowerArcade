@@ -3,22 +3,18 @@ using UnityEngine;
 
 namespace Game
 {
-    public class SaveSystem : ISaveSystem
+    public class SaveSystem
     {
         private readonly string _filePath;
 
-        public SaveSystem()
-        {
+        public SaveSystem() => 
             _filePath = Application.persistentDataPath + "/Save.json";
-        }
 
         public void Save(SaveData data)
         {
             var json = JsonUtility.ToJson(data);
-            using (var writer = new StreamWriter(_filePath))
-            {
-                writer.WriteLine(json);
-            }
+            using var writer = new StreamWriter(_filePath);
+            writer.WriteLine(json);
         }
 
         public SaveData Load()

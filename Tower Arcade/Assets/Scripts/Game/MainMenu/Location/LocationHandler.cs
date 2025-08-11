@@ -13,20 +13,27 @@ namespace Game
         private int _currentUnlockedEntrance = 0;
         private SaveData _saveData;
         private SaveSystem _saveSystem;
+        private SceneLoader _sceneLoader;
+        private SoundHandler _soundHandler;
+        private MassegeHandlerUI _massegeHandlerUI;
 
-        private void Start()
+        private void Awake()
         {
             _saveData = MenuDI.Resolve<SaveData>();
             _saveSystem = MenuDI.Resolve<SaveSystem>();
+            _sceneLoader = MenuDI.Resolve<SceneLoader>();
+            _soundHandler = MenuDI.Resolve<SoundHandler>();
+            _massegeHandlerUI = MenuDI.Resolve<MassegeHandlerUI>();
+        }
 
-            _currentUnlockedEntrance = _saveSystem.Load().CurrentUnlockedEntrance;
+        private void Start()
+        {
+            _currentUnlockedEntrance = _saveData.CurrentUnlockedEntrance;
 
-            InitializeEntrances(MenuDI.Resolve<SceneLoader>(), _saveData, _saveSystem, MenuDI.Resolve<MenuSoundHandler>(), MenuDI.Resolve<MassegeHandlerUI>());
+            InitializeEntrances(_sceneLoader, _saveData, _saveSystem);
 
             if (_currentUnlockedEntrance >= _levelEntranceControllers.Count)
-            {
                 _currentUnlockedEntrance = _levelEntranceControllers.Count - 1;
-            }
 
             for (int i = 0; i <= _currentUnlockedEntrance; i++)
             {
@@ -38,14 +45,14 @@ namespace Game
             }
         }
 
-        private void InitializeEntrances(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem, MenuSoundHandler menuSoundHandler, MassegeHandlerUI massegeHandler)
+        private void InitializeEntrances(SceneLoader sceneLoader, SaveData saveData, SaveSystem saveSystem)
         {
             _levelEntranceControllers = new List<LevelEntranceController>();
             foreach (var location in _locations)
             {
                 foreach (var entrance in location.GetEntrances())
                 {
-                    entrance.Init(sceneLoader, saveData, saveSystem, menuSoundHandler, massegeHandler);
+                    entrance.Init(sceneLoader, saveData, saveSystem, _soundHandler, _massegeHandlerUI);
                     _levelEntranceControllers.Add(entrance);
                 }
             }

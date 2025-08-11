@@ -21,7 +21,7 @@ namespace Game
 
         private CoinBalanceUI _coinBalanceUI;
 
-        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, MenuSoundHandler soundHandler, SaveSystem saveSystem, 
+        public void Init(CoinBalanceUI coinBalanceUI, EventBus eventBus, SoundHandler soundHandler, SaveSystem saveSystem, 
             SaveData saveData, MainInventoryContainer mainInventoryContainer, MassegeHandlerUI massegeHandler)
         {
             _coinBalanceUI = coinBalanceUI;
@@ -41,13 +41,13 @@ namespace Game
             _shopMenuRoot.SetActive(false);
         }
 
-        private void OpenShopMenu(MenuSoundHandler soundHandler)
+        private void OpenShopMenu(SoundHandler soundHandler)
         {
             soundHandler.PlaySound(ClipName.Click);
             _shopMenuRoot.SetActive(true);
         }
 
-        private void CloseShopMenu(MenuSoundHandler soundHandler)
+        private void CloseShopMenu(SoundHandler soundHandler)
         {
             soundHandler.PlaySound(ClipName.Click);
             _shopMenuRoot.SetActive(false);

@@ -6,10 +6,12 @@ namespace Game
     {
         private HealthBarHandlerUI _healthBarHandler;
 
-        private void Start()
+        private void Awake()
         {
             _healthBarHandler = LevelDI.Resolve<HealthBarHandlerUI>();
         }
+        private void Start() => 
+            _healthBarHandler = LevelDI.Resolve<HealthBarHandlerUI>();
 
         private void OnTriggerEnter(Collider other)
         {

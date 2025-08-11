@@ -25,16 +25,19 @@ namespace Game
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
         private LevelConfigurationSO _levelConfiguration;
-        private LevelSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
 
-        private void Start()
+        private void Awake()
         {
-            _levelSystemActivatorRoot.gameObject.SetActive(true);
-
             _levelSystem = LevelDI.Resolve<LevelSystemSO>();
             _eventBus = LevelDI.Resolve<EventBus>(); ;
             _levelConfiguration = LevelDI.Resolve<LevelConfigurationSO>();
-            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
+            _soundHandler = LevelDI.Resolve<SoundHandler>();
+        }
+
+        private void Start()
+        {
+            _levelSystemActivatorRoot.SetActive(true);
 
             ConfigurateLevel(_levelSystem);
 

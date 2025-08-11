@@ -20,7 +20,6 @@ namespace Game
         public virtual void Initialize()
         {
             Agent = GetComponent<NavMeshAgent>();
-
             Agent.speed = EnemyConfig.MoveSpeed;
             CurrentHealth = EnemyConfig.MaxHealth;
             SoulCost = EnemyConfig.SoulCost;
@@ -41,13 +40,11 @@ namespace Game
 
         public virtual void ActivateAbilitySystem() { }
 
-        public void SetTargetDestination(Vector3 destination) => Agent.SetDestination(destination);
+        public void SetTargetDestination(Vector3 destination) => 
+            Agent.SetDestination(destination);
 
-        public void SetStartPosition(Transform parent)
-        {
-            Agent.transform.SetParent(parent, false);
-            Agent.transform.localPosition = Vector3.zero;
-        }
+        public void WarpAgent(Vector3 warpPosition) => 
+            Agent.Warp(warpPosition);
 
         public float GetCurrentHealth() => CurrentHealth;
 

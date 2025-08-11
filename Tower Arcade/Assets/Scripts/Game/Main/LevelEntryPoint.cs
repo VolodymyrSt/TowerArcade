@@ -1,5 +1,6 @@
 using DI;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game
@@ -41,14 +42,24 @@ namespace Game
         [Header("Massege")]
         [SerializeField] private MassegeHandlerUI _massegeHandler;
 
-        private List<IUpdatable> _updatable = new List<IUpdatable>();
+        private readonly List<IUpdatable> _updatable = new();
+        private EventBus _eventBus;
+        private CoroutineUsager _coroutineUsager;
+        private SaveData _saveData;
 
         private void Awake()
         {
             _rootContainer = FindFirstObjectByType<GameEntryPoint>().GetRootContainer();
 
             _levelContainer = new DIContainer(_rootContainer);
+            var gameInput = new GameInput();
+            _eventBus = new EventBus();
 
+            _coroutineUsager = _levelContainer.Resolve<CoroutineUsager>();
+            _saveData = _levelContainer.Resolve<SaveData>();
+
+            _levelContainer.RegisterInstance<EventBus>(_eventBus);
+            _levelContainer.RegisterInstance<GameInput>(gameInput);
             _levelContainer.RegisterInstance<LevelSystemSO>(_levelSystemConfig);
             _levelContainer.RegisterInstance<EnemyDescriptionCardUI>(_enemyCardHandlerUI);
             _levelContainer.RegisterInstance<TowerDescriptionCardUI>(_towerDescriptionCardHandlerUI);
@@ -63,31 +74,27 @@ namespace Game
 
             LevelDI.Register(_levelContainer);
 
-            _gameInventoryHandler.InitializeInventorySlots(_levelContainer, _levelContainer.Resolve<SaveData>().TowerGenerals);
+            _gameInventoryHandler.InitializeInventorySlots(_levelContainer, _saveData.TowerGenerals);
 
-            InitializeUtilScripts();
+            AddUpdatables();
         }
 
-        private void Start()
-        {
-            _levelContainer.Resolve<EventBus>().SubscribeEvent<OnLevelSystemStartedSignal>(StartLevelSystem);
-        }
+        private void Start() => 
+            _eventBus.SubscribeEvent<OnLevelSystemStartedSignal>(StartLevelSystem);
 
         private void StartLevelSystem(OnLevelSystemStartedSignal signal)
         {
             StartCoroutine(_levelSystemConfig.StartLevelSystem(_levelContainer,
-                FindFirstObjectByType<CoroutineUsager>(), _enemyStartPosition, _enemyTargetDestination.position));
+                _coroutineUsager, _enemyStartPosition, _enemyTargetDestination.position));
         }
 
         private void Update()
         {
             foreach(var updatable in _updatable)
-            {
                 updatable.Tick();
-            }
         }
 
-        private void InitializeUtilScripts()
+        private void AddUpdatables()
         {
             _updatable.Clear();
 
@@ -105,6 +112,8 @@ namespace Game
             _rootContainer.UnRegister(_rootContainer.Resolve<CoinBalanceUI>());
             _rootContainer.UnRegister(_rootContainer.Resolve<LocationHandler>());
             _rootContainer.UnRegister(_rootContainer.Resolve<LevelEntranceController>());
+
+            _eventBus?.UnSubscribeEvent<OnLevelSystemStartedSignal>(StartLevelSystem);
         }
     }
 }

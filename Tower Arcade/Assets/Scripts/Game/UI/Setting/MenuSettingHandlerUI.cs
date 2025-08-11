@@ -18,22 +18,25 @@ namespace Game
         [Header("Root")]
         [SerializeField] private GameObject _settingMenuRoot;
 
+        private SceneLoader _sceneLoader;
+        private SoundHandler _soundHandler;
+
+        private void Awake()
+        {
+            _sceneLoader = MenuDI.Resolve<SceneLoader>();
+            _soundHandler = MenuDI.Resolve<SoundHandler>();
+        }
+
         private void Start()
         {
-            SceneLoader sceneLoader = MenuDI.Resolve<SceneLoader>();
-            MenuSoundHandler soundHandler = MenuDI.Resolve<MenuSoundHandler>();
-
-            InitButtons(sceneLoader, soundHandler);
-
+            InitButtons(_sceneLoader, _soundHandler);
             HideSettingMenu();
         }
 
-        public void InitSliders(float maxVoluem)
-        {
+        public void InitSliders(float maxVoluem) => 
             _soundSlider.maxValue = maxVoluem;
-        }
 
-        private void InitButtons(SceneLoader sceneLoader, MenuSoundHandler soundHandler)
+        private void InitButtons(SceneLoader sceneLoader, SoundHandler soundHandler)
         {
             _openSettingMenuButton.gameObject.SetActive(true);
             _closeSettingMenuButton.gameObject.SetActive(true);
@@ -58,14 +61,20 @@ namespace Game
             _quitButton.onClick.AddListener(() => Application.Quit());
         }
 
-        private void ShowSettingMenu() => _settingMenuRoot.SetActive(true);
-        private void HideSettingMenu() => _settingMenuRoot.SetActive(false);
+        private void ShowSettingMenu() => 
+            _settingMenuRoot.SetActive(true);
+        private void HideSettingMenu() => 
+            _settingMenuRoot.SetActive(false);
 
-        private void ShowOpenSettingMenuButton() => _openSettingMenuButton.gameObject.SetActive(true);
-        private void HideOpenSettingMenuButton() => _openSettingMenuButton.gameObject.SetActive(false);
+        private void ShowOpenSettingMenuButton() => 
+            _openSettingMenuButton.gameObject.SetActive(true);
+        private void HideOpenSettingMenuButton() => 
+            _openSettingMenuButton.gameObject.SetActive(false);
 
-        public void SetSoundSliderValue(float value) => _soundSlider.value = value;
+        public void SetSoundSliderValue(float value) => 
+            _soundSlider.value = value;
 
-        public float GetSoundSliderValue() => _soundSlider.value;
+        public float GetSoundSliderValue() =>
+            _soundSlider.value;
     }
 }

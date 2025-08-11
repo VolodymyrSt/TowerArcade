@@ -222,7 +222,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1786626921914691753
 Transform:
@@ -404,6 +404,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 35ce8bf552b69a44699d3098100bb6fe, type: 3}
       propertyPath: m_Name
       value: towerSquare_sampleE
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 35ce8bf552b69a44699d3098100bb6fe, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

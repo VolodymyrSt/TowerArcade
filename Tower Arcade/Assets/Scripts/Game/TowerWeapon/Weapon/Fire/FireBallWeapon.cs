@@ -12,7 +12,7 @@ namespace Game
         [SerializeField] private int _fireCycles;
         [SerializeField] private float _fireDamage;
 
-        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, LevelSoundHandler soundHandler)
+        public override void OnReachedTarget(Enemy enemy, float damage, LevelCurencyHandler levelCurencyHandler, SoundHandler soundHandler)
         {
             if (enemy == null)
                 DestroySelf();

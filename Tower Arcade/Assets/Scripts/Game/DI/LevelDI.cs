@@ -11,8 +11,6 @@ namespace Game
         {
             _container = container;
 
-            _container.RegisterFactory(c => new EventBus()).AsSingle();
-
             //enemy
             _container.RegisterFactory(c => new SkeletonMinionFactory()).AsSingle();
             _container.RegisterFactory(c => new SkeletonRogueFactory()).AsSingle();
@@ -58,16 +56,16 @@ namespace Game
 
             //card
             _container.RegisterFactory(c => new EnemyDescriptionCardHandler(c.Resolve<EnemyDescriptionCardUI>())).AsSingle();
-            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>(), c.Resolve<EffectPerformer>(), c.Resolve<MassegeHandlerUI>(), c.Resolve<LevelSoundHandler>())).AsSingle();
+            _container.RegisterFactory(c => new TowerDescriptionCardHandler(c.Resolve<TowerDescriptionCardUI>(), c.Resolve<LevelCurencyHandler>(), c.Resolve<EffectPerformer>(), c.Resolve<MassegeHandlerUI>(), c.Resolve<SoundHandler>())).AsSingle();
 
             //other
             _container.RegisterFactory(c => new LevelCurencyHandler(c.Resolve<LevelConfigurationSO>(), c.Resolve<EventBus>())).AsSingle();
 
-            _container.RegisterFactory(c => new LevelSettingHandler(c.Resolve<LevelSettingHandlerUI>(), c.Resolve<CameraMoveController>(), c.Resolve<LevelSoundHandler>(), c.Resolve<SaveSystem>(), c.Resolve<SaveData>())).AsSingle();
+            _container.RegisterFactory(c => new LevelSettingHandler(c.Resolve<LevelSettingHandlerUI>(), c.Resolve<CameraMoveController>(), c.Resolve<SoundHandler>(), c.Resolve<SaveSystem>(), c.Resolve<SaveData>())).AsSingle();
 
             _container.RegisterFactory(c => new TimeHandler(c.Resolve<EventBus>())).AsSingle();
 
-            _container.RegisterFactory(c => new LevelSoundHandler()).AsSingle();
+            _container.RegisterFactory(c => new SoundHandler()).AsSingle();
 
             _container.RegisterFactory(c => new PlacementBlockColorHandler(c.Resolve<GameInventoryHandler>())).AsSingle();
         }

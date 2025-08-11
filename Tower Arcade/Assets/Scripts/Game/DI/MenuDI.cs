@@ -12,15 +12,11 @@ namespace DI
             _container = container;
 
             _container.RegisterFactory(c => new EventBus()).AsSingle();
-
-            _container.RegisterFactory(c => new MenuSoundHandler()).AsSingle();
-
-            _container.RegisterFactory(c => new MenuSettingHandler(c.Resolve<MenuSettingHandlerUI>(), c.Resolve<MenuSoundHandler>(), c.Resolve<SaveSystem>(), c.Resolve<SaveData>())).AsSingle();
+            _container.RegisterFactory(c => new SoundHandler()).AsSingle();
+            _container.RegisterFactory(c => new MenuSettingHandler(c.Resolve<MenuSettingHandlerUI>(), c.Resolve<SoundHandler>(), c.Resolve<SaveData>())).AsSingle();
         }
 
-        public static T Resolve<T>()
-        {
-            return _container.Resolve<T>();
-        }
+        public static T Resolve<T>() => 
+            _container.Resolve<T>();
     }
 }

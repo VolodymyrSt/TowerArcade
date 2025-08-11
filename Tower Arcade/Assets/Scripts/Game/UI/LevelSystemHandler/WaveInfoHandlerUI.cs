@@ -20,25 +20,26 @@ namespace Game
         //Dependencies
         private LevelSystemSO _levelSystem;
         private EventBus _eventBus;
+        private SoundHandler _soundHandler;
         private Animator _animator;
 
-        public void Start()
+        private void Awake()
         {
             _levelSystem = LevelDI.Resolve<LevelSystemSO>();
             _eventBus = LevelDI.Resolve<EventBus>();
-
+            _soundHandler = LevelDI.Resolve<SoundHandler>();
             _animator = GetComponent<Animator>();
-
+        }
+        public void Start()
+        {
             _eventBus.SubscribeEvent<OnLevelSystemStartedSignal>(ShowWaveInfo);
             _eventBus.SubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveInfo);
             _eventBus.SubscribeEvent<OnSkipWaveButtonShowedSignal>(ShowSkipWaveButton);
             _eventBus.SubscribeEvent<OnSkipWaveButtonHidSignal>(HideSkipWaveButton);
             _eventBus.SubscribeEvent<OnGameEndedSignal>(HideWaveInfoRoot);
 
-            _skipWaveButton.onClick.AddListener(() =>
-            {
-                LevelDI.Resolve<LevelSoundHandler>().PlaySound(ClipName.Click);
-
+            _skipWaveButton.onClick.AddListener(() => {
+                _soundHandler.PlaySound(ClipName.Click);
                 _eventBus.Invoke(new OnWaveSkippedSignal());
             });
 
@@ -46,10 +47,8 @@ namespace Game
             _skipWaveButton.gameObject.SetActive(false);
         }
 
-        private void Update()
-        {
+        private void Update() => 
             _timerToNextWaveText.text = _levelSystem.GetCurrentTimeToNextWave().ToString($"0:00");
-        }
 
         private void ShowWaveInfo(OnLevelSystemStartedSignal signal)
         {
@@ -76,5 +75,16 @@ namespace Game
         private void HideSkipWaveButton(OnSkipWaveButtonHidSignal signal) => _skipWaveButton.gameObject.SetActive(false);
 
         private void HideWaveInfoRoot(OnGameEndedSignal signal) => _waveInfoRoot.SetActive(false);
+
+        private void OnDestroy()
+        {
+            _skipWaveButton.onClick.RemoveAllListeners();
+
+            _eventBus?.UnSubscribeEvent<OnLevelSystemStartedSignal>(ShowWaveInfo);
+            _eventBus?.UnSubscribeEvent<OnWaveEndedSignal>(ShowCurrentWaveInfo);
+            _eventBus?.UnSubscribeEvent<OnSkipWaveButtonShowedSignal>(ShowSkipWaveButton);
+            _eventBus?.UnSubscribeEvent<OnSkipWaveButtonHidSignal>(HideSkipWaveButton);
+            _eventBus?.UnSubscribeEvent<OnGameEndedSignal>(HideWaveInfoRoot);
+        }
     }
 }

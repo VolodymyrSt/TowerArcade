@@ -10,13 +10,14 @@ namespace Game
         private LevelCurencyHandler _levelCurencyHandler;
         private EffectPerformer _effectPerformer;
         private MassegeHandlerUI _masegeHandler;
-        private LevelSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
 
         private Camera _camera;
 
         private ITowerProperties _activeTowerPropeties;
 
-        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler, EffectPerformer effectPerformer, MassegeHandlerUI massegeHandlerUI, LevelSoundHandler soundHandler)
+        public TowerDescriptionCardHandler(TowerDescriptionCardUI descriptionCardUI, LevelCurencyHandler levelCurencyHandler,
+            EffectPerformer effectPerformer, MassegeHandlerUI massegeHandlerUI, SoundHandler soundHandler)
         {
             _towerDescriptionCardUI = descriptionCardUI;
             _levelCurencyHandler = levelCurencyHandler;

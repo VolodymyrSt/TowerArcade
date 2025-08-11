@@ -6,7 +6,6 @@ namespace Game
     {
         [Header("Controllers:")]
         [SerializeField] private Camera _camera;
-        [SerializeField] private GameInput _gameInput;
 
         [Header("Settings:")]
         [SerializeField] private float _min = 4;
@@ -20,13 +19,22 @@ namespace Game
         private bool _isPaused = false;
         private bool _isEnable = false;
 
+        private GameInput _gameInput;
+        private EventBus _eventBus;
+
+        private void Awake()
+        {
+            _gameInput = LevelDI.Resolve<GameInput>();
+            _eventBus = LevelDI.Resolve<EventBus>();
+        }
+
         private void Start() 
         {
             _orthoSize = _camera.orthographicSize;
 
-            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGamePausedSignal>(IsGamePaused);
-            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
-            LevelDI.Resolve<EventBus>().SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
+            _eventBus.SubscribeEvent<OnGamePausedSignal>(IsGamePaused);
+            _eventBus.SubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
+            _eventBus.SubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
         }
 
 
@@ -49,5 +57,12 @@ namespace Game
         }
 
         public void IsGamePaused(OnGamePausedSignal signal) => _isPaused = signal.OnGamePaused;
+
+        private void OnDestroy()
+        {
+            _eventBus?.UnSubscribeEvent<OnGamePausedSignal>(IsGamePaused);
+            _eventBus?.UnSubscribeEvent<OnGameWonSignal>((OnGameWonSignal signal) => _isEnable = true);
+            _eventBus?.UnSubscribeEvent<OnGameEndedSignal>((OnGameEndedSignal signal) => _isEnable = true);
+        }
     }
 }

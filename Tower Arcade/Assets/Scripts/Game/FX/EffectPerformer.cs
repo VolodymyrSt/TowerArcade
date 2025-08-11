@@ -9,25 +9,17 @@ namespace Game
         [SerializeField] private ParticleSystem _delateTowerParticle;
         [SerializeField] private ParticleSystem _installTowerParticle;
 
-        public void PlayUpgradeTowerEffect(Vector3 position)
-        {
+        public void PlayUpgradeTowerEffect(Vector3 position) => 
             Play(_upgradeTowerParticle, position);
-        }
 
-        public void PlayDelateTowerEffect(Vector3 position)
-        {
+        public void PlayDelateTowerEffect(Vector3 position) => 
             Play(_delateTowerParticle, position);
-        }
 
-        public void PlayTowerInstalledEffect(Vector3 position)
-        {
+        public void PlayTowerInstalledEffect(Vector3 position) => 
             Play(_installTowerParticle, position);
-        }
 
-        public void PlayEffect(ParticleSystem particleSystem, Vector3 position)
-        {
+        public void PlayEffect(ParticleSystem particleSystem, Vector3 position) => 
             Play(particleSystem, position);
-        }
 
         public void Play(ParticleSystem particleSystem, Vector3 position)
         {
@@ -35,7 +27,7 @@ namespace Game
 
             particle.transform.position = position;
 
-            DestroyParticle(particle);
+            StartCoroutine(DestroyParticle(particle));
         }
 
         private IEnumerator DestroyParticle(ParticleSystem particle)

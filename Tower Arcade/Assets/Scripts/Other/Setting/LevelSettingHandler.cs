@@ -4,15 +4,14 @@ namespace Game
 {
     public class LevelSettingHandler : IUpdatable
     {
-        //Dependencies
-        private LevelSettingHandlerUI _levelSettingHandlerUI;
-        private CameraMoveController _cameraMoveController;
-        private LevelSoundHandler _levelSoundHandler;
+        private readonly LevelSettingHandlerUI _levelSettingHandlerUI;
+        private readonly CameraMoveController _cameraMoveController;
+        private readonly SoundHandler _levelSoundHandler;
 
-        private SaveData _saveData;
-        private SaveSystem _saveSystem;
+        private readonly SaveData _saveData;
+        private readonly SaveSystem _saveSystem;
 
-        public LevelSettingHandler(LevelSettingHandlerUI levelSettingHandlerUI, CameraMoveController cameraMoveController, LevelSoundHandler levelSoundHandler
+        public LevelSettingHandler(LevelSettingHandlerUI levelSettingHandlerUI, CameraMoveController cameraMoveController, SoundHandler levelSoundHandler
             , SaveSystem saveSystem, SaveData saveData)
         {
             _levelSettingHandlerUI = levelSettingHandlerUI;
@@ -22,8 +21,8 @@ namespace Game
             _saveData = saveData;
             _saveSystem = saveSystem;
 
-            _cameraMoveController.InitMouseSensivity(_saveData, _saveSystem);
-            _levelSoundHandler.InitVoluem(_saveData, _saveSystem);
+            _cameraMoveController.InitMouseSensivity(_saveData);
+            _levelSoundHandler.InitVoluem(_saveData);
 
             _levelSettingHandlerUI.InitSliders(_cameraMoveController.GetMaxSensivity(), _levelSoundHandler.GetMaxVoluem());
 
@@ -34,8 +33,8 @@ namespace Game
 
         public void Tick()
         {
-            _cameraMoveController.ChangeSensivity(_levelSettingHandlerUI.GetMouseSensivitySliderValue(), _saveSystem, _saveData);
-            _levelSoundHandler.ChangeVoluem(_levelSettingHandlerUI.GetSoundSliderValue(), _saveData, _saveSystem);
+            _cameraMoveController.ChangeSensivity(_levelSettingHandlerUI.GetMouseSensivitySliderValue(), _saveData);
+            _levelSoundHandler.ChangeVoluem(_levelSettingHandlerUI.GetSoundSliderValue(), _saveData);
         }
     }
 }

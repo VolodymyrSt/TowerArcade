@@ -32,7 +32,7 @@ namespace Game
         private TowerDescriptionCardHandler _towerDescriptionCardHandler;
         private EffectPerformer _effectPerformer;
         private MassegeHandlerUI _masegeHandler;
-        private LevelSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
 
         public TowerSO Tower { get; private set; }
         private Camera _camera;
@@ -51,7 +51,7 @@ namespace Game
             _towerDescriptionCardHandler = container.Resolve<TowerDescriptionCardHandler>();
             _effectPerformer = container.Resolve<EffectPerformer>();
             _masegeHandler = container.Resolve<MassegeHandlerUI>();
-            _soundHandler = container.Resolve<LevelSoundHandler>();
+            _soundHandler = container.Resolve<SoundHandler>();
 
             _towerName.text = Tower.TowerName;
             _towerImage.sprite = Tower.TowerSprite;
@@ -63,9 +63,7 @@ namespace Game
         private void Update()
         {
             if (_gameInventoryHandler.IsSlotActive(this) && Mouse.current.leftButton.isPressed)
-            {
                 HandleTowerPlacement();
-            }
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -73,19 +71,13 @@ namespace Game
             _soundHandler.PlaySound(ClipName.SoftClick);
 
             if (_gameInventoryHandler.IsSlotActive(this))
-            {
                 _gameInventoryHandler.ClearActiveSlot();
-            }
             else
             {
                 if (_levelCurencyHandler.GetCurrentCurrencyCount() >= Tower.SoulCost)
-                {
                     _gameInventoryHandler.SetActiveSlot(this);
-                }
                 else
-                {
                     _masegeHandler.ShowMassege("Dont have enough soul");
-                }
             }
         }
 
@@ -119,9 +111,7 @@ namespace Game
                     PlaceTowerOnBlock(towerPlacementBlock, _levelCurencyHandler, _towerDescriptionCardHandler);
                 }
                 else
-                {
                     _gameInventoryHandler.ClearActiveSlot();
-                }
             }
         }
         private void PlaceTowerOnBlock(TowerPlacementBlock towerPlacementBlock, LevelCurencyHandler levelCurencyHandler,TowerDescriptionCardHandler towerDescriptionCardHandler)
@@ -143,13 +133,9 @@ namespace Game
         public void SetActive(bool isActive)
         {
             if (isActive)
-            {
                 _towerPlacementBlocksHolder.TuggleHighlight();
-            }
             else
-            {
                 _towerPlacementBlocksHolder.UnTuggleHighlight();
-            }
         }
 
         public void Select() => _backgraundImage.sprite = _selectedBackgraundSprite;

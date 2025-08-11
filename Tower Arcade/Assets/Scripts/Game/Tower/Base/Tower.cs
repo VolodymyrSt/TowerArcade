@@ -14,7 +14,7 @@ namespace Game
         private TowerPlacementBlock _towerPlacementBlock;
 
         protected int CurrentLevel = 1;
-        private int _maxLevel = 3;
+        private readonly int _maxLevel = 3;
 
         protected string Name;
         protected float AttackDamage;

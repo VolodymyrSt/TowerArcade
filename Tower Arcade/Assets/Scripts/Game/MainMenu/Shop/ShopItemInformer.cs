@@ -21,13 +21,12 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _itemAttackRange;
         [SerializeField] private TextMeshProUGUI _itemDescription;
 
-        private MenuSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
 
-        private void Start()
-        {
-            _soundHandler = MenuDI.Resolve<MenuSoundHandler>();
-            HideInfo();
-        }
+        private void Awake() => 
+            _soundHandler = MenuDI.Resolve<SoundHandler>();
+
+        private void Start() => HideInfo();
 
         public void OnPointerEnter(PointerEventData eventData)
         {

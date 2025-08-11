@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,52 +6,39 @@ namespace Game
 {
     public class SceneLoader
     {
-        private float _loadingTime = 3f;
+        public enum Scene { Loading, Menu }
 
-        private CoroutineUsager _coroutineUsager;
+        private const float LOADING_TIME = 3f;
 
-        public SceneLoader()
-        {
-            _coroutineUsager = Object.FindFirstObjectByType<CoroutineUsager>();
-        }
+        private readonly CoroutineUsager _coroutineUsager;
 
-        public enum Scene
-        {
-            Loading, Menu, Level1, Level2, Level3, Level4, Level5
-        }
+        public SceneLoader(CoroutineUsager coroutineUsager) => 
+            _coroutineUsager = coroutineUsager;
 
-        public void LoadWithLoadingScene(Scene scene)
-        {
+        public void LoadWithLoadingScene(Scene scene) => 
             _coroutineUsager.StartCoroutine(LoadWithLoading(scene));
-        }
 
-        public void LoadWithLoadingScene(string sceneName)
-        {
+        public void LoadWithLoadingScene(string sceneName) => 
             _coroutineUsager.StartCoroutine(LoadWithLoading(sceneName));
-        }
 
         private IEnumerator LoadWithLoading(Scene scene)
         {
             Load(Scene.Loading);
-            yield return new WaitForSecondsRealtime(_loadingTime);
+            yield return new WaitForSecondsRealtime(LOADING_TIME);
             Load(scene);
         }
         
         private IEnumerator LoadWithLoading(string sceneName)
         {
             Load(Scene.Loading);
-            yield return new WaitForSecondsRealtime(_loadingTime);
+            yield return new WaitForSecondsRealtime(LOADING_TIME);
             Load(sceneName);
         }
 
-        public void Load(Scene scene)
-        {
+        public void Load(Scene scene) => 
             SceneManager.LoadScene(scene.ToString());
-        }
 
-        private void Load(string sceneName)
-        {
+        private void Load(string sceneName) => 
             SceneManager.LoadScene(sceneName);
-        }
     }
 }

@@ -2,29 +2,22 @@ using UnityEngine;
 
 namespace Game
 {
-    public class GameInput : MonoBehaviour
+    public class GameInput
     {
-        private InputActions _action;
+        private readonly InputActions _action;
 
-        private void Awake()
+        public GameInput()
         {
             _action = new InputActions();
             _action.Enable();
         }
 
-        public Vector2 GetScrollVectorNormalized()
-        {
-            return _action.Player.Zoom.ReadValue<Vector2>().normalized;
-        }
+        public Vector2 GetScrollVectorNormalized() => 
+            _action.Player.Zoom.ReadValue<Vector2>().normalized;
 
-        public Vector2 GetCameraMoveVectorNormalized()
-        {
-            return _action.Player.MoveCamera.ReadValue<Vector2>().normalized;
-        }
+        public Vector2 GetCameraMoveVectorNormalized() => 
+            _action.Player.MoveCamera.ReadValue<Vector2>().normalized;
 
-        private void OnDestroy()
-        {
-            _action.Disable();
-        }
+        private void OnDestroy() => _action.Disable();
     }
 }

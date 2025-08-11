@@ -15,7 +15,7 @@ namespace Game
         [SerializeField] private Transform _weaponPointer;
 
         private ArrowWeaponFactory _arrowBulletFactory;
-        private LevelSoundHandler _soundHandler;
+        private SoundHandler _soundHandler;
 
         private Vector3 _frameDirection;
         private Vector3 _bowDirection;
@@ -23,7 +23,7 @@ namespace Game
         public override void Enter(LevelCurencyHandler levelCurencyHandler)
         {
             _arrowBulletFactory = LevelDI.Resolve<ArrowWeaponFactory>();
-            _soundHandler = LevelDI.Resolve<LevelSoundHandler>();
+            _soundHandler = LevelDI.Resolve<SoundHandler>();
 
             StartCoroutine(EnemyDetecte(levelCurencyHandler));
         }
@@ -41,7 +41,7 @@ namespace Game
         {
             StartCoroutine(base.PerformAttack(enemy, levelCurencyHandler));
 
-            yield return new WaitForSecondsRealtime(Config.AttackSpeed);
+            yield return new WaitForSeconds(Config.AttackSpeed);
 
             StartCoroutine(base.PerformAttack(enemy, levelCurencyHandler));
         }

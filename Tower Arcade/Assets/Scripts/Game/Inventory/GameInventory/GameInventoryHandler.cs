@@ -13,11 +13,10 @@ namespace Game
             for (int i = 0; i < transform.childCount; i++)
             {
                 if (transform.GetChild(i).TryGetComponent(out GameInventorySlotUI gameInventorySlotUI))
-                {
                     gameInventorySlotUI.InitializeSlot(container, towers[i], this);
-                }
             }
         }
+
         public bool IsSlotActive(GameInventorySlotUI slot) => _activeSlot == slot;
 
         public void SetActiveSlot(GameInventorySlotUI slot)
